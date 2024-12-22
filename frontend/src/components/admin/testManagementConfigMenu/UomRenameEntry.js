@@ -45,8 +45,12 @@ function UomRenameEntry() {
   const [uomRename, setUomRename] = useState({});
   const [uomListShow, setUomListShow] = useState([]);
   const [uomRenamePost, setUomRenamePost] = useState({});
-  const [entityNamesProvider, setEntityNamesProvider] = useState({});
-  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({});
+  const [entityNamesProvider, setEntityNamesProvider] = useState({
+    name: { english: "", french: "" },
+  });
+  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({ name: { 
+    english: "", french: ""
+  }});
   const [entityId, setEntityId] = useState();
   const [entityName, setEntityName] = useState("unitOfMeasure");
   const [selectedItem, setSelectedItem] = useState({});
@@ -70,11 +74,13 @@ function UomRenameEntry() {
   };
 
   useEffect(() => {
-    getFromOpenElisServer(
-      `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
-      handelEntityNamesProvider,
-    );
-  }, [entityId]);
+    if(entityId && entityName) {
+      getFromOpenElisServer(
+        `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
+        handelEntityNamesProvider,
+      );
+    }
+  }, [entityId,entityName]);
 
   const handelEntityNamesProvider = (res) => {
     if (!res) {

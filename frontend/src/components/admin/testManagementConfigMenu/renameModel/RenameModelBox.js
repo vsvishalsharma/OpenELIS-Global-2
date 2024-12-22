@@ -39,7 +39,7 @@ const RenameModelBox = ({
               <Modal
                 open={isModalOpen}
                 size="md"
-                modalHeading={`${modalHeading} : ${selectedItem?.value}`} // secondary lable
+                modalHeading={`${modalHeading} : ${selectedItem?.value}`}
                 primaryButtonText={
                   confirmationStep ? (
                     <>
@@ -65,7 +65,7 @@ const RenameModelBox = ({
                 onRequestSubmit={onSubmit}
                 onRequestClose={closeModel}
               >
-                {lang && lang.name && langPost && langPost.name ? (
+                {lang && lang?.name && langPost && langPost?.name && langPost?.name?.english && langPost?.name?.french ? (
                   <Grid fullWidth={true}>
                     <Column lg={16} md={8} sm={4}>
                       {/* Edit or Confirmation */}
@@ -98,7 +98,7 @@ const RenameModelBox = ({
                         id={`eng-${index}`}
                         labelText=""
                         hideLabel
-                        value={langPost?.name?.english || ""}
+                        value={`${langPost?.name?.english}` || ""}
                         onChange={(e) => {
                           onInputChangeEn(e);
                         }}
@@ -119,7 +119,7 @@ const RenameModelBox = ({
                         id={`fr-${index}`}
                         labelText=""
                         hideLabel
-                        value={langPost?.name?.french || ""}
+                        value={`${langPost?.name?.french}` || ""}
                         onChange={(e) => {
                           onInputChangeFr(e);
                         }}

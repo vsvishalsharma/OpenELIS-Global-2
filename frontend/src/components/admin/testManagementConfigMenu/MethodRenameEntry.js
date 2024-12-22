@@ -45,8 +45,8 @@ function MethodRenameEntry() {
   const [methodRename, setMethodRename] = useState({});
   const [methodListShow, setMethodListShow] = useState([]);
   const [methodRenamePost, setMethodRenamePost] = useState({});
-  const [entityNamesProvider, setEntityNamesProvider] = useState({});
-  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({});
+  const [entityNamesProvider, setEntityNamesProvider] = useState({ name: { english: "", french: "" },});
+  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({ name: { english: "", french: ""},});
   const [entityId, setEntityId] = useState();
   const [entityName, setEntityName] = useState("method");
   const [selectedItem, setSelectedItem] = useState({});
@@ -70,11 +70,13 @@ function MethodRenameEntry() {
   };
 
   useEffect(() => {
-    getFromOpenElisServer(
-      `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
-      handelEntityNamesProvider,
-    );
-  }, [entityId]);
+    if(entityId && entityName) {
+      getFromOpenElisServer(
+        `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
+        handelEntityNamesProvider,
+      );
+    }
+  }, [entityId,entityName]);
 
   const handelEntityNamesProvider = (res) => {
     if (!res) {
@@ -139,6 +141,7 @@ function MethodRenameEntry() {
   const onInputChangeEn = (e) => {
     const englishName = e.target.value;
     setEntityNamesProviderPost((prev) => ({
+      ...prev,
       name: {
         ...prev.name,
         english: englishName,
@@ -150,6 +153,7 @@ function MethodRenameEntry() {
   const onInputChangeFr = (e) => {
     const frenchName = e.target.value;
     setEntityNamesProviderPost((prev) => ({
+      ...prev,
       name: {
         ...prev.name,
         french: frenchName,

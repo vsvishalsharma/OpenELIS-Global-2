@@ -42,8 +42,10 @@ function PanelRenameEntry() {
   const [panel, setPanel] = useState({});
   const [panelListShow, setPanelListShow] = useState([]);
   const [panelPost, setPanelPost] = useState({});
-  const [entityNamesProvider, setEntityNamesProvider] = useState({});
-  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({});
+  const [entityNamesProvider, setEntityNamesProvider] = useState({ name : { english: "", french: "" } });
+  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({ name: { 
+    english: "", french: ""
+  }});
   const [entityId, setEntityId] = useState();
   const [entityName, setEntityName] = useState("panel");
   const [selectedItem, setSelectedItem] = useState({});
@@ -67,11 +69,13 @@ function PanelRenameEntry() {
   };
 
   useEffect(() => {
-    getFromOpenElisServer(
-      `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
-      handelEntityNamesProvider,
-    );
-  }, [entityId]);
+    if(entityId && entityName) {
+      getFromOpenElisServer(
+        `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
+        handelEntityNamesProvider,
+      );
+    }
+  }, [entityId,entityName]);
 
   const handelEntityNamesProvider = (res) => {
     if (!res) {

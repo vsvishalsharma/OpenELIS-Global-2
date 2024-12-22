@@ -45,8 +45,10 @@ function TestSectionRenameEntry() {
   const [testSectionName, setTestSectionName] = useState({});
   const [testSectionListShow, setTestSectionListShow] = useState([]);
   const [testSectionPost, setTestSectionPost] = useState({});
-  const [entityNamesProvider, setEntityNamesProvider] = useState({});
-  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({});
+  const [entityNamesProvider, setEntityNamesProvider] = useState({ name: { english: "", french: "" },});
+  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({ name: { 
+    english: "", french: ""
+  }});
   const [entityId, setEntityId] = useState();
   const [entityName, setEntityName] = useState("testSection");
   const [selectedItem, setSelectedItem] = useState({});
@@ -73,11 +75,13 @@ function TestSectionRenameEntry() {
   };
 
   useEffect(() => {
-    getFromOpenElisServer(
-      `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
-      handelEntityNamesProvider,
-    );
-  }, [entityId]);
+    if(entityId && entityName) {
+      getFromOpenElisServer(
+        `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
+        handelEntityNamesProvider,
+      );
+    }
+  }, [entityId,entityName]);
 
   const handelEntityNamesProvider = (res) => {
     if (!res) {

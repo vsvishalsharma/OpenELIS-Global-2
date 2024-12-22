@@ -43,8 +43,10 @@ function SampleTypeRenameEntry() {
   const [sampleType, setSampleType] = useState({});
   const [sampleTypeListShow, setSampleTypeListShow] = useState([]);
   const [sampleTypePost, setSampleTypePost] = useState({});
-  const [entityNamesProvider, setEntityNamesProvider] = useState({});
-  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({});
+  const [entityNamesProvider, setEntityNamesProvider] = useState({ name : { english: "", french: "" } });
+  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({ name: { 
+    english: "", french: ""
+  }});
   const [entityId, setEntityId] = useState();
   const [entityName, setEntityName] = useState("sampleType");
   const [selectedItem, setSelectedItem] = useState({});
@@ -71,11 +73,13 @@ function SampleTypeRenameEntry() {
   };
 
   useEffect(() => {
-    getFromOpenElisServer(
-      `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
-      handelEntityNamesProvider,
-    );
-  }, [entityId]);
+    if(entityId && entityName) {
+      getFromOpenElisServer(
+        `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
+        handelEntityNamesProvider,
+      );
+    }
+  }, [entityId,entityName]);
 
   const handelEntityNamesProvider = (res) => {
     if (!res) {

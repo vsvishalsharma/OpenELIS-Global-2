@@ -50,8 +50,8 @@ function TestRenameEntry() {
   const [testNamePost, setTestNamesPost] = useState({});
   const [testNamesShow, setTestNamesShow] = useState([]);
   const [selectedTest, setSelectedTest] = useState({});
-  const [testNamesLangs, setTestNamesLangs] = useState({});
-  const [testNamesLangsPost, setTestNamesLangsPost] = useState({});
+  const [testNamesLangs, setTestNamesLangs] = useState({ name: { english: "", french: "" }, reportingName: { english: "", french: "" }, });
+  const [testNamesLangsPost, setTestNamesLangsPost] = useState({ name: { english: "", french: "" }, reportingName: { english: "", french: "" }, });
 
   useEffect(() => {
     componentMounted.current = true;
@@ -72,7 +72,7 @@ function TestRenameEntry() {
   };
 
   useEffect(() => {
-    if (selectedTest) {
+    if (selectedTest && selectedTest.id) {
       getFromOpenElisServer(
         `/rest/TestNamesProvider?testId=${selectedTest?.id}`,
         handleTestNamesLangs,
@@ -142,7 +142,7 @@ function TestRenameEntry() {
     if (selectedTest && testNamesLangsPost && testNamesLangsPost.name) {
       setTestNamesPost((prev) => ({
         ...prev,
-        testId: selectedTest.id,
+        testId: selectedTest?.id,
         nameEnglish: testNamesLangsPost.name.english,
         nameFrench: testNamesLangsPost.name.french,
         reportNameEnglish: testNamesLangsPost.reportingName.english,
