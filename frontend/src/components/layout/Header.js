@@ -315,6 +315,7 @@ function OEHeader(props) {
       );
     }
   };
+  
   const hasActiveChildMenu = (menuItem) => {
     if (menuItem.menu.elementId === "menu_reports_routine") {
       console.log("reports");
