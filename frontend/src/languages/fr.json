@@ -584,6 +584,7 @@
   "banner.menu.createInitial": "Entrée initiale",
   "banner.menu.createDouble": "Double entrée",
   "banner.menu.patientEdit": "Modifier",
+  "notification.login.syntax.error": "Erreur de syntaxe dans le nom d'utilisateur ou le mot de passe",
   "banner.menu.patientConsult": "Afficher",
   "sidenav.label.admin.menu.study": "Configuration du menu d'étude",
   "menu.study.title": "Configuration du menu d'étude",
