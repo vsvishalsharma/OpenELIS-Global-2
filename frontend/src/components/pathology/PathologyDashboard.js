@@ -49,11 +49,12 @@ function PathologyDashboard() {
     searchTerm: "",
     myCases: false,
     statuses: [
-      {
-        id: "GROSSING",
-        value: "Grossing",
-      },
-    ],
+      {id: 'GROSSING'},
+      {id: 'CUTTING'},
+      {id: 'PROCESSING'},
+      {id: 'SLICING'},
+      {id: 'STAINING'}
+    ]
   });
   const [counts, setCounts] = useState({
     inProgress: 0,
@@ -155,11 +156,21 @@ function PathologyDashboard() {
   const setStatusFilter = (event) => {
     if (event.target.value === "All") {
       setFilters({ ...filters, statuses: statuses });
+    } else if (event.target.value === "IN_PROGRESS") {
+      setFilters({
+        ...filters,
+        statuses: [
+          {id: 'GROSSING'},
+          {id: 'CUTTING'},
+          {id: 'PROCESSING'},
+          {id: 'SLICING'},
+          {id: 'STAINING'}
+        ]
+      });
     } else {
       setFilters({ ...filters, statuses: [{ id: event.target.value }] });
     }
   };
-
   const filtersToParameters = () => {
     return (
       "statuses=" +
@@ -252,16 +263,12 @@ function PathologyDashboard() {
 
   useEffect(() => {
     componentMounted.current = true;
+    const inProgressStatuses = ['GROSSING', 'CUTTING', 'PROCESSING', 'SLICING', 'STAINING'].map(id => ({id}));
     setFilters({
       ...filters,
-      statuses: [
-        {
-          id: "GROSSING",
-          value: "Grossing",
-        },
-      ],
+      statuses: inProgressStatuses
     });
-
+  
     return () => {
       componentMounted.current = false;
     };
@@ -334,24 +341,29 @@ function PathologyDashboard() {
                 id="statusFilter"
                 name="statusFilter"
                 labelText={intl.formatMessage({ id: "label.filters.status" })}
-                defaultValue="placeholder"
                 value={
-                  filters.statuses.length > 1 ? "All" : filters.statuses[0].id
+                  filters.statuses.length === 5 &&
+                  filters.statuses.every(status => 
+                    ['GROSSING', 'CUTTING', 'PROCESSING', 'SLICING', 'STAINING'].includes(status.id)
+                  )
+                    ? "IN_PROGRESS"
+                    : filters.statuses.length > 1 
+                    ? "All" 
+                    : filters.statuses[0].id
                 }
                 onChange={setStatusFilter}
                 noLabel
               >
                 <SelectItem disabled value="placeholder" text="Status" />
                 <SelectItem text="All" value="All" />
-                {statuses.map((status, index) => {
-                  return (
-                    <SelectItem
-                      key={index}
-                      text={status.value}
-                      value={status.id}
-                    />
-                  );
-                })}
+                <SelectItem text="In Progress" value="IN_PROGRESS" />
+                {statuses.map((status, index) => (
+                  <SelectItem
+                    key={index}
+                    text={status.value}
+                    value={status.id}
+                  />
+                ))}
               </Select>
             </div>
           </Column>
