@@ -49,12 +49,12 @@ function PathologyDashboard() {
     searchTerm: "",
     myCases: false,
     statuses: [
-      {id: 'GROSSING'},
-      {id: 'CUTTING'},
-      {id: 'PROCESSING'},
-      {id: 'SLICING'},
-      {id: 'STAINING'}
-    ]
+      { id: "GROSSING" },
+      { id: "CUTTING" },
+      { id: "PROCESSING" },
+      { id: "SLICING" },
+      { id: "STAINING" },
+    ],
   });
   const [counts, setCounts] = useState({
     inProgress: 0,
@@ -160,12 +160,12 @@ function PathologyDashboard() {
       setFilters({
         ...filters,
         statuses: [
-          {id: 'GROSSING'},
-          {id: 'CUTTING'},
-          {id: 'PROCESSING'},
-          {id: 'SLICING'},
-          {id: 'STAINING'}
-        ]
+          { id: "GROSSING" },
+          { id: "CUTTING" },
+          { id: "PROCESSING" },
+          { id: "SLICING" },
+          { id: "STAINING" },
+        ],
       });
     } else {
       setFilters({ ...filters, statuses: [{ id: event.target.value }] });
@@ -263,12 +263,18 @@ function PathologyDashboard() {
 
   useEffect(() => {
     componentMounted.current = true;
-    const inProgressStatuses = ['GROSSING', 'CUTTING', 'PROCESSING', 'SLICING', 'STAINING'].map(id => ({id}));
+    const inProgressStatuses = [
+      "GROSSING",
+      "CUTTING",
+      "PROCESSING",
+      "SLICING",
+      "STAINING",
+    ].map((id) => ({ id }));
     setFilters({
       ...filters,
-      statuses: inProgressStatuses
+      statuses: inProgressStatuses,
     });
-  
+
     return () => {
       componentMounted.current = false;
     };
@@ -343,13 +349,19 @@ function PathologyDashboard() {
                 labelText={intl.formatMessage({ id: "label.filters.status" })}
                 value={
                   filters.statuses.length === 5 &&
-                  filters.statuses.every(status => 
-                    ['GROSSING', 'CUTTING', 'PROCESSING', 'SLICING', 'STAINING'].includes(status.id)
+                  filters.statuses.every((status) =>
+                    [
+                      "GROSSING",
+                      "CUTTING",
+                      "PROCESSING",
+                      "SLICING",
+                      "STAINING",
+                    ].includes(status.id),
                   )
                     ? "IN_PROGRESS"
-                    : filters.statuses.length > 1 
-                    ? "All" 
-                    : filters.statuses[0].id
+                    : filters.statuses.length > 1
+                      ? "All"
+                      : filters.statuses[0].id
                 }
                 onChange={setStatusFilter}
                 noLabel
