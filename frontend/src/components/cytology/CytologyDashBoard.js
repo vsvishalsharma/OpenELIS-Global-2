@@ -44,10 +44,9 @@ function CytologyDashboard() {
     searchTerm: "",
     myCases: false,
     statuses: [
-      {
-        id: "PREPARING_SLIDES",
-        value: "Preparing slides",
-      },
+      { id: "PREPARING_SLIDES" },
+      { id: "SCREENING" },
+      { id: "QUALITY_CONTROL" },
     ],
   });
   const [counts, setCounts] = useState({
@@ -151,11 +150,19 @@ function CytologyDashboard() {
   const setStatusFilter = (event) => {
     if (event.target.value === "All") {
       setFilters({ ...filters, statuses: statuses });
+    } else if (event.target.value === "IN_PROGRESS") {
+      setFilters({
+        ...filters,
+        statuses: [
+          { id: "PREPARING_SLIDES" },
+          { id: "SCREENING" },
+          { id: "QUALITY_CONTROL" },
+        ],
+      });
     } else {
       setFilters({ ...filters, statuses: [{ id: event.target.value }] });
     }
   };
-
   const filtersToParameters = () => {
     return (
       "statuses=" +
@@ -244,14 +251,14 @@ function CytologyDashboard() {
 
   useEffect(() => {
     componentMounted.current = true;
+    const inProgressStatuses = [
+      { id: "PREPARING_SLIDES" },
+      { id: "SCREENING" },
+      { id: "QUALITY_CONTROL" },
+    ];
     setFilters({
       ...filters,
-      statuses: [
-        {
-          id: "PREPARING_SLIDES",
-          value: "Preparing slides",
-        },
-      ],
+      statuses: inProgressStatuses,
     });
 
     return () => {
@@ -330,7 +337,18 @@ function CytologyDashboard() {
                 name="statusFilter"
                 labelText={intl.formatMessage({ id: "label.filters.status" })}
                 value={
-                  filters.statuses.length > 1 ? "All" : filters.statuses[0].id
+                  filters.statuses.length === 3 &&
+                  filters.statuses.every((status) =>
+                    [
+                      "PREPARING_SLIDES",
+                      "SCREENING",
+                      "QUALITY_CONTROL",
+                    ].includes(status.id),
+                  )
+                    ? "IN_PROGRESS"
+                    : filters.statuses.length > 1
+                      ? "All"
+                      : filters.statuses[0].id
                 }
                 onChange={setStatusFilter}
                 noLabel
@@ -344,15 +362,15 @@ function CytologyDashboard() {
                   text={intl.formatMessage({ id: "all.label" })}
                   value="All"
                 />
-                {statuses.map((status, index) => {
-                  return (
-                    <SelectItem
-                      key={index}
-                      text={status.value}
-                      value={status.id}
-                    />
-                  );
-                })}
+                <SelectItem text="In Progress" value="IN_PROGRESS" />
+                {/* Hardcoded "In Progress" */}
+                {statuses.map((status, index) => (
+                  <SelectItem
+                    key={index}
+                    text={status.value}
+                    value={status.id}
+                  />
+                ))}
               </Select>
             </div>
           </Column>
