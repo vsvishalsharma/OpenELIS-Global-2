@@ -49,11 +49,13 @@ function PathologyDashboard() {
     searchTerm: "",
     myCases: false,
     statuses: [
-      { id: "GROSSING" },
-      { id: "CUTTING" },
-      { id: "PROCESSING" },
-      { id: "SLICING" },
-      { id: "STAINING" },
+      { id: "GROSSING", value: "Grossing" },
+      { id: "CUTTING", value: "Cutting" },
+      { id: "PROCESSING", value: "Processing" },
+      { id: "SLICING", value: "Slicing for Slides" },
+      { id: "STAINING", value: "Staining" },
+      { id: "READY_PATHOLOGIST", value: "Ready for Pathologist" },
+      { id: "ADDITIONAL_REQUEST", value: "Additional Pathologist Request" },
     ],
   });
   const [counts, setCounts] = useState({
@@ -165,6 +167,8 @@ function PathologyDashboard() {
           { id: "PROCESSING" },
           { id: "SLICING" },
           { id: "STAINING" },
+          { id: "READY_PATHOLOGIST" },
+          { id: "ADDITIONAL_REQUEST" },
         ],
       });
     } else {
@@ -269,6 +273,8 @@ function PathologyDashboard() {
       "PROCESSING",
       "SLICING",
       "STAINING",
+      "READY_PATHOLOGIST",
+      "ADDITIONAL_REQUEST",
     ].map((id) => ({ id }));
     setFilters({
       ...filters,
@@ -348,7 +354,7 @@ function PathologyDashboard() {
                 name="statusFilter"
                 labelText={intl.formatMessage({ id: "label.filters.status" })}
                 value={
-                  filters.statuses.length === 5 &&
+                  filters.statuses.length === 7 && // Updated from 5 to 7
                   filters.statuses.every((status) =>
                     [
                       "GROSSING",
@@ -356,6 +362,8 @@ function PathologyDashboard() {
                       "PROCESSING",
                       "SLICING",
                       "STAINING",
+                      "READY_PATHOLOGIST",
+                      "ADDITIONAL_REQUEST",
                     ].includes(status.id),
                   )
                     ? "IN_PROGRESS"
