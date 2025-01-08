@@ -336,13 +336,12 @@ function CreatePatientForm(props) {
           days: "",
         });
       },
-    ).then(() => {
-      setIsSubmitting(false);
-    });
+    )
   };
 
   const handlePost = (status) => {
     setNotificationVisible(true);
+    setIsSubmitting(false);
     if (status === 200) {
       addNotification({
         title: intl.formatMessage({ id: "notification.title" }),

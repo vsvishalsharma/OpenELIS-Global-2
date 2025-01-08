@@ -35,7 +35,7 @@ export const postToOpenElisServer = (
   callback,
   extraParams,
 ) => {
-  return fetch(
+  fetch(
     config.serverBaseUrl + endPoint,
 
     {
