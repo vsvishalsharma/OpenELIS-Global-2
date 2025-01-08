@@ -143,8 +143,16 @@ function CreatePatientForm(props) {
   };
 
   function handleYearsChange(e, values) {
-    setPatientDetails(values);
-    let years = e.target.value;
+    // Ensure years is not negative
+    const years = Math.max(0, Number(e.target.value));
+
+    // Update form values with the validated years
+    setPatientDetails({
+      ...values,
+      // Update the specific field that contains years to ensure the form shows the corrected value
+      [e.target.name]: years,
+    });
+
     let dobFormatter = {
       ...dateOfBirthFormatter,
       years: years,
@@ -625,6 +633,7 @@ function CreatePatientForm(props) {
                   })}
                   id="years"
                   type="number"
+                  min="0"
                   onChange={(e) => handleYearsChange(e, values)}
                   placeholder={intl.formatMessage({
                     id: "patient.information.age",
