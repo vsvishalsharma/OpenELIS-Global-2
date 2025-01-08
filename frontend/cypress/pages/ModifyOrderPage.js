@@ -41,9 +41,9 @@ class ModifyOrderPage {
 
   clickRespectivePatient() {
     return cy
-      .get(
-        "#root > div > div.cds--white.cds--layer-one > main > div.pageContent > div:nth-child(4) > div > div:nth-child(2) > div.cds--data-table-container > div.cds--data-table-content > table > tbody > tr > td:nth-child(1) > div > label > span",
-      )
+    .get('tbody tr')
+    .first()
+    .find('.cds--radio-button__appearance')
       .click();
   }
 }
