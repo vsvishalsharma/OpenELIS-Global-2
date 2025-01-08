@@ -1,0 +1,7 @@
+{
+  "patientId": "12345",
+  "sampleId": "67890",
+  "testType": "Blood Test",
+  "notes": "Urgent",
+  "searchQuery": "case123"
+}
