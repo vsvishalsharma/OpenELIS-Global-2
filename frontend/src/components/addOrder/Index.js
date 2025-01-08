@@ -809,7 +809,9 @@ const Index = () => {
                 <Button
                   kind="primary"
                   className="forwardButton"
-                  disabled={isSubmitting || errors?.errors?.length > 0 ? true : false}
+                  disabled={
+                    isSubmitting || errors?.errors?.length > 0 ? true : false
+                  }
                   onClick={handleSubmitOrderForm}
                 >
                   <FormattedMessage id="label.button.submit" />

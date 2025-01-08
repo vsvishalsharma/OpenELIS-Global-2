@@ -336,7 +336,7 @@ function CreatePatientForm(props) {
           days: "",
         });
       },
-    )
+    );
   };
 
   const handlePost = (status) => {
