@@ -343,7 +343,9 @@ const ModifyOrder = () => {
                     kind="primary"
                     className="forwardButton"
                     onClick={handleSubmitOrderForm}
-                    disabled={isSubmitting || errors?.errors?.length > 0 ? true : false}
+                    disabled={
+                      isSubmitting || errors?.errors?.length > 0 ? true : false
+                    }
                   >
                     <FormattedMessage id="label.button.submit" />
                   </Button>
