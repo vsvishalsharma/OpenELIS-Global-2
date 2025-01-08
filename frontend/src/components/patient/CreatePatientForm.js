@@ -161,8 +161,16 @@ function CreatePatientForm(props) {
   }
 
   function handleMonthsChange(e, values) {
-    setPatientDetails(values);
-    let months = e.target.value;
+    // Ensure months is not negative
+    const months = Math.max(0, Number(e.target.value));
+
+    // Update form values with the validated months
+    setPatientDetails({
+      ...values,
+      // Update the specific field that contains months to ensure the form shows the corrected value
+      [e.target.name]: months,
+    });
+
     let dobFormatter = {
       ...dateOfBirthFormatter,
       months: months,
@@ -171,8 +179,16 @@ function CreatePatientForm(props) {
   }
 
   function handleDaysChange(e, values) {
-    setPatientDetails(values);
-    let days = e.target.value;
+    // Ensure days is not negative
+    const days = Math.max(0, Number(e.target.value));
+
+    // Update form values with the validated days
+    setPatientDetails({
+      ...values,
+      // Update the specific field that contains days to ensure the form shows the corrected value
+      [e.target.name]: days,
+    });
+
     let dobFormatter = {
       ...dateOfBirthFormatter,
       days: days,
@@ -646,6 +662,7 @@ function CreatePatientForm(props) {
                   name="months"
                   labelText={intl.formatMessage({ id: "patient.age.months" })}
                   type="number"
+                  min="0"
                   onChange={(e) => handleMonthsChange(e, values)}
                   id="months"
                   placeholder={intl.formatMessage({
@@ -658,6 +675,7 @@ function CreatePatientForm(props) {
                   value={dateOfBirthFormatter.days}
                   name="days"
                   type="number"
+                  min="0"
                   onChange={(e) => handleDaysChange(e, values)}
                   labelText={intl.formatMessage({ id: "patient.age.days" })}
                   id="days"
