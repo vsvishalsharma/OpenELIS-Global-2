@@ -42,7 +42,7 @@ class ModifyOrderPage {
   clickRespectivePatient() {
     return cy
       .get(
-        ":nth-child(2) > :nth-child(1) > .cds--radio-button-wrapper > .cds--radio-button__label > .cds--radio-button__appearance",
+        "#root > div > div.cds--white.cds--layer-one > main > div.pageContent > div:nth-child(4) > div > div:nth-child(2) > div.cds--data-table-container > div.cds--data-table-content > table > tbody > tr > td:nth-child(1) > div > label > span",
       )
       .click();
   }

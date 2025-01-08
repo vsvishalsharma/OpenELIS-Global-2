@@ -102,36 +102,36 @@ describe("Modify Order search by patient ", function () {
       );
     });
   });
-  // TO DO needs fixing
-  // it("Should be able to search by respective patient ", function () {
-  //   cy.wait(1000);
-  //   modifyOrderPage.clickRespectivePatient();
-  // });
-  // it("should check for program selection button and go to next page ", function () {
-  //   cy.wait(1000);
-  //   modifyOrderPage.checkProgramButton();
-  //   modifyOrderPage.clickNextButton();
-  // });
+  //TO DO needs fixing
+  it("Should be able to search by respective patient ", function () {
+    cy.wait(1000);
+    modifyOrderPage.clickRespectivePatient();
+  });
+  it("should check for program selection button and go to next page ", function () {
+    cy.wait(1000);
+    modifyOrderPage.checkProgramButton();
+    modifyOrderPage.clickNextButton();
+  });
 
-  // it("should be able to record", function () {
-  //   cy.wait(1000);
-  //   modifyOrderPage.assignValues();
-  // });
+  it("should be able to record", function () {
+    cy.wait(1000);
+    modifyOrderPage.assignValues();
+  });
 
-  // it("User should click next to go add order page and submit the order", function () {
-  //   modifyOrderPage.clickNextButton();
-  //   cy.wait(1000);
-  //   modifyOrderPage.clickNextButton();
-  // });
+  it("User should click next to go add order page and submit the order", function () {
+    modifyOrderPage.clickNextButton();
+    cy.wait(1000);
+    modifyOrderPage.clickNextButton();
+  });
 
-  // it("should be able to print barcode", function () {
-  //   cy.window().then((win) => {
-  //     cy.spy(win, "open").as("windowOpen");
-  //   });
-  //   modifyOrderPage.clickPrintBarcodeButton();
-  //   cy.get("@windowOpen").should(
-  //     "be.calledWithMatch",
-  //     "/api/OpenELIS-Global/LabelMakerServlet?labNo=",
-  //   );
-  // });
+  it("should be able to print barcode", function () {
+    cy.window().then((win) => {
+      cy.spy(win, "open").as("windowOpen");
+    });
+    modifyOrderPage.clickPrintBarcodeButton();
+    cy.get("@windowOpen").should(
+      "be.calledWithMatch",
+      "/api/OpenELIS-Global/LabelMakerServlet?labNo=",
+    );
+  });
 });
