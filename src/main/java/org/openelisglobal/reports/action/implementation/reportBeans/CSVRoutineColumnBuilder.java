@@ -632,14 +632,18 @@ public abstract class CSVRoutineColumnBuilder {
     }
 
     protected void appendCrosstabPreamble(SQLConstant listName) {
-        query.append(", \n\n ( SELECT s.id AS samp_id, "
-                + " (SELECT ts.name FROM clinlims.test_section ts "  // Modify subquery to get test section name
+        query.append(", \n\n ( SELECT s.id AS samp_id, " + " (SELECT ts.name FROM clinlims.test_section ts " // Modify
+                                                                                                             // subquery
+                                                                                                             // to get
+                                                                                                             // test
+                                                                                                             // section
+                                                                                                             // name
                 + "   JOIN clinlims.test t ON t.test_section_id = ts.id "
                 + "   JOIN clinlims.analysis a ON a.test_id = t.id "
                 + "   WHERE a.sampitem_id = si.id LIMIT 1) as lab_unit, " // Link back to sample item
-                + listName + ".* "
-                + " FROM sample AS s "
-                + " LEFT JOIN sample_item si ON s.id = si.samp_id "  // Add sample_item join
+                + listName + ".* " + " FROM sample AS s " + " LEFT JOIN sample_item si ON s.id = si.samp_id " // Add
+                                                                                                              // sample_item
+                                                                                                              // join
                 + " LEFT JOIN \n ");
     }
 
