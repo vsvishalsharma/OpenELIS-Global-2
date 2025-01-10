@@ -558,45 +558,6 @@ function OrganizationAddModify() {
                 <Grid fullWidth={true}>
                   <Column lg={8} md={4} sm={4}>
                     <>
-                      <FormattedMessage id="organization.parent" /> :
-                    </>
-                  </Column>
-                  <Column lg={8} md={4} sm={4}>
-                    <AutoComplete
-                      name="parentOrgName"
-                      id="parentOrgName"
-                      allowFreeText={
-                        !(
-                          configurationProperties.restrictFreeTextRefSiteEntry ===
-                          "true"
-                        )
-                      }
-                      value={
-                        typeOfActivity &&
-                        typeOfActivity.organization &&
-                        typeOfActivity.organization.organizationName != ""
-                          ? typeOfActivity.organization.organizationName
-                          : ""
-                      }
-                      onChange={handleParentOrganizationName}
-                      onSelect={handleAutoCompleteParentOrganizationNames}
-                      label={
-                        <>
-                          <FormattedMessage id="organization.search.parent.name" />{" "}
-                          <span className="requiredlabel">*</span>
-                        </>
-                      }
-                      style={{ width: "!important 100%" }}
-                      suggestions={
-                        parentOrgList.length > 0 ? parentOrgList : []
-                      }
-                      required
-                    />
-                  </Column>
-                </Grid>
-                <Grid fullWidth={true}>
-                  <Column lg={8} md={4} sm={4}>
-                    <>
                       <FormattedMessage id="organization.streetAddress" /> :
                     </>
                   </Column>
@@ -667,6 +628,45 @@ function OrganizationAddModify() {
                         orgInfo && orgInfo.cliaNumber ? orgInfo.cliaNumber : ""
                       }
                       onChange={(e) => handleCliaNumberChange(e)}
+                    />
+                  </Column>
+                </Grid>
+                <Grid fullWidth={true}>
+                  <Column lg={8} md={4} sm={4}>
+                    <>
+                      <FormattedMessage id="organization.parent" /> :
+                    </>
+                  </Column>
+                  <Column lg={8} md={4} sm={4}>
+                    <AutoComplete
+                      name="parentOrgName"
+                      id="parentOrgName"
+                      allowFreeText={
+                        !(
+                          configurationProperties.restrictFreeTextRefSiteEntry ===
+                          "true"
+                        )
+                      }
+                      value={
+                        typeOfActivity &&
+                        typeOfActivity.organization &&
+                        typeOfActivity.organization.organizationName != ""
+                          ? typeOfActivity.organization.organizationName
+                          : ""
+                      }
+                      onChange={handleParentOrganizationName}
+                      onSelect={handleAutoCompleteParentOrganizationNames}
+                      label={
+                        <>
+                          <FormattedMessage id="organization.search.parent.name" />{" "}
+                          <span className="requiredlabel">*</span>
+                        </>
+                      }
+                      style={{ width: "!important 100%" }}
+                      suggestions={
+                        parentOrgList.length > 0 ? parentOrgList : []
+                      }
+                      required
                     />
                   </Column>
                 </Grid>
