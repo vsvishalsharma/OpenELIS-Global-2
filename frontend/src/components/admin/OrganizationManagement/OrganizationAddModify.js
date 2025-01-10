@@ -230,6 +230,42 @@ function OrganizationAddModify() {
     }));
   }
 
+  function handleStreetAddressChange(e) {
+    setSaveButton(false);
+    setOrgInfoPost((prevOrgInfoPost) => ({
+      ...prevOrgInfoPost,
+      streetAddress: e.target.value,
+    }));
+    setOrgInfo((prevOrgInfo) => ({
+      ...prevOrgInfo,
+      streetAddress: e.target.value,
+    }));
+  }
+
+  function handleCityChange(e) {
+    setSaveButton(false);
+    setOrgInfoPost((prevOrgInfoPost) => ({
+      ...prevOrgInfoPost,
+      state: e.target.value,
+    }));
+    setOrgInfo((prevOrgInfo) => ({
+      ...prevOrgInfo,
+      state: e.target.value,
+    }));
+  }
+
+  function handleCliaNumberChange(e) {
+    setSaveButton(false);
+    setOrgInfoPost((prevOrgInfoPost) => ({
+      ...prevOrgInfoPost,
+      cliaNumber: e.target.value,
+    }));
+    setOrgInfo((prevOrgInfo) => ({
+      ...prevOrgInfo,
+      cliaNumber: e.target.value,
+    }));
+  }
+
   function handleIsActiveChange(e) {
     setSaveButton(false);
     setOrgInfoPost((prevOrgInfoPost) => ({
@@ -555,6 +591,82 @@ function OrganizationAddModify() {
                         parentOrgList.length > 0 ? parentOrgList : []
                       }
                       required
+                    />
+                  </Column>
+                </Grid>
+                <Grid fullWidth={true}>
+                  <Column lg={8} md={4} sm={4}>
+                    <>
+                      <FormattedMessage id="organization.streetAddress" /> :
+                    </>
+                  </Column>
+                  <Column lg={8} md={4} sm={4}>
+                    <TextInput
+                      id="org-street-address"
+                      className="defalut"
+                      type="text"
+                      labelText=""
+                      maxLength={15}
+                      placeholder={intl.formatMessage({
+                        id: "organization.add.placeholder",
+                      })}
+                      // invalid={errors.order && touched.order}
+                      // invalidText={errors.order}
+                      // required={true}
+                      value={
+                        orgInfo && orgInfo.streetAddress ? orgInfo.streetAddress : ""
+                      }
+                      onChange={(e) => handleStreetAddressChange(e)}
+                    />
+                  </Column>
+                </Grid>
+                <Grid fullWidth={true}>
+                  <Column lg={8} md={4} sm={4}>
+                    <>
+                      <FormattedMessage id="organization.city" /> :
+                    </>
+                  </Column>
+                  <Column lg={8} md={4} sm={4}>
+                    <TextInput
+                      id="org-city"
+                      className="defalut"
+                      type="text"
+                      labelText=""
+                      maxLength={15}
+                      placeholder={intl.formatMessage({
+                        id: "organization.add.placeholder",
+                      })}
+                      // invalid={errors.order && touched.order}
+                      // invalidText={errors.order}
+                      // required={true}
+                      value={
+                        orgInfo && orgInfo.city ? orgInfo.city : ""
+                      }
+                      onChange={(e) => handleCityChange(e)}
+                    />
+                  </Column>
+                </Grid>
+                <Grid fullWidth={true}>
+                  <Column lg={8} md={4} sm={4}>
+                    <>
+                      <FormattedMessage id="organization.clia.number" /> :
+                    </>
+                  </Column>
+                  <Column lg={8} md={4} sm={4}>
+                    <TextInput
+                      id="org-clia-number"
+                      className="defalut"
+                      type="number"
+                      placeholder={intl.formatMessage({
+                        id: "organization.add.placeholder",
+                      })}
+                      // invalid={errors.order && touched.order}
+                      // invalidText={errors.order}
+                      // required={true}
+                      value={
+                        orgInfo && orgInfo.cliaNumber ? orgInfo.cliaNumber : ""
+                      }
+                      onChange={(e) => handleCliaNumberChange(e)}
                     />
                   </Column>
                 </Grid>
