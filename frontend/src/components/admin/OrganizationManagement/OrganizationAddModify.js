@@ -624,14 +624,10 @@ function OrganizationAddModify() {
                             id="table-select-all"
                             {...getSelectionProps()}
                             checked={
-                              selectedRowIds.length === pageSize &&
                               typeOfActivityShow
                                 .slice((page - 1) * pageSize, page * pageSize)
-                                .filter(
-                                  (row) =>
-                                    !row.disabled &&
-                                    selectedRowIds.includes(row.id),
-                                ).length === pageSize
+                                .filter(row => !row.disabled)
+                                .every(row => selectedRowIds.includes(row.id))
                             }
                             indeterminate={
                               selectedRowIds.length > 0 &&
