@@ -67,17 +67,25 @@ function AutoComplete(props) {
   };
 
   const onKeyDown = (e) => {
+    // Handeling enter key
     if (e.keyCode === 13) {
-      setActiveSuggestion(0);
-      setUserInput(filteredSuggestions[activeSuggestion]);
-      setShowSuggestions(false);
-    } else if (e.keyCode === 38) {
+      e.preventDefault();
+      if (filteredSuggestions[activeSuggestion]) {
+        const selectedValue = filteredSuggestions[activeSuggestion].value;
+        setTextValue(selectedValue); // Update local state
+        setShowSuggestions(false);
+      }
+    } 
+    // Handeling up arrow
+    else if (e.keyCode === 38) {
       if (activeSuggestion === 0) {
         return;
       }
       setActiveSuggestion(activeSuggestion - 1);
-    } else if (e.keyCode === 40) {
-      if (activeSuggestion - 1 === filteredSuggestions.length) {
+    } 
+    // Handeling down arrow
+    else if (e.keyCode === 40) {
+      if (activeSuggestion === filteredSuggestions.length - 1) {
         return;
       }
       setActiveSuggestion(activeSuggestion + 1);
