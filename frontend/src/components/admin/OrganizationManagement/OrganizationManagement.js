@@ -180,9 +180,10 @@ function OrganizationManagement() {
               : "",
             orgPrefix: item.shortName || "",
             active: item.isActive || "",
-            streetAddress: item.internetAddress || "",
-            city: item.state || "",
-            cliaNumber: item.cliaNumber || "",
+            internetAddress: item.internetAddress || "",
+            streetAddress: item.streetAddress || "",
+            city: item.city || "",
+            cliaNumber: item.cliaNum || "",
           };
         });
       const newOrganizationsManagementListArray = Object.values(
@@ -212,9 +213,10 @@ function OrganizationManagement() {
                 : "",
               orgPrefix: item.shortName || "",
               active: item.isActive || "",
-              streetAddress: item.internetAddress || "",
-              city: item.state || "",
-              cliaNumber: item.cliaNumber || "",
+              internetAddress: item.internetAddress || "",
+              streetAddress: item.streetAddress || "",
+              city: item.city || "",
+              cliaNumber: item.cliaNum || "",
             };
           },
         );
@@ -392,6 +394,12 @@ function OrganizationManagement() {
                         header: intl.formatMessage({
                           id: "organization.isActive",
                         }),
+                      },
+                      {
+                        key: "internetAddress",
+                        header: intl.formatMessage({
+                          id: "organization.internetaddress",
+                        })
                       },
                       {
                         key: "streetAddress",
@@ -611,6 +619,12 @@ function OrganizationManagement() {
                         header: intl.formatMessage({
                           id: "organization.isActive",
                         }),
+                      },
+                      {
+                        key: "internetAddress",
+                        header: intl.formatMessage({
+                          id: "organization.internetaddress",
+                        })
                       },
                       {
                         key: "streetAddress",

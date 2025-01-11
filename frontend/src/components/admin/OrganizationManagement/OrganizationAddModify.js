@@ -246,11 +246,11 @@ function OrganizationAddModify() {
     setSaveButton(false);
     setOrgInfoPost((prevOrgInfoPost) => ({
       ...prevOrgInfoPost,
-      state: e.target.value,
+      city: e.target.value,
     }));
     setOrgInfo((prevOrgInfo) => ({
       ...prevOrgInfo,
-      state: e.target.value,
+      city: e.target.value,
     }));
   }
 
@@ -258,11 +258,11 @@ function OrganizationAddModify() {
     setSaveButton(false);
     setOrgInfoPost((prevOrgInfoPost) => ({
       ...prevOrgInfoPost,
-      cliaNumber: e.target.value,
+      cliaNum: e.target.value,
     }));
     setOrgInfo((prevOrgInfo) => ({
       ...prevOrgInfo,
-      cliaNumber: e.target.value,
+      cliaNum: e.target.value,
     }));
   }
 
@@ -361,6 +361,7 @@ function OrganizationAddModify() {
   }, [parentOrg]);
 
   function submitAddUpdatedOrgInfo() {
+    console.log(orgInfoPost)
     setLoading(true);
     postToOpenElisServerJsonResponse(
       `/rest/Organization?ID=${ID}&startingRecNo=1`,
@@ -537,7 +538,7 @@ function OrganizationAddModify() {
                   </Column>
                   <Column lg={8} md={4} sm={4}>
                     <TextInput
-                      id="internet-address"
+                      id="org-internet-address"
                       className="defalut"
                       type="text"
                       labelText=""
@@ -625,7 +626,7 @@ function OrganizationAddModify() {
                       // invalidText={errors.order}
                       // required={true}
                       value={
-                        orgInfo && orgInfo.cliaNumber ? orgInfo.cliaNumber : ""
+                        orgInfo && orgInfo.cliaNum ? orgInfo.cliaNum : ""
                       }
                       onChange={(e) => handleCliaNumberChange(e)}
                     />
