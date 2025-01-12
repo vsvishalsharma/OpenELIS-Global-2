@@ -399,7 +399,7 @@ function OrganizationManagement() {
                         key: "internetAddress",
                         header: intl.formatMessage({
                           id: "organization.internetaddress",
-                        })
+                        }),
                       },
                       {
                         key: "streetAddress",
@@ -624,7 +624,7 @@ function OrganizationManagement() {
                         key: "internetAddress",
                         header: intl.formatMessage({
                           id: "organization.internetaddress",
-                        })
+                        }),
                       },
                       {
                         key: "streetAddress",

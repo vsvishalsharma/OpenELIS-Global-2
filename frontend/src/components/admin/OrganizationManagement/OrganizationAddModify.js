@@ -361,7 +361,6 @@ function OrganizationAddModify() {
   }, [parentOrg]);
 
   function submitAddUpdatedOrgInfo() {
-    console.log(orgInfoPost)
     setLoading(true);
     postToOpenElisServerJsonResponse(
       `/rest/Organization?ID=${ID}&startingRecNo=1`,
@@ -576,7 +575,9 @@ function OrganizationAddModify() {
                       // invalidText={errors.order}
                       // required={true}
                       value={
-                        orgInfo && orgInfo.streetAddress ? orgInfo.streetAddress : ""
+                        orgInfo && orgInfo.streetAddress
+                          ? orgInfo.streetAddress
+                          : ""
                       }
                       onChange={(e) => handleStreetAddressChange(e)}
                     />
@@ -601,9 +602,7 @@ function OrganizationAddModify() {
                       // invalid={errors.order && touched.order}
                       // invalidText={errors.order}
                       // required={true}
-                      value={
-                        orgInfo && orgInfo.city ? orgInfo.city : ""
-                      }
+                      value={orgInfo && orgInfo.city ? orgInfo.city : ""}
                       onChange={(e) => handleCityChange(e)}
                     />
                   </Column>
@@ -625,9 +624,7 @@ function OrganizationAddModify() {
                       // invalid={errors.order && touched.order}
                       // invalidText={errors.order}
                       // required={true}
-                      value={
-                        orgInfo && orgInfo.cliaNum ? orgInfo.cliaNum : ""
-                      }
+                      value={orgInfo && orgInfo.cliaNum ? orgInfo.cliaNum : ""}
                       onChange={(e) => handleCliaNumberChange(e)}
                     />
                   </Column>
@@ -736,12 +733,10 @@ function OrganizationAddModify() {
                           <TableSelectAll
                             id="table-select-all"
                             {...getSelectionProps()}
-                            checked={
-                              typeOfActivityShow
-                                .slice((page - 1) * pageSize, page * pageSize)
-                                .filter(row => !row.disabled)
-                                .every(row => selectedRowIds.includes(row.id))
-                            }
+                            checked={typeOfActivityShow
+                              .slice((page - 1) * pageSize, page * pageSize)
+                              .filter((row) => !row.disabled)
+                              .every((row) => selectedRowIds.includes(row.id))}
                             indeterminate={
                               selectedRowIds.length > 0 &&
                               selectedRowIds.length <
