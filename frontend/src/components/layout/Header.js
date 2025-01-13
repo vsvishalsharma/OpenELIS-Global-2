@@ -579,6 +579,15 @@ function OEHeader(props) {
                         isPersistent={false}
                       >
                         <SideNavItems>
+                          {/* Adding the home link at the top in the side navigation bar */}
+                          <SideNavMenuItem 
+                            href="/"
+                            className="top-level-menu-item"
+                          >
+                            <FormattedMessage id="banner.menu.home" />
+                          </SideNavMenuItem>
+
+                          {/* Adding other links after the home in the side navigation bar */}
                           {menus["menu"].map((childMenuItem, index) => {
                             // ignore the Home Menu in the new UI
                             if (childMenuItem.menu.elementId != "menu_home") {
