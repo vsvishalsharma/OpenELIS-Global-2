@@ -359,8 +359,20 @@ const HomeDashBoard: React.FC<DashBoardProps> = () => {
     }
   };
 
+  const handleTileClick = (tile) => {
+    if (testSections?.length > 0 || hasRole(userSessionDetails, "Global Administrator")) {
+      setSelectedTile(tile);
+    } else {
+      setNotificationVisible(true);
+      addNotification({
+        kind: NotificationKinds.warning,
+        title: intl.formatMessage({ id: "accessDenied.title" }),
+        message: intl.formatMessage({ id: "accessDenied.message" }),
+      });
+    }
+  }
+
   const handleMaximizeClick = (tile) => {
-    console.log("Icon clicked!");
     if (
       testSections?.length > 0 ||
       hasRole(userSessionDetails, "Global Administrator")
@@ -504,7 +516,7 @@ const HomeDashBoard: React.FC<DashBoardProps> = () => {
       {selectedTile == null ? (
         <div className="home-dashboard-container">
           {tileList.map((tile, index) => (
-            <ClickableTile key={index} className="dashboard-tile">
+            <ClickableTile key={index} className="dashboard-tile" onClick={() => handleTileClick(tile)}>
               <h3 className="tile-title">{tile.title}</h3>
               <p className="tile-subtitle">{tile.subTitle}</p>
               <p className="tile-value">{tile.value}</p>
