@@ -360,7 +360,10 @@ const HomeDashBoard: React.FC<DashBoardProps> = () => {
   };
 
   const handleTileClick = (tile) => {
-    if (testSections?.length > 0 || hasRole(userSessionDetails, "Global Administrator")) {
+    if (
+      testSections?.length > 0 ||
+      hasRole(userSessionDetails, "Global Administrator")
+    ) {
       setSelectedTile(tile);
     } else {
       setNotificationVisible(true);
@@ -370,7 +373,7 @@ const HomeDashBoard: React.FC<DashBoardProps> = () => {
         message: intl.formatMessage({ id: "accessDenied.message" }),
       });
     }
-  }
+  };
 
   const handleMaximizeClick = (tile) => {
     if (
@@ -516,7 +519,11 @@ const HomeDashBoard: React.FC<DashBoardProps> = () => {
       {selectedTile == null ? (
         <div className="home-dashboard-container">
           {tileList.map((tile, index) => (
-            <ClickableTile key={index} className="dashboard-tile" onClick={() => handleTileClick(tile)}>
+            <ClickableTile
+              key={index}
+              className="dashboard-tile"
+              onClick={() => handleTileClick(tile)}
+            >
               <h3 className="tile-title">{tile.title}</h3>
               <p className="tile-subtitle">{tile.subTitle}</p>
               <p className="tile-value">{tile.value}</p>

@@ -580,7 +580,7 @@ function OEHeader(props) {
                       >
                         <SideNavItems>
                           {/* Adding the home link at the top in the side navigation bar */}
-                          <SideNavMenuItem 
+                          <SideNavMenuItem
                             href="/"
                             className="top-level-menu-item"
                           >
