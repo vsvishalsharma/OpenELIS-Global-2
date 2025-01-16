@@ -147,6 +147,9 @@ function OrganizationAddModify() {
         isActive: typeOfActivity.isActive,
         internetAddress: typeOfActivity.internetAddress,
         selectedTypes: typeOfActivity.selectedTypes,
+        cliaNum: typeOfActivity.cliaNum,
+        streetAddress: typeOfActivity.streetAddress,
+        city: typeOfActivity.city,
       };
 
       const organizationsManagementIdInfoPost = {
@@ -169,6 +172,9 @@ function OrganizationAddModify() {
         internetAddress: typeOfActivity.internetAddress,
         selectedTypes: typeOfActivity.selectedTypes,
         organization: typeOfActivity.organization,
+        cliaNum: typeOfActivity.cliaNum,
+        streetAddress: typeOfActivity.streetAddress,
+        city: typeOfActivity.city,
       };
       setOrgInfo(organizationsManagementIdInfo);
       setOrgInfoPost(organizationsManagementIdInfoPost);
