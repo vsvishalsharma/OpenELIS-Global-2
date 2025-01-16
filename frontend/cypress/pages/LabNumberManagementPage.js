@@ -12,15 +12,15 @@ class LabNumberManagementPage {
   }
 
   checkPrefixCheckBox() {
-    cy.get("#usePrefix").check();
+    cy.get("#usePrefix").check({force: true}); // Check the checkbox
   }
   typePrefix(prefix) {
     this.checkPrefixCheckBox();
     
     // Wait for the input to become enabled
     cy.get("#alphanumPrefix")
-      .should("not.be.disabled") // Ensure the input is enabled
-      .type(prefix); // Now type into the input field
+      .should("not.be.disabled")  
+      .type(prefix);
   }
   clickSubmitButton() {
     cy.wait(1000);
