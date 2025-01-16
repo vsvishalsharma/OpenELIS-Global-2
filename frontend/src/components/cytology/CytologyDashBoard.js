@@ -61,7 +61,7 @@ function CytologyDashboard() {
 
   const setStatusList = (statusList) => {
     if (componentMounted.current) {
-      console.log('All available statuses:', statusList);
+      console.log("All available statuses:", statusList);
       setStatuses(statusList);
     }
   };
@@ -343,7 +343,7 @@ function CytologyDashboard() {
                     [
                       "PREPARING_SLIDES",
                       "SCREENING",
-                      "READY_FOR_CYTOPATHOLOGIST" ,
+                      "READY_FOR_CYTOPATHOLOGIST",
                     ].includes(status.id),
                   )
                     ? "IN_PROGRESS"
