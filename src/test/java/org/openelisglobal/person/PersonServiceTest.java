@@ -1,22 +1,33 @@
 package org.openelisglobal.person;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-import java.util.Map;
+import org.hibernate.ObjectNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openelisglobal.BaseWebContextSensitiveTest;
 import org.openelisglobal.common.util.ConfigurationProperties;
 import org.openelisglobal.patient.service.PatientService;
+import org.openelisglobal.patient.valueholder.Patient;
 import org.openelisglobal.person.service.PersonService;
 import org.openelisglobal.person.valueholder.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
+@Rollback
 public class PersonServiceTest extends BaseWebContextSensitiveTest {
     private static final String PERSON1_FIRSTNAME = "John";
     private static final String PERSON1_LASTNAME = "Doe";
@@ -34,53 +45,56 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
     @Before
     public void setUp() throws Exception {
         executeDataSetWithStateManagement("testdata/person.xml");
+        resetSequence("person_seq", "PERSON", "ID");
     }
-    //DOTO CRUD methods need to be looked into
-    // @Test
-    // public void createPerson_shouldCreateNewPerson() throws Exception {
-    // String firstName = "John";
-    // String lastname = "moe";
 
-    // Person pat = new Person();
-    // pat.setFirstName(firstName);
-    // pat.setLastName(lastname);
-    // personService.save(pat);
+    @Test
+    public void verifyTestData() {
+        List<Person> personList = personService.getAll();
+        System.out.println("Persons we have in db: " + personList.size());
+        personList.forEach(person -> System.out.println(person.getId() + " - " + person.getFirstName()));
+    }
 
-    // String personIdId = personService.insert(pat);
-    // Person savedPerson = personService.get(personIdId);
+    @Test
+    public void createPerson_shouldCreateNewPerson() throws Exception {
+        String firstName = "John";
+        String lastname = "moe";
 
-    // Assert.assertEquals(1, personService.getAllPersons().size());
-    // Assert.assertEquals(firstName, savedPerson.getFirstName());
-    // Assert.assertEquals(lastname, savedPerson.getLastName());
-    // }
+        Person pat = new Person();
+        pat.setFirstName(firstName);
+        pat.setLastName(lastname);
 
-    //DOTO this needs to be looked into
-    // @Test
-    // @Transactional
-    // @SuppressWarnings("unchecked")
-    // public void createPersonWithMultiplePatients_shouldLinkPatientsToPerson()
-    // throws Exception {
+        String personIdId = personService.insert(pat);
+        Person savedPerson = personService.get(personIdId);
 
-    // Person savedPerson = personService.get("1");
+        Assert.assertEquals(4, personService.getAllPersons().size());
+        Assert.assertEquals(firstName, savedPerson.getFirstName());
+        Assert.assertEquals(lastname, savedPerson.getLastName());
+    }
 
-    // Patient patient1 = patientService.get("1");
-    // Patient patient2 = patientService.get("2");
+    public Patient createPatient(String firstName, String LastName, String birthDate, String gender)
+            throws ParseException {
+        Person person = new Person();
+        person.setFirstName(firstName);
+        person.setLastName(LastName);
+        personService.get("1");
 
-    // savedPerson.addPatient(patient1);
-    // savedPerson.addPatient(patient2);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = dateFormat.parse(birthDate);
+        long time = date.getTime();
+        Timestamp dob = new Timestamp(time);
 
-    // Set<Patient> patients = personService.get(savedPerson.getId()).getPatients();
-    // Assert.assertEquals(2, patients.size());
-    // Assert.assertTrue(patients.stream().anyMatch(p -> p.getId().equals("1")));
-    // Assert.assertTrue(patients.stream().anyMatch(p -> p.getId().equals("2")));
-    // for (Patient patient : patients) {
-    // Assert.assertEquals(savedPerson.getId(), patient.getPerson().getId());
-    // }
-    // }
+        Patient pat = new Patient();
+        pat.setPerson(person);
+        pat.setBirthDate(dob);
+        pat.setGender(gender);
+
+        return pat;
+    }
 
     @Test
     public void getAllPerson_shouldGetAllPerson() throws Exception {
-        Assert.assertEquals(3, personService.getAllPersons().size());
+        Assert.assertEquals(4, personService.getAllPersons().size());
     }
 
     @Test
@@ -200,19 +214,19 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
         Assert.assertEquals("siannah@gmail.com", retrievedEmail);
     }
 
-    // @Test
-    // public void updatePerson_shouldUpdatePersonInformation() throws Exception {
-    //     Person savedPerson = personService.get("1");
+    @Test
+    public void updatePerson_shouldUpdatePersonInformation() throws Exception {
+        Person savedPerson = personService.get("1");
 
-    //     savedPerson.setCity("Los Angeles");
-    //     savedPerson.setStreetAddress("456 Oak St");
-    //     personService.update(savedPerson);
+        savedPerson.setCity("Los Angeles");
+        savedPerson.setStreetAddress("456 Oak St");
+        personService.update(savedPerson);
 
-    //     Person updatedPerson = personService.get("1");
+        Person updatedPerson = personService.get("1");
 
-    //     Assert.assertEquals("Los Angeles", updatedPerson.getCity());
-    //     Assert.assertEquals("456 Oak St", updatedPerson.getStreetAddress());
-    // }
+        Assert.assertEquals("Los Angeles", updatedPerson.getCity());
+        Assert.assertEquals("456 Oak St", updatedPerson.getStreetAddress());
+    }
 
     @Test
     public void getPhone_shouldReturnCorrectPhoneNumber() throws Exception {
@@ -248,12 +262,16 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
         assertTrue(result.isEmpty());
     }
 
-    // @Test
-    // public void deletePerson_shouldDeletePerson() {
-    //     Person savedPerson = personService.get("2");
+    @Test
+    public void deletePerson_shouldDeletePerson() {
+        Person savedPerson = personService.get("2");
+        personService.delete(savedPerson);
 
-    //     personService.delete(savedPerson);
+        Throwable throwable = assertThrows(ObjectNotFoundException.class, () -> {
+            personService.get("2");
+        });
 
-    //     Assert.assertEquals("", personService.getFirstName(savedPerson));
-    // }
+        assertEquals("No row with the given identifier exists: [org.openelisglobal.person.valueholder.Person#2]", throwable.getMessage());
+    }
+
 }

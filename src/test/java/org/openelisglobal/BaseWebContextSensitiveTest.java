@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
 import javax.sql.DataSource;
 import org.dbunit.database.DatabaseConfig;
@@ -175,4 +177,17 @@ public abstract class BaseWebContextSensitiveTest extends AbstractTransactionalJ
             }
         }
     }
+
+    @AfterTransaction
+    protected void resetSequence(String sequenceName, String tableName, String idColumn) throws Exception {
+        try (Statement stmt = dataSource.getConnection().createStatement()) {
+            String maxIdQuery = String.format("SELECT COALESCE(MAX(%s), 0) FROM %s", idColumn, tableName);
+            ResultSet rs = stmt.executeQuery(maxIdQuery);
+            long maxId = rs.next() ? rs.getLong(1) : 0;
+
+            String resetSequenceQuery = String.format("SELECT setval('%s', %d, false)", sequenceName, maxId + 1);
+            stmt.execute(resetSequenceQuery);
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package org.openelisglobal.dictionary.service;
 
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -189,5 +190,26 @@ public class DictionaryServiceTest extends BaseWebContextSensitiveTest {
 
         Assert.assertEquals("Y", dictionaryService.get("1").getIsActive());
         Assert.assertEquals("INFLUENZA VIRUS A RNA DETECTEDetest", dictionaryService.get("1").getDictEntry());
+    }
+
+    @Test
+    public void createDictionary_shouldCreateNewDictionary() throws Exception {
+        Dictionary dict = createDictionaryObject();
+
+        String inserted = dictionaryService.insert(dict);
+        Dictionary dictionary = dictionaryService.get(inserted);
+
+        Assert.assertEquals("Dictionary Entry 4", dictionary.getDictEntry());
+        Assert.assertEquals("Y", dictionary.getIsActive());
+    }
+
+    private Dictionary createDictionaryObject() {
+        Dictionary dictionary = new Dictionary();
+        dictionary.setSortOrder(4);
+        dictionary.setDictionaryCategory(dictionaryCategoryService.getDictionaryCategoryByName("CA3"));
+        dictionary.setDictEntry("Dictionary Entry 4");
+        dictionary.setIsActive("Y");
+        dictionary.setLocalAbbreviation("DE4");
+        return dictionary;
     }
 }
