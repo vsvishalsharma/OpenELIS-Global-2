@@ -589,15 +589,12 @@ function OEHeader(props) {
 
                           {/* Adding other links after the home in the side navigation bar */}
                           {menus["menu"].map((childMenuItem, index) => {
-                            // ignore the Home Menu in the new UI
-                            if (childMenuItem.menu.elementId != "menu_home") {
-                              return generateMenuItems(
-                                childMenuItem,
-                                index,
-                                0,
-                                "$.menu[" + index + "]",
-                              );
-                            }
+                            return generateMenuItems(
+                              childMenuItem,
+                              index,
+                              0,
+                              "$.menu[" + index + "]",
+                            );
                           })}
                         </SideNavItems>
                       </SideNav>
