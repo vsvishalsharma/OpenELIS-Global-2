@@ -623,7 +623,7 @@ function OrganizationAddModify() {
                     <TextInput
                       id="org-clia-number"
                       className="defalut"
-                      type="number"
+                      type="text"
                       placeholder={intl.formatMessage({
                         id: "organization.add.placeholder",
                       })}
