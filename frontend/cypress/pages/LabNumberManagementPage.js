@@ -1,6 +1,6 @@
 class LabNumberManagementPage {
   constructor() {}
-  
+
   verifyPageLoaded() {
     // Confirm the page is loaded by checking a unique element
     cy.contains("Lab Number Management").should("be.visible");
@@ -12,15 +12,13 @@ class LabNumberManagementPage {
   }
 
   checkPrefixCheckBox() {
-    cy.get("#usePrefix").check({force: true}); // Check the checkbox
+    cy.get("#usePrefix").check({ force: true }); // Check the checkbox
   }
   typePrefix(prefix) {
     this.checkPrefixCheckBox();
-    
+
     // Wait for the input to become enabled
-    cy.get("#alphanumPrefix")
-      .should("not.be.disabled")  
-      .type(prefix);
+    cy.get("#alphanumPrefix").should("not.be.disabled").type(prefix);
   }
   clickSubmitButton() {
     cy.wait(1000);
