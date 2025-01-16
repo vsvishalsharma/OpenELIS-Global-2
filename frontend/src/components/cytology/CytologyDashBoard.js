@@ -46,7 +46,7 @@ function CytologyDashboard() {
     statuses: [
       { id: "PREPARING_SLIDES" },
       { id: "SCREENING" },
-      { id: "QUALITY_CONTROL" },
+      { id: "READY_FOR_CYTOPATHOLOGIST" },
     ],
   });
   const [counts, setCounts] = useState({
@@ -61,6 +61,7 @@ function CytologyDashboard() {
 
   const setStatusList = (statusList) => {
     if (componentMounted.current) {
+      console.log('All available statuses:', statusList);
       setStatuses(statusList);
     }
   };
@@ -156,7 +157,7 @@ function CytologyDashboard() {
         statuses: [
           { id: "PREPARING_SLIDES" },
           { id: "SCREENING" },
-          { id: "QUALITY_CONTROL" },
+          { id: "READY_FOR_CYTOPATHOLOGIST" },
         ],
       });
     } else {
@@ -254,7 +255,7 @@ function CytologyDashboard() {
     const inProgressStatuses = [
       { id: "PREPARING_SLIDES" },
       { id: "SCREENING" },
-      { id: "QUALITY_CONTROL" },
+      { id: "READY_FOR_CYTOPATHOLOGIST" },
     ];
     setFilters({
       ...filters,
@@ -342,7 +343,7 @@ function CytologyDashboard() {
                     [
                       "PREPARING_SLIDES",
                       "SCREENING",
-                      "QUALITY_CONTROL",
+                      "READY_FOR_CYTOPATHOLOGIST" ,
                     ].includes(status.id),
                   )
                     ? "IN_PROGRESS"
