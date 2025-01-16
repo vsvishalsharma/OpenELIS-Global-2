@@ -68,21 +68,27 @@ function AutoComplete(props) {
 
   const onKeyDown = (e) => {
     // Handeling enter key
+    const { onSelect } = props;
     if (e.keyCode === 13) {
-      e.preventDefault();
       if (filteredSuggestions[activeSuggestion]) {
         const selectedValue = filteredSuggestions[activeSuggestion].value;
-        setTextValue(selectedValue); // Update local state
+        setUserInput(selectedValue);
+        setTextValue(selectedValue);
         setShowSuggestions(false);
+        setInvalid(false);
+
+        if (typeof onSelect === "function") {
+          onSelect(filteredSuggestions[activeSuggestion].id);
+        }
       }
-    } 
+    }
     // Handeling up arrow
     else if (e.keyCode === 38) {
       if (activeSuggestion === 0) {
         return;
       }
       setActiveSuggestion(activeSuggestion - 1);
-    } 
+    }
     // Handeling down arrow
     else if (e.keyCode === 40) {
       if (activeSuggestion === filteredSuggestions.length - 1) {
