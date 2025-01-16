@@ -1,9 +1,6 @@
 class LabNumberManagementPage {
-  visitManagementPage() {
-    //cy.visit('.cds--side-nav_link[href="#AnalyzerTestName"]');
-    return cy.get("h2").should("contain.text", "Lab Number Management");
-  }
-
+  constructor() {}
+  
   verifyPageLoaded() {
     // Confirm the page is loaded by checking a unique element
     cy.contains("Lab Number Management").should("be.visible");
@@ -15,16 +12,32 @@ class LabNumberManagementPage {
   }
 
   checkPrefixCheckBox() {
-    cy.get(":nth-child(4) > .cds--form-item > .cds--checkbox-label").click();
+    cy.get("#usePrefix").check();
   }
-  typePrefix(userPrefix) {
-    cy.get("#alphanumPrefix").type(userPrefix);
-    cy.get(".cds--text-input").should("be.visible").click();
+  typePrefix(prefix) {
+    this.checkPrefixCheckBox();
+    
+    // Wait for the input to become enabled
+    cy.get("#alphanumPrefix")
+      .should("not.be.disabled") // Ensure the input is enabled
+      .type(prefix); // Now type into the input field
   }
   clickSubmitButton() {
+    cy.wait(1000);
     cy.get(
       "#root > div > div.cds--white.cds--layer-one > main > div.adminPageContent > form > div > div:nth-child(9) > button",
-    ).click();
+    )
+      .should("be.visible")
+      .click();
+  }
+
+  clickSubmitButton2() {
+    cy.wait(1000);
+    cy.get(
+      "#root > div > div.cds--white.cds--layer-one > main > div.adminPageContent > form > div > div:nth-child(11) > button",
+    )
+      .should("be.visible")
+      .click();
   }
 }
 

@@ -1,5 +1,5 @@
 {
-  "alphaLabNumberType": "Alphanumeric",
+  "alphaLabNumberType": "Alpha Numeric",
   "legacyLabNumberType": "Legacy",
-  "userPrefix": "RA"
+  "userPrefix": "REG-"
 }

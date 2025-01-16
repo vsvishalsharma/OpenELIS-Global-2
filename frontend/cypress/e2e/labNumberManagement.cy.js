@@ -1,7 +1,4 @@
 import LoginPage from "../pages/LoginPage";
-import HomePage from "../pages/HomePage";
-import AdminPage from "../pages/AdminPage";
-import LabNumberManagementPage from "../pages/LabNumberManagementPage";
 
 let loginPage = null;
 let homePage = null;
@@ -27,12 +24,21 @@ describe("Lab Number Management", function () {
     labNumMgtPage = adminPage.goToLabNumberManagementPage();
   });
 
-  it("User selects the lab number type and submits", function () {
+  it("User selects legacy lab number type and submits", function () {
     cy.get("@labNMData").then((labNumberManagementData) => {
       labNumMgtPage.selectLabNumber(
         labNumberManagementData.legacyLabNumberType,
       );
       labNumMgtPage.clickSubmitButton();
+    });
+  });
+
+  it("User selects alpha numeric lab number type and submits", function () {
+    cy.get("@labNMData").then((labNumberManagementData) => {
+      labNumMgtPage.selectLabNumber(labNumberManagementData.alphaLabNumberType);
+      labNumMgtPage.checkPrefixCheckBox();
+      labNumMgtPage.typePrefix(labNumberManagementData.userPrefix);
+      labNumMgtPage.clickSubmitButton2();
     });
   });
 });
