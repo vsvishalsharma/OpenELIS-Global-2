@@ -18,9 +18,7 @@ class AdminPage {
   //lab number management
   goToLabNumberManagementPage() {
     // Click on the element using the provided selector
-    cy.get(
-      "#root > div > div.cds--white.cds--layer-one > main > nav > ul > li:nth-child(3) > a",
-    )
+    cy.get("a.cds--side-nav__link[href='#labNumber']")
       .should("be.visible") // Ensure the element is visible
       .click(); // Click to navigate to the page
 
