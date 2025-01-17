@@ -43,12 +43,10 @@ function CytologyDashboard() {
   const [filters, setFilters] = useState({
     searchTerm: "",
     myCases: false,
-    statuses: [
-      { id: "PREPARING_SLIDES" },
-      { id: "SCREENING" },
-      { id: "READY_FOR_CYTOPATHOLOGIST" },
-    ],
+    statuses: [{ id: "PREPARING_SLIDES" }],
   });
+  const [inProgressStatuses, setInProgressStatuses] = useState([]);
+
   const [counts, setCounts] = useState({
     inProgress: 0,
     awaitingReview: 0,
@@ -61,11 +59,24 @@ function CytologyDashboard() {
 
   const setStatusList = (statusList) => {
     if (componentMounted.current) {
-      console.log("All available statuses:", statusList);
       setStatuses(statusList);
+
+      // Create in-progress statuses by filtering out COMPLETED
+      const filteredStatuses = statusList
+        .filter((status) => status.id !== "COMPLETED")
+        .map((status) => status.id);
+      setInProgressStatuses(filteredStatuses);
+
+      // Set initial filter to in-progress
+      const inProgressStatusObjects = filteredStatuses.map((statusId) => ({
+        id: statusId,
+      }));
+      setFilters((prev) => ({
+        ...prev,
+        statuses: inProgressStatusObjects,
+      }));
     }
   };
-
   const assignCurrentUserAsTechnician = (event, pathologySampleId) => {
     postToOpenElisServerFullResponse(
       "/rest/cytology/assignTechnician?cytologySampleId=" + pathologySampleId,
@@ -152,17 +163,29 @@ function CytologyDashboard() {
     if (event.target.value === "All") {
       setFilters({ ...filters, statuses: statuses });
     } else if (event.target.value === "IN_PROGRESS") {
-      setFilters({
-        ...filters,
-        statuses: [
-          { id: "PREPARING_SLIDES" },
-          { id: "SCREENING" },
-          { id: "READY_FOR_CYTOPATHOLOGIST" },
-        ],
-      });
+      const inProgressStatusObjects = inProgressStatuses.map((statusId) => ({
+        id: statusId,
+      }));
+      setFilters({ ...filters, statuses: inProgressStatusObjects });
     } else {
       setFilters({ ...filters, statuses: [{ id: event.target.value }] });
     }
+  };
+
+  const getSelectedValue = () => {
+    const selectedValue =
+      filters.statuses.length === inProgressStatuses.length &&
+      filters.statuses.every((status) => inProgressStatuses.includes(status.id))
+        ? "IN_PROGRESS"
+        : filters.statuses.length > 1
+          ? "All"
+          : filters.statuses[0].id;
+
+    //console.log("Current selected value:", selectedValue);
+    //console.log("Current filters.statuses:", filters.statuses);
+    //console.log("Current inProgressStatuses:", inProgressStatuses);
+
+    return selectedValue;
   };
   const filtersToParameters = () => {
     return (
@@ -252,23 +275,6 @@ function CytologyDashboard() {
 
   useEffect(() => {
     componentMounted.current = true;
-    const inProgressStatuses = [
-      { id: "PREPARING_SLIDES" },
-      { id: "SCREENING" },
-      { id: "READY_FOR_CYTOPATHOLOGIST" },
-    ];
-    setFilters({
-      ...filters,
-      statuses: inProgressStatuses,
-    });
-
-    return () => {
-      componentMounted.current = false;
-    };
-  }, [statuses]);
-
-  useEffect(() => {
-    componentMounted.current = true;
     refreshItems();
     return () => {
       componentMounted.current = false;
@@ -337,34 +343,13 @@ function CytologyDashboard() {
                 id="statusFilter"
                 name="statusFilter"
                 labelText={intl.formatMessage({ id: "label.filters.status" })}
-                value={
-                  filters.statuses.length === 3 &&
-                  filters.statuses.every((status) =>
-                    [
-                      "PREPARING_SLIDES",
-                      "SCREENING",
-                      "READY_FOR_CYTOPATHOLOGIST",
-                    ].includes(status.id),
-                  )
-                    ? "IN_PROGRESS"
-                    : filters.statuses.length > 1
-                      ? "All"
-                      : filters.statuses[0].id
-                }
+                value={getSelectedValue()}
                 onChange={setStatusFilter}
                 noLabel
               >
-                <SelectItem
-                  disabled
-                  value="placeholder"
-                  text={intl.formatMessage({ id: "label.filters.status" })}
-                />
-                <SelectItem
-                  text={intl.formatMessage({ id: "all.label" })}
-                  value="All"
-                />
+                <SelectItem disabled value="placeholder" text="Status" />
+                <SelectItem text="All" value="All" />
                 <SelectItem text="In Progress" value="IN_PROGRESS" />
-                {/* Hardcoded "In Progress" */}
                 {statuses.map((status, index) => (
                   <SelectItem
                     key={index}

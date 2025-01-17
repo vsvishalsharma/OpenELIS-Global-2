@@ -48,16 +48,11 @@ function PathologyDashboard() {
   const [filters, setFilters] = useState({
     searchTerm: "",
     myCases: false,
-    statuses: [
-      { id: "GROSSING", value: "Grossing" },
-      { id: "CUTTING", value: "Cutting" },
-      { id: "PROCESSING", value: "Processing" },
-      { id: "SLICING", value: "Slicing for Slides" },
-      { id: "STAINING", value: "Staining" },
-      { id: "READY_PATHOLOGIST", value: "Ready for Pathologist" },
-      { id: "ADDITIONAL_REQUEST", value: "Additional Pathologist Request" },
-    ],
+    statuses: [{ id: "GROSSING" }],
   });
+
+  const [inProgressStatuses, setInProgressStatuses] = useState([]);
+
   const [counts, setCounts] = useState({
     inProgress: 0,
     awaitingReview: 0,
@@ -69,6 +64,21 @@ function PathologyDashboard() {
   const setStatusList = (statusList) => {
     if (componentMounted.current) {
       setStatuses(statusList);
+
+      // Create in-progress statuses by filtering out COMPLETED
+      const filteredStatuses = statusList
+        .filter((status) => status.id !== "COMPLETED")
+        .map((status) => status.id);
+      setInProgressStatuses(filteredStatuses);
+
+      // Set initial filter to in-progress
+      const inProgressStatusObjects = filteredStatuses.map((statusId) => ({
+        id: statusId,
+      }));
+      setFilters((prev) => ({
+        ...prev,
+        statuses: inProgressStatusObjects,
+      }));
     }
   };
 
@@ -159,22 +169,30 @@ function PathologyDashboard() {
     if (event.target.value === "All") {
       setFilters({ ...filters, statuses: statuses });
     } else if (event.target.value === "IN_PROGRESS") {
-      setFilters({
-        ...filters,
-        statuses: [
-          { id: "GROSSING" },
-          { id: "CUTTING" },
-          { id: "PROCESSING" },
-          { id: "SLICING" },
-          { id: "STAINING" },
-          { id: "READY_PATHOLOGIST" },
-          { id: "ADDITIONAL_REQUEST" },
-        ],
-      });
+      const inProgressStatusObjects = inProgressStatuses.map((statusId) => ({
+        id: statusId,
+      }));
+      setFilters({ ...filters, statuses: inProgressStatusObjects });
     } else {
       setFilters({ ...filters, statuses: [{ id: event.target.value }] });
     }
   };
+  const getSelectedValue = () => {
+    const selectedValue =
+      filters.statuses.length === inProgressStatuses.length &&
+      filters.statuses.every((status) => inProgressStatuses.includes(status.id))
+        ? "IN_PROGRESS"
+        : filters.statuses.length > 1
+          ? "All"
+          : filters.statuses[0].id;
+
+    //console.log("Current selected value:", selectedValue);
+    //console.log("Current filters.statuses:", filters.statuses);
+    //console.log("Current inProgressStatuses:", inProgressStatuses);
+
+    return selectedValue;
+  };
+
   const filtersToParameters = () => {
     return (
       "statuses=" +
@@ -267,27 +285,6 @@ function PathologyDashboard() {
 
   useEffect(() => {
     componentMounted.current = true;
-    const inProgressStatuses = [
-      "GROSSING",
-      "CUTTING",
-      "PROCESSING",
-      "SLICING",
-      "STAINING",
-      "READY_PATHOLOGIST",
-      "ADDITIONAL_REQUEST",
-    ].map((id) => ({ id }));
-    setFilters({
-      ...filters,
-      statuses: inProgressStatuses,
-    });
-
-    return () => {
-      componentMounted.current = false;
-    };
-  }, [statuses]);
-
-  useEffect(() => {
-    componentMounted.current = true;
     refreshItems();
     return () => {
       componentMounted.current = false;
@@ -353,24 +350,7 @@ function PathologyDashboard() {
                 id="statusFilter"
                 name="statusFilter"
                 labelText={intl.formatMessage({ id: "label.filters.status" })}
-                value={
-                  filters.statuses.length === 7 && // Updated from 5 to 7
-                  filters.statuses.every((status) =>
-                    [
-                      "GROSSING",
-                      "CUTTING",
-                      "PROCESSING",
-                      "SLICING",
-                      "STAINING",
-                      "READY_PATHOLOGIST",
-                      "ADDITIONAL_REQUEST",
-                    ].includes(status.id),
-                  )
-                    ? "IN_PROGRESS"
-                    : filters.statuses.length > 1
-                      ? "All"
-                      : filters.statuses[0].id
-                }
+                value={getSelectedValue()}
                 onChange={setStatusFilter}
                 noLabel
               >
