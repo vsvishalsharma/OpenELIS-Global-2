@@ -48,7 +48,7 @@ function PathologyDashboard() {
   const [filters, setFilters] = useState({
     searchTerm: "",
     myCases: false,
-    statuses: [{ id: "GROSSING" }],
+    statuses: [{}],
   });
 
   const [inProgressStatuses, setInProgressStatuses] = useState([]);
@@ -60,24 +60,30 @@ function PathologyDashboard() {
     complete: 0,
   });
   const [loading, setLoading] = useState(true);
-
+  const [inProgressStatusObjects, setInProgressStatusObjects] = useState(
+    inProgressStatuses.map((statusId) => ({ id: statusId })),
+  );
   const setStatusList = (statusList) => {
     if (componentMounted.current) {
+      // Set all statuses
       setStatuses(statusList);
 
-      // Create in-progress statuses by filtering out COMPLETED
+      // Filter out COMPLETED statuses and update the in-progress statuses state
       const filteredStatuses = statusList
         .filter((status) => status.id !== "COMPLETED")
         .map((status) => status.id);
+
       setInProgressStatuses(filteredStatuses);
 
-      // Set initial filter to in-progress
-      const inProgressStatusObjects = filteredStatuses.map((statusId) => ({
-        id: statusId,
-      }));
+      // Update the inProgressStatusObjects state
+      setInProgressStatusObjects(
+        filteredStatuses.map((statusId) => ({ id: statusId })),
+      );
+
+      // Set filters using the updated state
       setFilters((prev) => ({
         ...prev,
-        statuses: inProgressStatusObjects,
+        statuses: filteredStatuses.map((statusId) => ({ id: statusId })),
       }));
     }
   };
@@ -166,17 +172,17 @@ function PathologyDashboard() {
   };
 
   const setStatusFilter = (event) => {
-    if (event.target.value === "All") {
+    const { value } = event.target;
+
+    if (value === "All") {
       setFilters({ ...filters, statuses: statuses });
-    } else if (event.target.value === "IN_PROGRESS") {
-      const inProgressStatusObjects = inProgressStatuses.map((statusId) => ({
-        id: statusId,
-      }));
+    } else if (value === "IN_PROGRESS") {
       setFilters({ ...filters, statuses: inProgressStatusObjects });
     } else {
-      setFilters({ ...filters, statuses: [{ id: event.target.value }] });
+      setFilters({ ...filters, statuses: [{ id: value }] });
     }
   };
+
   const getSelectedValue = () => {
     const selectedValue =
       filters.statuses.length === inProgressStatuses.length &&
@@ -185,10 +191,6 @@ function PathologyDashboard() {
         : filters.statuses.length > 1
           ? "All"
           : filters.statuses[0].id;
-
-    //console.log("Current selected value:", selectedValue);
-    //console.log("Current filters.statuses:", filters.statuses);
-    //console.log("Current inProgressStatuses:", inProgressStatuses);
 
     return selectedValue;
   };
