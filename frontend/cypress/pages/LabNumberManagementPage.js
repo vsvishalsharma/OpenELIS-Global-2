@@ -21,19 +21,7 @@ class LabNumberManagementPage {
     cy.get("#alphanumPrefix").should("not.be.disabled").type(prefix);
   }
   clickSubmitButton() {
-    cy.wait(1000);
-    cy.get(
-      "#root > div > div.cds--white.cds--layer-one > main > div.adminPageContent > form > div > div:nth-child(9) > button",
-    )
-      .should("be.visible")
-      .click();
-  }
-
-  clickSubmitButton2() {
-    cy.wait(1000);
-    cy.get(
-      "#root > div > div.cds--white.cds--layer-one > main > div.adminPageContent > form > div > div:nth-child(11) > button",
-    )
+    cy.get("button.cds--btn.cds--btn--primary[type='submit']")
       .should("be.visible")
       .click();
   }

@@ -38,7 +38,7 @@ describe("Lab Number Management", function () {
       labNumMgtPage.selectLabNumber(labNumberManagementData.alphaLabNumberType);
       labNumMgtPage.checkPrefixCheckBox();
       labNumMgtPage.typePrefix(labNumberManagementData.userPrefix);
-      labNumMgtPage.clickSubmitButton2();
+      labNumMgtPage.clickSubmitButton();
     });
   });
 });
