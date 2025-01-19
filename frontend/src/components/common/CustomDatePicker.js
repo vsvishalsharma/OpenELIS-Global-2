@@ -23,20 +23,21 @@ const CustomDatePicker = (props) => {
   function handleInputChange(e) {
     const inputValue = event.target.value;
 
-  const isFrenchLocale = configurationProperties.DEFAULT_DATE_LOCALE === "fr-FR";
-  const partialDateRegex = isFrenchLocale
-    ? /^(\d{0,2})(\/(\d{0,2})(\/(\d{0,4})?)?)?$/ 
-    : /^(\d{0,2})(\/(\d{0,2})(\/(\d{0,4})?)?)?$/;
+    const isFrenchLocale =
+      configurationProperties.DEFAULT_DATE_LOCALE === "fr-FR";
+    const partialDateRegex = isFrenchLocale
+      ? /^(\d{0,2})(\/(\d{0,2})(\/(\d{0,4})?)?)?$/
+      : /^(\d{0,2})(\/(\d{0,2})(\/(\d{0,4})?)?)?$/;
 
-  const fullDateRegex = isFrenchLocale
-    ? /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/
-    : /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/; 
+    const fullDateRegex = isFrenchLocale
+      ? /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/
+      : /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
 
-  if (partialDateRegex.test(inputValue)) {
-    event.target.value = inputValue;
-  } else {
-    event.target.value = ""; // Clear invalid input
-  }
+    if (partialDateRegex.test(inputValue)) {
+      event.target.value = inputValue;
+    } else {
+      event.target.value = ""; // Clear invalid input
+    }
   }
 
   useEffect(() => {
