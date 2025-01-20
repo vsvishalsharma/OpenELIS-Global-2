@@ -7,18 +7,32 @@ class BatchOrderEntry {
     cy.get(":nth-child(12) > .cds--btn").should("be.disabled");
   }
 
-  selectForm(formType) {
-    cy.get("#form-dropdown").select(formType);
+  selectForm(formTypeRoutine) {
+    cy.get("#form-dropdown").select(formTypeRoutine);
   }
 
-  selectSampleType(sampleType) {
-    cy.get("#selectSampleType").should("be.visible").select(sampleType);
+  selectSampleType(serumSample) {
+    cy.get("#selectSampleType").should("be.visible").select(serumSample);
   }
 
-  selectPanel(panelIndex) {
-    cy.get(
-      `:nth-child(${panelIndex}) > :nth-child(5) > .cds--checkbox-label`,
-    ).click();
+  checkBilanPanel() {
+    cy.contains('span','Bilan Biochimique').click();
+  }
+
+  checkSerologiePanel() {
+    cy.contains('span','Serologie VIH').click();
+  }
+
+  checkDenguePCR() {
+    cy.contains('span','DENGUE PCR').click();
+  }
+
+  checkHIVViralLoad() {
+    cy.contains('span','HIV VIRAL LOAD').click();
+  }
+
+  checkCreatinine() {
+    cy.contains('span','Creatinine').click();
   }
 
   checkNextLabel() {
@@ -34,11 +48,11 @@ class BatchOrderEntry {
   }
 
   checkFacilityCheckbox() {
-    cy.get(":nth-child(5) > .cds--form-item > .cds--checkbox-label").click();
+    cy.get("#facility-checkbox").check({ force: true });
   }
 
   checkPatientCheckbox() {
-    cy.get(":nth-child(6) > .cds--form-item > .cds--checkbox-label").click();
+    cy.get("#patient-checkbox").check({ force: true });
   }
 
   enterSiteName(siteName) {
@@ -46,16 +60,27 @@ class BatchOrderEntry {
     cy.get(".suggestion-active").should("be.visible").click();
   }
 
+  typeLabNumber(labNumber){
+    cy.get("#display_labNo").type(labNumber);
+  }
   checkNextButtonEnabled() {
-    cy.get(":nth-child(12) > .cds--btn").should("not.be.disabled").click();
+    cy.contains('button', 'Next').click();
+  }
+
+  selectDNAPCRTest() {
+    cy.get("#eid_dnaPCR").check();
+  }
+
+  selectTubeSample() {
+    cy.contains('span','Dry Tube').click();
+  }
+
+  selectBloodSample() {
+    cy.contains('span','Dry Blood Spot').click();
   }
 
   visitBatchOrderEntryPage() {
     cy.get("h2").should("contain.text", "Batch Order Entry");
-  }
-
-  validateField(tagId, expectedText) {
-    cy.get(tagId).should("contain.text", expectedText);
   }
 
   clickGenerateAndSaveBarcode() {
@@ -80,6 +105,10 @@ class BatchOrderEntry {
 
   selectPatient(rowIndex) {
     cy.get(`tbody > :nth-child(${rowIndex}) > :nth-child(1)`).click();
+  }
+
+  clickFinishButton() {
+    cy.contains("button", "Finish").click();
   }
 }
 

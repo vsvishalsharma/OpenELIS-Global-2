@@ -1,9 +1,12 @@
 {
   "formTypeRoutine": "Routine",
-  "sampleType": "Serum",
+  "formTypeEID": "EID",
+  "formTypeViralLoad": "Viral Load",
+  "serumSample": "Serum",
   "methodOnDemand": "On Demand",
   "methodPrePrinted": "Pre-Printed",
   "siteName": "CAMES",
   "panel": "Western blot HIV",
-  "facility": "279 - CAMES MAN"
+  "facility": "279 - CAMES MAN",
+  "labNumber": "123456"
 }

@@ -18,7 +18,7 @@ before("login", () => {
   loginPage.visit();
 });
 
-describe("Batch Order Entry On Demand", function () {
+describe("Batch Order Entry On Demand and Serum form type", function () {
   before("navigate to Batch Order Entry Page", function () {
     navigateToBatchOrderEntryPage();
   });
@@ -28,46 +28,46 @@ describe("Batch Order Entry On Demand", function () {
     batchOrder.checkNextButtonDisabled();
   });
 
-  it("Should Select Form And Samples", function () {
+  it("User selects Routine Form and Routine form type", function () {
     cy.fixture("BatchOrder").then((batchOrderData) => {
       batchOrder.selectForm(batchOrderData.formTypeRoutine);
-      batchOrder.selectSampleType(batchOrderData.sampleType);
-      batchOrder.selectPanel(3);
+      batchOrder.selectSampleType(batchOrderData.serumSample);
     });
+  });
+
+  it("User checks Panels and Tests", function () {
+    batchOrder.checkBilanPanel();
+    batchOrder.checkSerologiePanel();
+    //tests picked at random
+    batchOrder.checkDenguePCR();
+    batchOrder.checkHIVViralLoad();
+    batchOrder.checkCreatinine();
   });
 
   it("Should Select Methods, Site Name and Move to Next Page", function () {
     cy.fixture("BatchOrder").then((batchOrderData) => {
       batchOrder.selectMethod(batchOrderData.methodOnDemand);
       batchOrder.checkFacilityCheckbox();
+      batchOrder.checkPatientCheckbox();
       batchOrder.enterSiteName(batchOrderData.siteName);
       batchOrder.checkNextButtonEnabled();
     });
   });
 
-  it("Should Visit Batch Order Entry Page", function () {
-    batchOrder.visitBatchOrderEntryPage();
-  });
-
-  it("Should Validate Fields And Generate BarCode", function () {
+  it("Generate BarCode", function () {
     cy.fixture("BatchOrder").then((batchOrderData) => {
-      batchOrder.validateField(
-        ":nth-child(1) > .cds--subgrid > :nth-child(8)",
-        batchOrderData.sampleType,
-      );
-      batchOrder.validateField(".cds--lg\\:col-span-12", batchOrderData.panel);
-      batchOrder.validateField(
-        ":nth-child(1) > .cds--subgrid > :nth-child(13)",
-        batchOrderData.facility,
-      );
-      batchOrder.checkNextLabel().should("be.disabled");
+      batchOrder.typeLabNumber(batchOrderData.labNumber);
       batchOrder.clickGenerateAndSaveBarcode();
       batchOrder.checkNextLabel().should("be.visible");
     });
+    });
+  
+    it("User clicks the finish button", function () {
+      batchOrder.clickFinishButton();
+    });
   });
-});
 
-describe("Batch Order Entry Pre Printed", function () {
+describe("Batch Order Entry Pre Printed and EID form type", function () {
   before("navigate to Batch Order Entry Page", function () {
     navigateToBatchOrderEntryPage();
   });
@@ -77,15 +77,18 @@ describe("Batch Order Entry Pre Printed", function () {
     batchOrder.checkNextButtonDisabled();
   });
 
-  it("Should Select Form And Samples", function () {
+  it("User selects EID form, samples and tests", function () {
     cy.fixture("BatchOrder").then((batchOrderData) => {
-      batchOrder.selectForm(batchOrderData.formTypeRoutine);
-      batchOrder.selectSampleType(batchOrderData.sampleType);
-      batchOrder.selectPanel(3);
+      batchOrder.selectForm(batchOrderData.formTypeEID);
+      batchOrder.selectDNAPCRTest();
+      batchOrder.selectTubeSample();
+      batchOrder.selectBloodSample();
+      batchOrder.checkBilanPanel();
+      batchOrder.checkSerologiePanel();
     });
   });
 
-  it("Should Select Methods, Site Name and Move to Next Page", function () {
+  it("User Selects Methods, Site Name and Move to Next Page", function () {
     cy.fixture("BatchOrder").then((batchOrderData) => {
       batchOrder.selectMethod(batchOrderData.methodPrePrinted);
       batchOrder.checkFacilityCheckbox();
@@ -99,19 +102,6 @@ describe("Batch Order Entry Pre Printed", function () {
     batchOrder.visitBatchOrderEntryPage();
   });
 
-  it("Should Validate Fields", function () {
-    cy.fixture("BatchOrder").then((batchOrderData) => {
-      batchOrder.validateField(
-        ":nth-child(1) > .cds--subgrid > :nth-child(8)",
-        batchOrderData.sampleType,
-      );
-      batchOrder.validateField(".cds--lg\\:col-span-12", batchOrderData.panel);
-      batchOrder.validateField(
-        ":nth-child(1) > .cds--subgrid > :nth-child(13)",
-        batchOrderData.facility,
-      );
-    });
-  });
 
   it("Should Search For Patient And Generate Barcode", function () {
     batchOrder.selectPatientGender(2);
@@ -120,5 +110,9 @@ describe("Batch Order Entry Pre Printed", function () {
 
     batchOrder.clickGenerateButton();
     batchOrder.saveOrder();
+  });
+
+  it("User clicks the finish button", function () {
+    batchOrder.clickFinishButton();
   });
 });
