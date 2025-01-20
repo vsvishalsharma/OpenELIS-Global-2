@@ -182,44 +182,8 @@ function OEHeader(props) {
     setSearchBar(!searchBar);
   };
   const generateMenuItems = (menuItem, index, level, path) => {
-    if (!menuItem.menu.isActive) {
-      return <React.Fragment key={path}></React.Fragment>;
-    }
-
-    const activeChildMenus = menuItem.childMenus.filter(
-      (child) => child.menu.isActive,
-    );
-
-    if (level === 0) {
-      // For top level items with exactly one active child, render direct link
-      if (activeChildMenus.length === 1) {
-        const singleChildMenu = activeChildMenus[0];
-        return (
-          <span
-            key={path}
-            id={menuItem.menu.elementId}
-            style={{ position: "relative", zIndex: 10 }}
-          >
-            <span
-              id={menuItem.menu.elementId + "_dropdown"}
-              style={{ position: "relative", zIndex: 5 }}
-            >
-              <SideNavMenuItem
-                id={menuItem.menu.elementId + "dashboard_nav"}
-                href={singleChildMenu.menu.actionURL}
-                target={singleChildMenu.menu.openInNewWindow ? "_blank" : ""}
-                className="top-level-menu-item"
-                style={{ position: "relative", zIndex: 15 }}
-              >
-                {renderSideNavMenuItemLabel(menuItem, level)}
-              </SideNavMenuItem>
-            </span>
-          </span>
-        );
-      }
-
-      // Multiple active children - show dropdown
-      if (menuItem.childMenus.length > 0) {
+    if (menuItem.menu.isActive) {
+      if (level === 0 && menuItem.childMenus.length > 0) {
         return (
           <span id={menuItem.menu.elementId} key={path}>
             <span
@@ -238,6 +202,9 @@ function OEHeader(props) {
                 })}
                 key={"menu_" + index + "_" + level}
                 defaultExpanded={menuItem.expanded}
+                // onClick={(e) => { // not supported yet, but if it becomes so we can simplify the functionality here by having this here and not have a span around it
+                //   setMenuItemExpanded(e, menuItem, path);
+                // }}
               >
                 <span
                   onClick={(e) => {
@@ -258,7 +225,7 @@ function OEHeader(props) {
             </span>
           </span>
         );
-      } else {
+      } else if (level === 0) {
         return (
           <span key={path} id={menuItem.menu.elementId}>
             <SideNavMenuItem
@@ -271,51 +238,53 @@ function OEHeader(props) {
             </SideNavMenuItem>
           </span>
         );
+      } else {
+        return (
+          <span id={menuItem.menu.elementId} key={path}>
+            <SideNavMenuItem
+              className="reduced-padding-nav-menu-item"
+              href={menuItem.menu.actionURL}
+              target={menuItem.menu.openInNewWindow ? "_blank" : ""}
+              style={{ width: "100%" }}
+              rel="noreferrer"
+            >
+              <span style={{ display: "flex", width: "100%" }}>
+                {!menuItem.menu.actionURL &&
+                  !hasActiveChildMenu(menuItem) &&
+                  console.warn("menu entry has no action url and no child")}
+                {!hasActiveChildMenu(menuItem) &&
+                  renderSingleNavButton(menuItem, index, level, path)}
+                {!menuItem.menu.actionURL &&
+                  hasActiveChildMenu(menuItem) &&
+                  renderSingleDropdownButton(menuItem, index, level, path)}
+                {menuItem.menu.actionURL &&
+                  hasActiveChildMenu(menuItem) &&
+                  renderDualNavDropdownButton(menuItem, index, level, path)}
+              </span>
+            </SideNavMenuItem>
+            {menuItem.childMenus.map((childMenuItem, index) => {
+              return (
+                <span
+                  key={path + ".childMenus[" + index + "].span"}
+                  style={{ display: menuItem.expanded ? "" : "none" }}
+                >
+                  {generateMenuItems(
+                    childMenuItem,
+                    index,
+                    level + 1,
+                    path + ".childMenus[" + index + "]",
+                  )}
+                </span>
+              );
+            })}
+          </span>
+        );
       }
     } else {
-      return (
-        <span id={menuItem.menu.elementId} key={path}>
-          <SideNavMenuItem
-            className="reduced-padding-nav-menu-item"
-            href={menuItem.menu.actionURL}
-            target={menuItem.menu.openInNewWindow ? "_blank" : ""}
-            style={{ width: "100%" }}
-            rel="noreferrer"
-          >
-            <span style={{ display: "flex", width: "100%" }}>
-              {!menuItem.menu.actionURL &&
-                !hasActiveChildMenu(menuItem) &&
-                console.warn("menu entry has no action url and no child")}
-              {!hasActiveChildMenu(menuItem) &&
-                renderSingleNavButton(menuItem, index, level, path)}
-              {!menuItem.menu.actionURL &&
-                hasActiveChildMenu(menuItem) &&
-                renderSingleDropdownButton(menuItem, index, level, path)}
-              {menuItem.menu.actionURL &&
-                hasActiveChildMenu(menuItem) &&
-                renderDualNavDropdownButton(menuItem, index, level, path)}
-            </span>
-          </SideNavMenuItem>
-          {menuItem.childMenus.map((childMenuItem, index) => {
-            return (
-              <span
-                key={path + ".childMenus[" + index + "].span"}
-                style={{ display: menuItem.expanded ? "" : "none" }}
-              >
-                {generateMenuItems(
-                  childMenuItem,
-                  index,
-                  level + 1,
-                  path + ".childMenus[" + index + "]",
-                )}
-              </span>
-            );
-          })}
-        </span>
-      );
+      return <React.Fragment key={path}></React.Fragment>;
     }
   };
-  
+
   const hasActiveChildMenu = (menuItem) => {
     if (menuItem.menu.elementId === "menu_reports_routine") {
       console.log("reports");
