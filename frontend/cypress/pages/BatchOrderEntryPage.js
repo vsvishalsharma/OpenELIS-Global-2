@@ -65,7 +65,8 @@ class BatchOrderEntry {
   }
 
   typeLabNumber(labNumber) {
-    cy.get("#display_labNo").type(labNumber);
+    cy.wait(500);
+    cy.get("#display_labNo").should("be.visible").type(labNumber);
   }
 
   uniqueHealthIDNum(healthID) {
@@ -100,7 +101,7 @@ class BatchOrderEntry {
     cy.contains("span", "Female").click();
   }
   checkNextButtonEnabled() {
-    cy.contains("button", "Next").click();
+    cy.contains("button", "Next").wait(10000).click();
   }
 
   selectDNAPCRTest() {

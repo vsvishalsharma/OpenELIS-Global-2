@@ -28,7 +28,7 @@ describe("Batch Order Entry On Demand and Serum form type", function () {
     batchOrder.checkNextButtonDisabled();
   });
 
-  it("User selects Routine Form and Routine form type", function () {
+  it("User selects Routine Form and Serum Sample", function () {
     cy.fixture("BatchOrder").then((batchOrderData) => {
       batchOrder.selectForm(batchOrderData.formTypeRoutine);
       batchOrder.selectSampleType(batchOrderData.serumSample);
