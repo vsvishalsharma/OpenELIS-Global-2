@@ -65,8 +65,10 @@ class BatchOrderEntry {
   }
 
   typeLabNumber(labNumber) {
-    cy.wait(500);
-    cy.get("#display_labNo").should("be.visible").type(labNumber);
+    cy.wait(10000);
+    cy.get('[placeholder="Enter Lab Number"]')
+      .should("be.visible")
+      .type(labNumber);
   }
 
   uniqueHealthIDNum(healthID) {
