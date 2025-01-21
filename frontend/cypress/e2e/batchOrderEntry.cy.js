@@ -54,19 +54,36 @@ describe("Batch Order Entry On Demand and Serum form type", function () {
     });
   });
 
+  it("User adds New Patient", function () {
+    batchOrder.clickNewPatientButton();
+    cy.fixture("BatchOrder").then((batchOrderData) => {
+      batchOrder.uniqueHealthIDNum(batchOrderData.healthID);
+      batchOrder.nationalID(batchOrderData.nationalID);
+      batchOrder.firstName(batchOrderData.firstName);
+      batchOrder.lastName(batchOrderData.lastName);
+      batchOrder.typePatientYears(batchOrderData.years);
+      batchOrder.typePatientMonths(batchOrderData.months);
+      batchOrder.typePatientDays(batchOrderData.days);
+      batchOrder.selectGender(); //female in this case
+    });
+  });
+  //Save button is lacking and needs to be added for this test to work
+  //it("User should click save new patient information button", function () {
+  // batchOrder.clickSavePatientButton();
+  //});
+
   it("Generate BarCode", function () {
     cy.fixture("BatchOrder").then((batchOrderData) => {
       batchOrder.typeLabNumber(batchOrderData.labNumber);
       batchOrder.clickGenerateAndSaveBarcode();
       batchOrder.checkNextLabel().should("be.visible");
     });
-    });
-  
-    it("User clicks the finish button", function () {
-      batchOrder.clickFinishButton();
-    });
   });
 
+  it("User clicks the finish button", function () {
+    batchOrder.clickFinishButton();
+  });
+});
 describe("Batch Order Entry Pre Printed and EID form type", function () {
   before("navigate to Batch Order Entry Page", function () {
     navigateToBatchOrderEntryPage();
@@ -96,16 +113,28 @@ describe("Batch Order Entry Pre Printed and EID form type", function () {
     });
   });
 
+  it("User Searches for Existing Patient", function () {
+    batchOrder.clickSearchPatientButton();
+    cy.fixture("BatchOrder").then((batchOrderData) => {
+      batchOrder.lastName(batchOrderData.lastName);
+      batchOrder.firstName(batchOrderData.firstName);
+      batchOrder.localSearchButton();
+      batchOrder.checkPatientRadio(); //the first on the list
+    });
+  });
+
   it("Should Visit Batch Order Entry Page", function () {
     batchOrder.visitBatchOrderEntryPage();
   });
 
-
-  it(" Generate Barcode", function () {
-    batchOrder.clickGenerateButton();
-    batchOrder.saveOrder();
+  it(" User enters Lab Number and Generates Barcode", function () {
+    cy.fixture("BatchOrder").then((batchOrderData) => {
+      batchOrder.typeLabNumber(batchOrderData.labNumber);
+      batchOrder.visitBatchOrderEntryPage();
+      batchOrder.clickGenerateButton();
+      batchOrder.saveOrder();
+    });
   });
-
   it("User clicks the finish button", function () {
     batchOrder.clickFinishButton();
   });
