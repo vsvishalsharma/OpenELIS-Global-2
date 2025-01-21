@@ -21,7 +21,7 @@ const CustomDatePicker = (props) => {
   }
 
   function handleInputChange(e) {
-    const inputValue = event.target.value;
+    const inputValue = e.target.value;
 
     const isFrenchLocale =
       configurationProperties.DEFAULT_DATE_LOCALE === "fr-FR";
@@ -34,9 +34,9 @@ const CustomDatePicker = (props) => {
       : /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
 
     if (partialDateRegex.test(inputValue)) {
-      event.target.value = inputValue;
+      e.target.value = inputValue;
     } else {
-      event.target.value = ""; // Clear invalid input
+      e.target.value = ""; // Clear invalid input
     }
   }
 
