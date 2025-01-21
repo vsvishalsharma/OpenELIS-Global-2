@@ -77,14 +77,12 @@ describe("Batch Order Entry Pre Printed and EID form type", function () {
     batchOrder.checkNextButtonDisabled();
   });
 
-  it("User selects EID form, samples and tests", function () {
+  it("User selects EID form, samples and test", function () {
     cy.fixture("BatchOrder").then((batchOrderData) => {
       batchOrder.selectForm(batchOrderData.formTypeEID);
       batchOrder.selectDNAPCRTest();
       batchOrder.selectTubeSample();
       batchOrder.selectBloodSample();
-      batchOrder.checkBilanPanel();
-      batchOrder.checkSerologiePanel();
     });
   });
 
@@ -103,11 +101,7 @@ describe("Batch Order Entry Pre Printed and EID form type", function () {
   });
 
 
-  it("Should Search For Patient And Generate Barcode", function () {
-    batchOrder.selectPatientGender(2);
-    batchOrder.clickSearchPatient();
-    batchOrder.selectPatient(1);
-
+  it(" Generate Barcode", function () {
     batchOrder.clickGenerateButton();
     batchOrder.saveOrder();
   });

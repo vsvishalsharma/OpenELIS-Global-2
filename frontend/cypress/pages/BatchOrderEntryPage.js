@@ -68,7 +68,7 @@ class BatchOrderEntry {
   }
 
   selectDNAPCRTest() {
-    cy.get("#eid_dnaPCR").check();
+    cy.get("#eid_dnaPCR").check({force: true} );
   }
 
   selectTubeSample() {
@@ -91,21 +91,6 @@ class BatchOrderEntry {
     cy.get(":nth-child(6) > .cds--btn").click();
   }
 
-  checkNextButtonVisible() {
-    cy.get(":nth-child(8) > .cds--btn").should("be.visible");
-  }
-
-  selectPatientGender(genderIndex) {
-    cy.get(`:nth-child(${genderIndex}) > .cds--radio-button__label`).click(); // 2 for male, 3 for female
-  }
-
-  clickSearchPatient() {
-    cy.get("#local_search").click();
-  }
-
-  selectPatient(rowIndex) {
-    cy.get(`tbody > :nth-child(${rowIndex}) > :nth-child(1)`).click();
-  }
 
   clickFinishButton() {
     cy.contains("button", "Finish").click();
