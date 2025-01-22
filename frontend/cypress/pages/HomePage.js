@@ -180,7 +180,7 @@ class HomePage {
     return new StudyReportPage();
   }
 
-  goToPathologyDashboard() {
+  goToPathology() {
     this.openNavigationMenu();
     cy.get("#menu_pathology").click(); // Changed from menu_pathology_dropdown
     return new DashBoardPage();
@@ -189,6 +189,12 @@ class HomePage {
   goToImmunoChemistryDashboard() {
     this.openNavigationMenu();
     cy.get("#menu_immunochem").click(); // Changed from menu_immunochem_dropdown
+    return new DashBoardPage();
+  }
+
+  goToCytology() {
+    this.openNavigationMenu();
+    cy.get("#menu_cytology").click();
     return new DashBoardPage();
   }
 

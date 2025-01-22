@@ -1,14 +1,7 @@
 {
-  "samples": [
-    {
-      "sampleType": "Serum"
-    }
-  ],
-  "siteName": "279 - CAMES MAN",
-  "requester": {
-    "firstName": "Optimus",
-    "lastName": "Prime"
-  },
-  "labNo": "",
-  "invalidLabNo": "DEV0124000000000000"
+  "labNo": "REG-00000123",
+  "myCases": "Grossing",
+  "myCases2": "Completed",
+  "myCases3": "Screening",
+  "itemsPerPage": "30"
 }

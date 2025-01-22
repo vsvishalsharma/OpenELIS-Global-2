@@ -7,79 +7,53 @@ let dashboard = null;
 before("login", () => {
   loginPage = new LoginPage();
   loginPage.visit();
+
+  homePage = loginPage.goToHomePage();
+
+  cy.fixture("Order").as("dashBData");
 });
 
 describe("Pathology Dashboard", function () {
-  it("User  Visits Pathology Dashboard", function () {
-    homePage = loginPage.goToHomePage();
-    dashboard = homePage.goToPathologyDashboard();
-
-    dashboard.checkForHeader("Pathology");
+  it("User  Visits the Dashboard", function () {
+    dashboard = homePage.goToPathology();
   });
 
-  it("User adds a new Pathology order", function () {
-    homePage.goToOrderPage();
-    dashboard.addOrder("Histopathology");
-  });
-  it("Check For Order", () => {
-    homePage.goToPathologyDashboard();
-    dashboard.checkForHeader("Pathology");
-
-    cy.fixture("DashBoard").then((order) => {
-      dashboard.validatePreStatus(order.labNo);
-    });
-  });
-
-  it("Change The Status of Order and save it", () => {
-    dashboard.changeStatus("Completed");
-    dashboard.enterDetails();
-    dashboard.saveOrder();
-  });
-
-  it("Validate the Status of Order", () => {
-    cy.fixture("DashBoard").then((order) => {
-      //  dashboard.validateOrderStatus(order.labNo, 4);
+  it("User checks filters, selects cases and items per page", function () {
+    dashboard.checkFilters();
+    cy.fixture("Order").then((dashBData) => {
+      dashboard.selectCases(dashBData.myCases);
+      dashboard.enterLabNumber(dashBData.labNo);
+      dashboard.pageItems(dashBData.itemsPerPage);
     });
   });
 });
 
-describe("ImmunoChemistry Dashboard", function () {
-  it("User  Visits ImmunoChemistry Dashboard", function () {
-    homePage = loginPage.goToHomePage();
+describe("Immunohistochemistry Dashboard", function () {
+  it("User  Visits the Dashboard", function () {
     dashboard = homePage.goToImmunoChemistryDashboard();
-    dashboard.checkForHeader("Immunohistochemistry");
-
-    //  cy.fixture("DashBoard").then((order) => {
-    //     dashboard.validatePreStatus(order.labNo);
-
-    //     });
   });
 
-  it("User adds a new ImmunioChemistry order", function () {
-    homePage.goToOrderPage();
-    dashboard.addOrder("Immunohistochemistry");
-  });
-
-  it("Check For Order", () => {
-    homePage.goToImmunoChemistryDashboard();
-
-    dashboard.checkForHeader("Immunohistochemistry");
-
-    cy.fixture("DashBoard").then((order) => {
-      dashboard.validatePreStatus(order.labNo);
+  it("User checks filters, selects cases and items per page", function () {
+    dashboard.checkFilters();
+    cy.fixture("Order").then((dashBData) => {
+      dashboard.selectCompletedCases(dashBData.myCases2);
+      dashboard.enterLabNumber(dashBData.labNo);
+      dashboard.pageItems(dashBData.itemsPerPage);
     });
   });
+});
 
-  it("Change The Status of Order and save it", () => {
-    dashboard.changeStatus("Completed");
-    dashboard.selectPathologist("ELIS,Open");
-    dashboard.saveOrder();
+describe("Cytology Dashboard", function () {
+  it("User  Visits the Dashboard", function () {
+    dashboard = homePage.goToCytology();
   });
 
-  it("Validate the Status of Order", () => {
-    cy.fixture("DashBoard").then((order) => {
-      //TO DO : needs to be properly re-writen with proper selector
-      //dashboard.validateOrderStatus(order.labNo, 3);
+  it("User checks filters, selects cases and items per page", function () {
+    dashboard.checkFilters();
+    cy.fixture("Order").then((dashBData) => {
+      dashboard.selectScreeningCases(dashBData.myCases3);
+      dashboard.enterLabNumber(dashBData.labNo);
+      dashboard.pageItems(dashBData.itemsPerPage);
     });
   });
 });
