@@ -913,8 +913,9 @@ function UserAddModify() {
                           !passwordPatternRegex.test(
                             userDataShow.confirmPassword,
                           )) ||
-                        userDataShow.confirmPassword !==
-                          userDataShow.userPassword
+                        (passwordTouched.confirmPassword &&
+                          userDataShow.confirmPassword !==
+                          userDataShow.userPassword)
                       }
                       // invalidText={errors.order}
                       value={
