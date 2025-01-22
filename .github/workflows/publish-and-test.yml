@@ -307,6 +307,7 @@ jobs:
           cache-to: type=registry,ref=${{ env.DOCKER_TEST_NAME }}-frontend:buildcache,mode=max
 
   build-and-push-image-proxy:
+    if: ${{ github.repository == 'I-TECH-UW/OpenELIS-Global-2' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -348,6 +349,7 @@ jobs:
           cache-to: type=registry,ref=${{ env.DOCKER_TEST_NAME }}-proxy:buildcache,mode=max
 
   build-and-push-image-fhir:
+    if: ${{ github.repository == 'I-TECH-UW/OpenELIS-Global-2' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
