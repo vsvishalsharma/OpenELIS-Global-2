@@ -22,7 +22,7 @@ describe("Pathology Dashboard", function () {
     dashboard.checkFilters();
     cy.fixture("Order").then((dashBData) => {
       dashboard.selectCases(dashBData.myCases);
-      dashboard.enterLabNumber(dashBData.labNo);
+      dashboard.enterLabNumber(dashBData.labNum);
       dashboard.pageItems(dashBData.itemsPerPage);
     });
   });

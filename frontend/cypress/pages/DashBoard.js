@@ -16,8 +16,8 @@ class DashBoardPage {
   selectScreeningCases(myCases3) {
     cy.get("#statusFilter").select(myCases3);
   }
-  enterLabNumber(labNo) {
-    cy.get("#search-input-41").should("be.visible").type(labNo);
+  enterLabNumber(labNum) {
+    cy.get("#search-input-41").should("be.visible").type(labNum);
   }
 
   pageItems(itemsPerPage) {
