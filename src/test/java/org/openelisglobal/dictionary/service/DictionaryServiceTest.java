@@ -92,17 +92,6 @@ public class DictionaryServiceTest extends BaseWebContextSensitiveTest {
         Assert.assertEquals("Y", dictionary.getIsActive());
     }
 
-//    @Test
-//    This fails with java.lang.AssertionError: Values should be different. Actual: 0
-//    public void getDictionaryEntrysByCategoryAbbreviation_shouldGetDictEntrysByCategoryAbbreviation() {
-//        List<Dictionary> dictionaries = dictionaryService.getDictionaryEntrysByCategoryAbbreviation("Dictionary", "CA2");
-//        Assert.assertNotEquals(0, dictionaries.size());
-//
-//        Assert.assertEquals("Dictionary Entry 2", dictionaries.get(0).getDictEntry());
-//        Assert.assertEquals("N", dictionaries.get(0).getIsActive());
-//        Assert.assertEquals("DE2", dictionaries.get(0).getLocalAbbreviation());
-//    }
-
     @Test
     public void getDictionaryEntrysByNameAndCategoryDescription_shouldGetDictionaryEntrysByNameAndCategoryDescription() {
         Dictionary dictionary = dictionaryService.getDictionaryEntrysByNameAndCategoryDescription("Dictionary Entry 1",
