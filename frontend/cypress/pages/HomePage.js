@@ -204,6 +204,11 @@ class HomePage {
     //cy.get("#menu_administration_nav").click();
     return new AdminPage();
   }
+  //This takes you from any page back to the home page
+  backToHomePage() {
+    this.openNavigationMenu();
+    cy.get("#menu_home").click();
+  }
 }
 
 export default HomePage;

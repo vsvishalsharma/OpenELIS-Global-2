@@ -15,5 +15,7 @@
   "myCases": "Grossing",
   "myCases2": "Completed",
   "myCases3": "Screening",
-  "itemsPerPage": "30"
+  "itemsPerPage": "30",
+  "searchName": "Smith",
+  "engLang": "English"
 }
