@@ -43,10 +43,15 @@ function SampleTypeRenameEntry() {
   const [sampleType, setSampleType] = useState({});
   const [sampleTypeListShow, setSampleTypeListShow] = useState([]);
   const [sampleTypePost, setSampleTypePost] = useState({});
-  const [entityNamesProvider, setEntityNamesProvider] = useState({ name : { english: "", french: "" } });
-  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({ name: { 
-    english: "", french: ""
-  }});
+  const [entityNamesProvider, setEntityNamesProvider] = useState({
+    name: { english: "", french: "" },
+  });
+  const [entityNamesProviderPost, setEntityNamesProviderPost] = useState({
+    name: {
+      english: "",
+      french: "",
+    },
+  });
   const [entityId, setEntityId] = useState();
   const [entityName, setEntityName] = useState("sampleType");
   const [selectedItem, setSelectedItem] = useState({});
@@ -73,13 +78,13 @@ function SampleTypeRenameEntry() {
   };
 
   useEffect(() => {
-    if(entityId && entityName) {
+    if (entityId && entityName) {
       getFromOpenElisServer(
         `/rest/EntityNamesProvider?entityId=${entityId}&entityName=${entityName}`,
         handelEntityNamesProvider,
       );
     }
-  }, [entityId,entityName]);
+  }, [entityId, entityName]);
 
   const handelEntityNamesProvider = (res) => {
     if (!res) {
@@ -142,6 +147,7 @@ function SampleTypeRenameEntry() {
   };
 
   const onInputChangeEn = (e) => {
+    e.preventDefault();
     const englishName = e.target.value;
     setEntityNamesProviderPost((prev) => ({
       name: {
@@ -153,6 +159,7 @@ function SampleTypeRenameEntry() {
   };
 
   const onInputChangeFr = (e) => {
+    e.preventDefault();
     const frenchName = e.target.value;
     setEntityNamesProviderPost((prev) => ({
       name: {

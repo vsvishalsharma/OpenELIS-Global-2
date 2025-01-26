@@ -129,6 +129,7 @@ function SelectListRenameEntry() {
   };
 
   const onInputChangeEn = (e, index) => {
+    e.preventDefault();
     const updatedValue = e.target.value;
     setDisplayValueList((prevList) =>
       prevList.map((item, i) =>
@@ -144,6 +145,7 @@ function SelectListRenameEntry() {
   };
 
   const onInputChangeFr = (e, index) => {
+    e.preventDefault();
     const updatedValue = e.target.value;
     setDisplayValueList((prevList) =>
       prevList.map((item, i) =>
