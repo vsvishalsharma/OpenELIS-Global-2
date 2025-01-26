@@ -24,7 +24,7 @@ describe("Dashboard for the Home Page", function () {
     cy.fixture("Order").then((dashBData) => {
       dashboard.searchBarInput(dashBData.searchName);
     });
-    dashboard.searchBarClose();
+    dashboard.homeSearchBar();
   });
 
   it("User interacts with the notifications icon", function () {
@@ -37,7 +37,7 @@ describe("Dashboard for the Home Page", function () {
     cy.fixture("Order").then((dashBData) => {
       dashboard.userSelectsEng(dashBData.engLang);
     });
-    dashboard.userClosesIcon();
+    dashboard.userIcon();
   });
 });
 

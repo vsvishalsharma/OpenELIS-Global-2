@@ -2,22 +2,18 @@ class DashBoardPage {
   constructor() {}
 
   homeSearchBar() {
-    //#tooltip-43 #mainHeader > div.cds--header__global > span:nth-child(1) > button
-    cy.get("#mainHeader > div.cds--header__global > span:nth-child(1)").click();
-    //cy.get(".search-bar-container").should("be.visible").click();
+    cy.get('[data-cy="header-global-action-search"]').click();
   }
   searchBarInput(inputName) {
     cy.get("#searchItem").type(inputName);
   }
 
   searchBarClose() {
-    cy.get("#mainHeader > div.cds--header__global > span:nth-child(2)").click();
+    cy.get('[data-cy="header-global-action-search"]').click();
   }
 
   notificationIcon() {
-    cy.get(
-      "#mainHeader > div.cds--header__global > span:nth-child(2) > button",
-    ).click();
+    cy.get('[data-cy="header-global-action-notifications"]').click();
   }
 
   notificationIconClose() {
@@ -25,9 +21,7 @@ class DashBoardPage {
   }
 
   userIcon() {
-    cy.get(
-      "#mainHeader > div.cds--header__global > span:nth-child(3) > button",
-    ).click();
+    cy.get('[data-cy="header-global-action-user"]').click();
   }
 
   userSelectsEng(engLang) {
@@ -35,9 +29,7 @@ class DashBoardPage {
   }
 
   userClosesIcon() {
-    cy.get(
-      "#mainHeader > div.cds--header__global > span:nth-child(3) > button",
-    ).click();
+    cy.get('[data-cy="header-global-action-user"]').click();
   }
 
   checkFilters() {
