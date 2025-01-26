@@ -1,7 +1,8 @@
 package org.openelisglobal.dictionary.service;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,11 @@ public class DictionaryServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void setup() throws Exception {
-        executeDataSetWithStateManagement("testdata/dictionary.xml");
+        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
+        sequenceResetInfo.put("DICTIONARY", new SequenceResetInfo("dictionary_seq", "ID"));
+        sequenceResetInfo.put("DICTIONARY_CATEGORY", new SequenceResetInfo("dictionary_category_seq", "ID"));
+
+        executeDataSetWithStateManagement("testdata/dictionary.xml", sequenceResetInfo);
     }
 
     // @Test

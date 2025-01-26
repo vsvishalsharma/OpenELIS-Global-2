@@ -1,6 +1,8 @@
 package org.openelisglobal.address;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,6 +17,7 @@ import org.openelisglobal.person.valueholder.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PersonAddressServiceTest extends BaseWebContextSensitiveTest {
+
     @Autowired
     PersonAddressService pAddressService;
 
@@ -26,8 +29,10 @@ public class PersonAddressServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void init() throws Exception {
-        executeDataSetWithStateManagement("testdata/personaddress.xml");
-        resetSequence("person_seq", "PERSON", "ID");
+        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
+        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
+
+        executeDataSetWithStateManagement("testdata/personaddress.xml", sequenceResetInfo);
     }
 
     @After

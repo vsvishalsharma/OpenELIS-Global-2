@@ -8,7 +8,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +38,9 @@ public class DictionaryMenuRestControllerTest extends BaseWebContextSensitiveTes
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        executeDataSetWithStateManagement("testdata/dictionary.xml");
+        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
+        sequenceResetInfo.put("DICTIONARY_CATEGORY", new SequenceResetInfo("dictionary_category_seq", "ID"));
+        executeDataSetWithStateManagement("testdata/dictionary.xml", sequenceResetInfo);
     }
 
     @Test

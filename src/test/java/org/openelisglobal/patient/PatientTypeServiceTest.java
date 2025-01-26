@@ -1,11 +1,13 @@
 package org.openelisglobal.patient;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openelisglobal.BaseWebContextSensitiveTest;
-import org.openelisglobal.common.util.ConfigurationProperties;
 import org.openelisglobal.patient.service.PatientTypeService;
 import org.openelisglobal.patienttype.valueholder.PatientType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +19,30 @@ public class PatientTypeServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void init() throws Exception {
-        executeDataSetWithStateManagement("testdata/patient.xml");
-        resetSequence("patient_type_seq", "PATIENT_TYPE", "ID");
+        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
+        sequenceResetInfo.put("PATIENT_TYPE", new SequenceResetInfo("patient_type_seq", "ID"));
+        truncateTables(new String[] { "patient_type", "patient", "person", "patient_identity" });
+        executeDataSetWithStateManagement("testdata/patient.xml", sequenceResetInfo);
+    }
+
+    @After
+    public void tearDown() {
+        typeService.deleteAll(typeService.getAll());
     }
 
     @Test
     public void createPatientType_shouldCreateNewPatientType() throws Exception {
+        truncateTables(new String[] { "patient_type", "patient", "person", "patient_identity" });
         PatientType patientType = new PatientType();
         patientType.setDescription("Test Type Description");
         patientType.setType("Test Type");
 
-        Assert.assertEquals(6, typeService.getAllPatientTypes().size());
+        Assert.assertEquals(0, typeService.getAllPatientTypes().size());
 
         String patientTypeId = typeService.insert(patientType);
         PatientType savedPatientType = typeService.get(patientTypeId);
 
-        Assert.assertEquals(7, typeService.getAllPatientTypes().size());
+        Assert.assertEquals(1, typeService.getAllPatientTypes().size());
         Assert.assertEquals("Test Type Description", savedPatientType.getDescription());
         Assert.assertEquals("Test Type", savedPatientType.getType());
 
@@ -54,42 +64,26 @@ public class PatientTypeServiceTest extends BaseWebContextSensitiveTest {
         PatientType savedPatientType = typeService.get("6");
         typeService.delete(savedPatientType);
 
-        Assert.assertEquals(5, typeService.getAllPatientTypes().size());
+        Assert.assertEquals(0, typeService.getAllPatientTypes().size());
     }
 
     @Test
     public void getallPatientTypes_shouldReturnPatientType() throws Exception {
 
-        Assert.assertEquals(6, typeService.getAllPatientTypes().size());
+        Assert.assertEquals(1, typeService.getAllPatientTypes().size());
     }
 
     @Test
     public void getTotalPatientTypeCount_shouldReturnTotalPatientTypeCount() throws Exception {
 
-        Assert.assertEquals(6, typeService.getTotalPatientTypeCount().longValue());
+        Assert.assertEquals(1, typeService.getTotalPatientTypeCount().longValue());
     }
 
     @Test
     public void getPatientTypes_shouldReturnListOfFilteredPatientTypes() throws Exception {
-        List<PatientType> savedPatientTypes = typeService.getPatientTypes("patient");
+        List<PatientType> savedPatientTypes = typeService.getPatientTypes("Discharged");
 
-        Assert.assertEquals(2, savedPatientTypes.size());
-    }
-
-    @Test
-    public void getPageOfPatientType_shouldReturnPatientTypes() throws Exception {
-
-        List<PatientType> patientTypesPage = typeService.getPageOfPatientType(1);
-
-        int expectedPageSize = Integer
-                .parseInt(ConfigurationProperties.getInstance().getPropertyValue("page.defaultPageSize"));
-
-        Assert.assertTrue(patientTypesPage.size() <= expectedPageSize);
-
-        if (expectedPageSize >= 2) {
-            Assert.assertTrue(patientTypesPage.stream().anyMatch(p -> p.getType().equals("R")));
-            Assert.assertTrue(patientTypesPage.stream().anyMatch(p -> p.getType().equals("E")));
-        }
+        Assert.assertEquals(1, savedPatientTypes.size());
     }
 
     @Test

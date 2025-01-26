@@ -24,8 +24,8 @@
     <!--Patient catagory entries-->
     <patient id ="1" person_id="1" race="black" gender="M" birth_date="1992-12-12 02:00:00" birth_time="1992-12-12 02:00:00" national_id="1234" ethnicity="U" external_id="EX456" school_attend="MaKerere College" birth_place="Mulago" entered_birth_date="1992-12-12" lastUpdated="2023-11-01 12:00:02" />
     <patient id="2" person_id="3" race="black" gender="F" birth_date="1997-10-09 09:00:00" birth_time="1997-10-09 09:00:00" national_id="56789" ethnicity="A" external_id="EX123" school_attend="Merryland College" birth_place="Nevada" entered_birth_date="1997-10-09" lastUpdated="2023-11-01 12:00:02" />
-    <patient id ="3" person_id="2" race="black" gender="M" birth_date="1992-12-12 02:00:00" birth_time="1992-12-12 02:00:00" national_id="1234" ethnicity="U" external_id="EX432" school_attend="MaKerere College" birth_place="Kawempe" entered_birth_date="1992-12-12" lastUpdated="2023-11-01 12:00:02" />
-    <patient id ="4" person_id="4" race="black" gender="F" birth_date="1992-12-12 02:00:00" birth_time="1992-12-12 02:00:00" national_id="1234" ethnicity="U" external_id="EX432" school_attend="MaKerere College" birth_place="Kawempe" entered_birth_date="1992-12-12" lastUpdated="2023-11-01 12:00:02" />
+    <patient id ="3" person_id="2" race="black" gender="M" birth_date="1992-12-12 02:00:00" birth_time="1992-12-12 02:00:00" national_id="12314" ethnicity="U" external_id="EX432" school_attend="MaKerere College" birth_place="Kawempe" entered_birth_date="1992-12-12" lastUpdated="2023-11-01 12:00:02" />
+    <patient id ="4" person_id="4" race="black" gender="F" birth_date="1992-12-12 02:00:00" birth_time="1992-12-12 02:00:00" national_id="12304" ethnicity="U" external_id="EX432" school_attend="MaKerere College" birth_place="Kawempe" entered_birth_date="1992-12-12" lastUpdated="2023-11-01 12:00:02" />
 
     <!-- PatientIdentity Categoty entries-->
     <patient_identity id ="1" identity_type_id="9" patient_id="1" identity_data="334-422-A" lastUpdated="2023-11-01 12:00:02" />

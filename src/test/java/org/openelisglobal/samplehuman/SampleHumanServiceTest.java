@@ -3,7 +3,10 @@ package org.openelisglobal.samplehuman;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,25 +53,28 @@ public class SampleHumanServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void setUp() throws Exception {
-        executeDataSetWithStateManagement("testdata/samplehuman.xml");
-        resetSequence("person_seq", "PERSON", "ID");
-        resetSequence("sample_human_seq", "SAMPLE_HUMAN", "ID");
-        resetSequence("sample_seq", "SAMPLE", "ID");
-        resetSequence("provider_seq", "PROVIDER", "ID");
-        resetSequence("patient_seq", "PATIENT", "ID");
+        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
+        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
+        sequenceResetInfo.put("SAMPLE_HUMAN", new SequenceResetInfo("sample_human_seq", "ID"));
+        sequenceResetInfo.put("SAMPLE", new SequenceResetInfo("sample_seq", "ID"));
+        sequenceResetInfo.put("PROVIDER", new SequenceResetInfo("provider_seq", "ID"));
+        sequenceResetInfo.put("PATIENT", new SequenceResetInfo("patient_seq", "ID"));
+
+        truncateTables(new String[] { "person", "patient", "provider", "sample", "sample_human" });
+
+        executeDataSetWithStateManagement("testdata/samplehuman.xml", sequenceResetInfo);
     }
 
     @Test
     public void createSampleHuman_shouldCreateNewSampleHuman() throws Exception {
-        SampleHuman sampleHuman = creatSampleHuman(PATIENT_FIRSTNAME, PATIENT_LASTNAME, PROVIDER_FIRSTNAME,
-                PROVIDER_LASTNAME, PATIENT_BIRTHDATE, SAMPLE_ACCESSION_NUMBER, PATIENT_GENDER,
-                SAMPLE_RECEIVED_TIMESTAMP, PROVIDER_TYPE, SAMPLE_ENTERED_DATE);
+        truncateTables(new String[] { "person", "patient", "provider", "sample", "sample_human" });
+        SampleHuman sampleHuman = creatSampleHuman(SAMPLE_ENTERED_DATE);
 
-        Assert.assertEquals(3, humanService.getAll().size());
+        Assert.assertEquals(0, humanService.getAll().size());
 
         humanService.insert(sampleHuman);
 
-        Assert.assertEquals(4, humanService.getAll().size());
+        Assert.assertEquals(1, humanService.getAll().size());
 
         humanService.delete(sampleHuman);
     }
@@ -102,43 +108,44 @@ public class SampleHumanServiceTest extends BaseWebContextSensitiveTest {
     public void getAllPatientsWithSampleEntered_shouldReturnPatientsWithSample() throws Exception {
         List<Patient> patients = humanService.getAllPatientsWithSampleEntered();
 
+        patients.sort(Comparator.comparing(p -> p.getPerson().getFirstName()));
+
         Assert.assertEquals(3, patients.size());
-        Assert.assertEquals("The first element should be James", patients.get(0).getPerson().getFirstName(), "James");
-        Assert.assertEquals("The first element should be Faith", patients.get(1).getPerson().getFirstName(), "Faith");
-        Assert.assertEquals("The first element should be John", patients.get(2).getPerson().getFirstName(),
-                PATIENT_FIRSTNAME);
+        Assert.assertEquals("Faith", patients.get(0).getPerson().getFirstName());
+        Assert.assertEquals("James", patients.get(1).getPerson().getFirstName());
+        Assert.assertEquals(PATIENT_FIRSTNAME, patients.get(2).getPerson().getFirstName());
     }
 
-    private SampleHuman creatSampleHuman(String firstname, String lastname, String firstname2, String lastname2,
-                                         String birthdate, String accessionNumber, String gender, String receivedTimestamp, String type,
-                                         String entereddate) throws ParseException {
+    private SampleHuman creatSampleHuman(String entereddate) throws ParseException {
         Person person = new Person();
-        person.setFirstName(firstname);
-        person.setLastName(lastname);
+        person.setFirstName(SampleHumanServiceTest.PATIENT_FIRSTNAME);
+        person.setLastName(SampleHumanServiceTest.PATIENT_LASTNAME);
         personService.save(person);
 
         Person person2 = new Person();
-        person2.setFirstName(firstname2);
-        person2.setLastName(lastname2);
+        person2.setFirstName(SampleHumanServiceTest.PROVIDER_FIRSTNAME);
+        person2.setLastName(SampleHumanServiceTest.PROVIDER_LASTNAME);
         personService.save(person2);
 
         Patient pat = new Patient();
-        pat.setBirthDate(new Timestamp(new SimpleDateFormat("dd/MM/yyyy").parse(birthdate).getTime()));
+        pat.setBirthDate(new Timestamp(
+                new SimpleDateFormat("dd/MM/yyyy").parse(SampleHumanServiceTest.PATIENT_BIRTHDATE).getTime()));
         pat.setPerson(person);
-        pat.setGender(gender);
+        pat.setGender(SampleHumanServiceTest.PATIENT_GENDER);
         String patId = patientService.insert(pat);
 
         Provider prov = new Provider();
         prov.setPerson(person2);
-        prov.setProviderType(type);
+        prov.setProviderType(SampleHumanServiceTest.PROVIDER_TYPE);
         String providerId = providerService.insert(prov);
 
         java.sql.Date enteredDate = java.sql.Date.valueOf(SAMPLE_ENTERED_DATE);
 
         Sample samp = new Sample();
         samp.setEnteredDate(enteredDate);
-        samp.setReceivedTimestamp(new Timestamp(new SimpleDateFormat("dd/MM/yyyy").parse(receivedTimestamp).getTime()));
-        samp.setAccessionNumber(accessionNumber);
+        samp.setReceivedTimestamp(new Timestamp(
+                new SimpleDateFormat("dd/MM/yyyy").parse(SampleHumanServiceTest.SAMPLE_RECEIVED_TIMESTAMP).getTime()));
+        samp.setAccessionNumber(SampleHumanServiceTest.SAMPLE_ACCESSION_NUMBER);
         String sampId = sampleService.insert(samp);
 
         SampleHuman sampleHuman = new SampleHuman();

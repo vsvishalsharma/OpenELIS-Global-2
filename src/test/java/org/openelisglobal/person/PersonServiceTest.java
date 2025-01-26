@@ -1,33 +1,30 @@
 package org.openelisglobal.person;
 
-import org.hibernate.ObjectNotFoundException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openelisglobal.BaseWebContextSensitiveTest;
-import org.openelisglobal.common.util.ConfigurationProperties;
-import org.openelisglobal.patient.service.PatientService;
-import org.openelisglobal.patient.valueholder.Patient;
-import org.openelisglobal.person.service.PersonService;
-import org.openelisglobal.person.valueholder.Person;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
-@Rollback
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.hibernate.ObjectNotFoundException;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.openelisglobal.BaseWebContextSensitiveTest;
+import org.openelisglobal.common.util.ConfigurationProperties;
+import org.openelisglobal.patient.valueholder.Patient;
+import org.openelisglobal.person.service.PersonService;
+import org.openelisglobal.person.valueholder.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class PersonServiceTest extends BaseWebContextSensitiveTest {
     private static final String PERSON1_FIRSTNAME = "John";
     private static final String PERSON1_LASTNAME = "Doe";
@@ -39,13 +36,12 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
     @Autowired
     PersonService personService;
 
-    @Autowired
-    PatientService patientService;
-
     @Before
     public void setUp() throws Exception {
-        executeDataSetWithStateManagement("testdata/person.xml");
-        resetSequence("person_seq", "PERSON", "ID");
+        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
+        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
+        truncateTables(new String[] { "person", "patient" });
+        executeDataSetWithStateManagement("testdata/person.xml", sequenceResetInfo);
     }
 
     @Test
@@ -57,6 +53,7 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void createPerson_shouldCreateNewPerson() throws Exception {
+        truncateTables(new String[] { "person", "patient" });
         String firstName = "John";
         String lastname = "moe";
 
@@ -67,7 +64,7 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
         String personIdId = personService.insert(pat);
         Person savedPerson = personService.get(personIdId);
 
-        Assert.assertEquals(4, personService.getAllPersons().size());
+        Assert.assertEquals(1, personService.getAllPersons().size());
         Assert.assertEquals(firstName, savedPerson.getFirstName());
         Assert.assertEquals(lastname, savedPerson.getLastName());
     }
@@ -94,7 +91,7 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void getAllPerson_shouldGetAllPerson() throws Exception {
-        Assert.assertEquals(4, personService.getAllPersons().size());
+        Assert.assertEquals(3, personService.getAllPersons().size());
     }
 
     @Test
@@ -271,7 +268,8 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
             personService.get("2");
         });
 
-        assertEquals("No row with the given identifier exists: [org.openelisglobal.person.valueholder.Person#2]", throwable.getMessage());
+        assertEquals("No row with the given identifier exists: [org.openelisglobal.person.valueholder.Person#2]",
+                throwable.getMessage());
     }
 
 }
