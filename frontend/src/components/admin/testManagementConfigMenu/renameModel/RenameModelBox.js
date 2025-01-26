@@ -65,7 +65,7 @@ const RenameModelBox = ({
                 onRequestSubmit={onSubmit}
                 onRequestClose={closeModel}
               >
-                {lang && lang?.name && langPost && langPost?.name && langPost?.name?.english && langPost?.name?.french ? (
+                {lang && lang?.name && langPost && langPost?.name ? (
                   <Grid fullWidth={true}>
                     <Column lg={16} md={8} sm={4}>
                       {/* Edit or Confirmation */}
