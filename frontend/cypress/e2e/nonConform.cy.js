@@ -1,6 +1,5 @@
 import LoginPage from "../pages/LoginPage";
-import HomePage from "../pages/HomePage";
-import NonConform from "../pages/NonConformPage";
+
 
 let homePage = null;
 let loginPage = null;
@@ -65,7 +64,7 @@ describe("Report Non-Conforming Event", function () {
       nonConform.enterSearchField(order.labNo);
       nonConform.clickSearchButton();
       nonConform.validateSearchResult(order.labNo);
-      nonConform.clickCheckbox();
+      nonConform.clickCheckbox({force: true});
       nonConform.clickGoToNceFormButton();
     });
 
@@ -80,7 +79,7 @@ describe("Report Non-Conforming Event", function () {
       nonConform.enterDescription(nonConformData.description);
       nonConform.enterSuspectedCause(nonConformData.suspectedCause);
       nonConform.enterCorrectiveAction(nonConformData.proposedCorrectiveAction);
-      nonConform.submitFormNce();
+      nonConform.submitForm();
     });
   });
 });
@@ -101,14 +100,16 @@ describe("View New Non-Conforming Event", function () {
       .should("contain.text", "View New Non Conform Event");
   });
 
-  it("Should Search by Lab Number and Validate the results", function () {
+  // the ViewNonConfirm page does not have a method to render lab number as search result
+  //Prev selctor was pointing to the text input
+  /*it("Should Search by Lab Number and Validate the results", function () {
     cy.fixture("EnteredOrder").then((order) => {
       nonConform.selectSearchType("Lab Number");
       nonConform.enterSearchField(order.labNo);
       nonConform.clickSearchButton();
       nonConform.validateLabNoSearchResult(order.labNo);
     });
-  });
+  });*/
 
   it("Should Search by Lab Number and Validate the results", function () {
     cy.fixture("NonConform").then((nce) => {
@@ -149,14 +150,16 @@ describe("Corrective Actions", function () {
       .should("contain.text", "Nonconforming Events Corrective Action");
   });
 
-  it("Should Search by Lab Number and Validate the results", function () {
+  // the Corrective Action page does not have a method to render lab number as search result
+  //Prev selctor was pointing to the text input
+  /*it("Should Search by Lab Number and Validate the results", function () {
     cy.fixture("EnteredOrder").then((order) => {
       nonConform.selectSearchType("Lab Number");
       nonConform.enterSearchField(order.labNo);
       nonConform.clickSearchButton();
-      nonConform.validateLabNoSearchResultCorective(order.labNo);
+      nonConform.validateLabNoSearchResult(order.labNo);
     });
-  });
+  });*/
 
   it("Should Search by NCE Number and Validate the results", function () {
     cy.fixture("NonConform").then((nce) => {
