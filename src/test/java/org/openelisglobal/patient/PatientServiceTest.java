@@ -8,7 +8,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -39,11 +38,8 @@ public class PatientServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void init() throws Exception {
-        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
-        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
-        sequenceResetInfo.put("PATIENT", new SequenceResetInfo("patient_seq", "ID"));
         truncateTables(new String[] { "person", "patient" });
-        executeDataSetWithStateManagement("testdata/patient.xml", sequenceResetInfo);
+        executeDataSetWithStateManagement("testdata/patient.xml");
     }
 
     @Test

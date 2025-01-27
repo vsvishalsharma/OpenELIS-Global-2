@@ -1,8 +1,6 @@
 package org.openelisglobal.address;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,10 +27,7 @@ public class PersonAddressServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void init() throws Exception {
-        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
-        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
-
-        executeDataSetWithStateManagement("testdata/personaddress.xml", sequenceResetInfo);
+        executeDataSetWithStateManagement("testdata/personaddress.xml");
     }
 
     @After

@@ -11,7 +11,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.ObjectNotFoundException;
@@ -38,10 +37,8 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void setUp() throws Exception {
-        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
-        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
         truncateTables(new String[] { "person", "patient" });
-        executeDataSetWithStateManagement("testdata/person.xml", sequenceResetInfo);
+        executeDataSetWithStateManagement("testdata/person.xml");
     }
 
     @Test

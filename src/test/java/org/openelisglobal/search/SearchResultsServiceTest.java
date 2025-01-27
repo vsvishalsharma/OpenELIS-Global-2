@@ -5,9 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.*;
@@ -79,12 +77,8 @@ public class SearchResultsServiceTest extends BaseWebContextSensitiveTest {
     public void getSearchResults_shouldGetSearchResultsFromDB(String searchFirstName, String searchLastName,
             String searchDateOfBirth, String searchGender) throws Exception {
 
-        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
-        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
-        sequenceResetInfo.put("PATIENT", new SequenceResetInfo("patient_seq", "ID"));
         truncateTables(new String[] { "person", "patient" });
-
-        executeDataSetWithStateManagement("testdata/patient-person-search.xml", sequenceResetInfo);
+        executeDataSetWithStateManagement("testdata/patient-person-search.xml");
 
         String firstName = "John";
         String lastname = "Doe";
@@ -103,12 +97,9 @@ public class SearchResultsServiceTest extends BaseWebContextSensitiveTest {
     @Parameters
     public void getSearchResultsExact_shouldGetExactSearchResultsFromDB(String searchFirstName, String searchLastName,
             String searchDateOfBirth, String searchGender) throws Exception {
-        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
-        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
-        sequenceResetInfo.put("PATIENT", new SequenceResetInfo("patient_seq", "ID"));
-        truncateTables(new String[] { "person", "patient" });
 
-        executeDataSetWithStateManagement("testdata/patient-person-search.xml", sequenceResetInfo);
+        truncateTables(new String[] { "person", "patient" });
+        executeDataSetWithStateManagement("testdata/patient-person-search.xml");
 
         String firstName = "John";
         String lastname = "Doe";

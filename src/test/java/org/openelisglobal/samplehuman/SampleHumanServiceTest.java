@@ -4,9 +4,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,16 +51,8 @@ public class SampleHumanServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void setUp() throws Exception {
-        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
-        sequenceResetInfo.put("PERSON", new SequenceResetInfo("person_seq", "ID"));
-        sequenceResetInfo.put("SAMPLE_HUMAN", new SequenceResetInfo("sample_human_seq", "ID"));
-        sequenceResetInfo.put("SAMPLE", new SequenceResetInfo("sample_seq", "ID"));
-        sequenceResetInfo.put("PROVIDER", new SequenceResetInfo("provider_seq", "ID"));
-        sequenceResetInfo.put("PATIENT", new SequenceResetInfo("patient_seq", "ID"));
-
         truncateTables(new String[] { "person", "patient", "provider", "sample", "sample_human" });
-
-        executeDataSetWithStateManagement("testdata/samplehuman.xml", sequenceResetInfo);
+        executeDataSetWithStateManagement("testdata/samplehuman.xml");
     }
 
     @Test

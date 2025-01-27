@@ -6,12 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import javax.sql.DataSource;
-import lombok.Getter;
+
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
@@ -86,13 +85,10 @@ public abstract class BaseWebContextSensitiveTest extends AbstractTransactionalJ
      * Executes a database test with the specified dataset and sequence reset
      * information.
      *
-     * @param datasetFileName    The filename of the dataset file in the classpath.
-     * @param sequenceResetInfos A map with table names as keys and
-     *                           {@link SequenceResetInfo} objects as values.
+     * @param datasetFileName The filename of the dataset file in the classpath.
      * @throws Exception If an error occurs while executing the test.
      */
-    protected void executeDataSetWithStateManagement(String datasetFileName,
-            Map<String, SequenceResetInfo> sequenceResetInfos) throws Exception {
+    protected void executeDataSetWithStateManagement(String datasetFileName) throws Exception {
         if (datasetFileName == null) {
             throw new NullPointerException("Please provide test dataset file to execute!");
         }
@@ -112,32 +108,6 @@ public abstract class BaseWebContextSensitiveTest extends AbstractTransactionalJ
             }
 
             IDataSet dataset = new FlatXmlDataSet(inputStream);
-            String[] tableNames = dataset.getTableNames();
-
-            logger.info("Tables from dataset: {}", Arrays.toString(tableNames));
-
-            if (sequenceResetInfos != null) {
-                for (String tableName : tableNames) {
-                    SequenceResetInfo resetInfo = sequenceResetInfos.get(tableName.toUpperCase());
-                    if (resetInfo != null) {
-                        try (Connection conn = dataSource.getConnection(); Statement stmt = conn.createStatement()) {
-                            String maxIdQuery = String.format("SELECT COALESCE(MAX(%s), 0) FROM %s",
-                                    resetInfo.getIdColumn(), tableName);
-                            try (ResultSet rs = stmt.executeQuery(maxIdQuery)) {
-                                long maxId = rs.next() ? rs.getLong(1) : 0;
-                                String resetSequenceQuery = String.format("SELECT setval('%s', %d, false)",
-                                        resetInfo.getSequenceName(), maxId + 1);
-                                logger.info("Reset sequence {} to {} for table {}", resetInfo.getSequenceName(),
-                                        maxId + 1, tableName);
-                                stmt.execute(resetSequenceQuery);
-                            }
-                        }
-                    }
-                }
-            } else {
-                logger.info("Reset sequence info is empty!");
-            }
-
             DatabaseOperation.REFRESH.execute(connection, dataset);
         } finally {
             if (inputStream != null) {
@@ -163,17 +133,6 @@ public abstract class BaseWebContextSensitiveTest extends AbstractTransactionalJ
                 logger.info("Truncating table: {}", tableName);
                 stmt.execute(truncateQuery);
             }
-        }
-    }
-
-    @Getter
-    protected static class SequenceResetInfo {
-        private final String sequenceName;
-        private final String idColumn;
-
-        public SequenceResetInfo(String sequenceName, String idColumn) {
-            this.sequenceName = sequenceName;
-            this.idColumn = idColumn;
         }
     }
 }

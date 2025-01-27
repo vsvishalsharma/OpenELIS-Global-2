@@ -1,8 +1,6 @@
 package org.openelisglobal.patient;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,10 +17,8 @@ public class PatientTypeServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void init() throws Exception {
-        Map<String, SequenceResetInfo> sequenceResetInfo = new HashMap<>();
-        sequenceResetInfo.put("PATIENT_TYPE", new SequenceResetInfo("patient_type_seq", "ID"));
         truncateTables(new String[] { "patient_type", "patient", "person", "patient_identity" });
-        executeDataSetWithStateManagement("testdata/patient.xml", sequenceResetInfo);
+        executeDataSetWithStateManagement("testdata/patient.xml");
     }
 
     @After
