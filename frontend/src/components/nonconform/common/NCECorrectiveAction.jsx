@@ -308,7 +308,7 @@ export const NCECorrectiveAction = () => {
             <div>
               <Grid>
                 <Column lg={16} md={16} sm={16}>
-                  <Table style={{ marginTop: "1em" }} data-testid='nce-search-result'>
+                  <Table style={{ marginTop: "1em" }}>
                     <TableHead>
                       <TableRow>
                         <TableHeader key="checkbox" />
