@@ -322,7 +322,7 @@ export const NCECorrectiveAction = () => {
                     <TableBody>
                       {tData.nceEventsSearchResults.map((row) => ( 
                         <TableRow key={row.nceNumber}>
-                          <TableCell key={`${row}-checkbox`} >
+                          <TableCell key={`${row}-checkbox`} data-testid='Radio-button'>
                             <RadioButton
                               name="radio-group"
                               onClick={() => setSelected(row.nceNumber)}

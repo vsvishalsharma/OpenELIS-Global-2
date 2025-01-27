@@ -352,7 +352,7 @@ export const ViewNonConformingEvent = () => {
                 <TableBody>
                   {tData.nceEventsSearchResults.map((row) => (
                     <TableRow key={row.nceNumber} > 
-                      <TableCell key={`${row}-checkbox`} >
+                      <TableCell key={`${row}-checkbox`} data-testid='Radio-button'>
                         <RadioButton
                           name="radio-group"
                           onClick={() => {
@@ -446,11 +446,11 @@ export const ViewNonConformingEvent = () => {
           <Column lg={1}></Column>
           <Column lg={3} style={{ marginBottom: "20px" }}>
             <div style={{ marginBottom: "10px" }}>
-              <span style={{ color: "#3366B3", fontWeight: "bold" }}>
+              <span style={{ color: "#3366B3", fontWeight: "bold" }} >
                 <FormattedMessage id="sample.label.labnumber" />
               </span>
             </div>
-            <div style={{ marginBottom: "10px" }}>
+            <div style={{ marginBottom: "10px" }} data-testid='nce-search-result'>
               {data.nceEventsSearchResults[0].labOrderNumber}
             </div>
           </Column>

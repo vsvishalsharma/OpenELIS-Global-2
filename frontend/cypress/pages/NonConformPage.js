@@ -126,6 +126,12 @@ class NonConform {
     cy.get(":nth-child(1) > .cds--radio-button__label").click();
   }
 
+  clickRadioButtonNCE() {
+    cy.get("[data-testid='Radio-button']")
+        .first()  // Get just the first radio button
+        .should('be.visible')
+        .click();
+}
   enterDateCompleted0(date) {
     cy.get(".cds--date-picker-input__wrapper > #dateCompleted-0").type(date);
   }
