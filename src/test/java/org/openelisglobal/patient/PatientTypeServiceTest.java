@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openelisglobal.BaseWebContextSensitiveTest;
+import org.openelisglobal.common.util.ConfigurationProperties;
 import org.openelisglobal.patient.service.PatientTypeService;
 import org.openelisglobal.patienttype.valueholder.PatientType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,35 @@ public class PatientTypeServiceTest extends BaseWebContextSensitiveTest {
         List<PatientType> savedPatientTypes = typeService.getPatientTypes("Discharged");
 
         Assert.assertEquals(1, savedPatientTypes.size());
+    }
+
+    @Test
+    public void getPageOfPatientType_shouldReturnPatientTypes() throws Exception {
+        PatientType patientType = new PatientType();
+        patientType.setDescription("Test Type Description");
+        patientType.setType("Test Type");
+
+        String patientTypeId = typeService.insert(patientType);
+        PatientType savedPatientType = typeService.get(patientTypeId);
+
+        PatientType patientType2 = new PatientType();
+        patientType2.setDescription("Test2 Type Description");
+        patientType2.setType("Test2 Type");
+
+        String patientTypeId2 = typeService.insert(patientType2);
+        Assert.assertEquals(3, typeService.getAll().size());
+
+        List<PatientType> patientTypesPage = typeService.getPageOfPatientType(1);
+
+        int expectedPageSize = Integer
+                .parseInt(ConfigurationProperties.getInstance().getPropertyValue("page.defaultPageSize"));
+
+        Assert.assertTrue(patientTypesPage.size() <= expectedPageSize);
+
+        if (expectedPageSize >= 2) {
+            Assert.assertTrue(patientTypesPage.stream().anyMatch(p -> p.getType().equals("Test Type")));
+            Assert.assertTrue(patientTypesPage.stream().anyMatch(p -> p.getType().equals("Test2 Type")));
+        }
     }
 
     @Test

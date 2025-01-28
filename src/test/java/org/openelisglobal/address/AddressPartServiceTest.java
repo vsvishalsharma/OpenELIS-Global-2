@@ -28,6 +28,11 @@ public class AddressPartServiceTest extends BaseWebContextSensitiveTest {
     }
 
     @Test
+    public void getAll_shouldGetAllAddressParts() throws Exception {
+        Assert.assertEquals(3, partService.getAll().size());
+    }
+
+    @Test
     public void createAddressPart_shouldCreateAddressPart() throws Exception {
         AddressPart part = new AddressPart();
         part.setPartName("PartName");
