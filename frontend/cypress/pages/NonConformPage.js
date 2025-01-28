@@ -128,7 +128,7 @@ class NonConform {
 
   clickRadioButtonNCE() {
     cy.get("[data-testid='Radio-button']")
-        .first()  // Get just the first radio button
+        .eq(0)  // 0 for first, 1 for second, 2 for third, etc.
         .should('be.visible')
         .click();
 }
