@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
 import javax.sql.DataSource;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConfig;
@@ -48,20 +47,6 @@ public abstract class BaseWebContextSensitiveTest extends AbstractTransactionalJ
     private DataSource dataSource;
 
     protected MockMvc mockMvc;
-
-    private Map<String, IDataSet> originalStateCache;
-
-    private List<String[]> tablesToRestore;
-
-    protected BaseWebContextSensitiveTest() {
-        this.originalStateCache = new HashMap<>();
-        this.tablesToRestore = new ArrayList<>();
-    }
-
-    protected BaseWebContextSensitiveTest(List<String[]> tablesToRestore) {
-        this.originalStateCache = new HashMap<>();
-        this.tablesToRestore = tablesToRestore != null ? tablesToRestore : new ArrayList<>();
-    }
 
     protected void setUp() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
@@ -107,6 +92,9 @@ public abstract class BaseWebContextSensitiveTest extends AbstractTransactionalJ
             }
 
             IDataSet dataset = new FlatXmlDataSet(inputStream);
+            String[] tableNames = dataset.getTableNames();
+            cleanRowsInCurrentConnection(tableNames);
+
             DatabaseOperation.REFRESH.execute(connection, dataset);
         } finally {
             if (inputStream != null) {
@@ -119,12 +107,13 @@ public abstract class BaseWebContextSensitiveTest extends AbstractTransactionalJ
     }
 
     /**
-     * Helper method to truncate the specified tables.
+     * Helper method to clear out all rows in specified tables within the given
+     * dataset in the current connection.
      *
      * @param tableNames The names of the tables to truncate.
      * @throws SQLException If an error occurs during truncation.
      */
-    protected void truncateTables(String[] tableNames) throws SQLException, DatabaseUnitException {
+    protected void cleanRowsInCurrentConnection(String[] tableNames) throws SQLException, DatabaseUnitException {
         IDatabaseConnection connection = new DatabaseConnection(dataSource.getConnection());
         try (Connection conn = connection.getConnection(); Statement stmt = conn.createStatement()) {
             for (String tableName : tableNames) {

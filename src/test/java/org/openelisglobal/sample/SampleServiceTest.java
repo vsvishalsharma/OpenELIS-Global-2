@@ -29,13 +29,12 @@ public class SampleServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void setUp() throws Exception {
-        truncateTables(new String[] { "person", "patient", "provider", "sample", "sample_human" });
         executeDataSetWithStateManagement("testdata/samplehuman.xml");
     }
 
     @Test
     public void createSample_shouldCreateNewSample() throws Exception {
-        truncateTables(new String[] { "person", "patient", "provider", "sample", "sample_human" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient", "provider", "sample", "sample_human" });
         Date enteredDate = Date.valueOf("2024-06-13");
         String receivedTimestamp = "13/06/2024";
         String accessionNumber = "123";
@@ -125,7 +124,7 @@ public class SampleServiceTest extends BaseWebContextSensitiveTest {
     @Test
     public void getConfirmationSamplesReceivedInDateRange_shouldReturnConfirmationSamplesReceivedInDateRange()
             throws ParseException, SQLException, DatabaseUnitException {
-        truncateTables(new String[] { "person", "patient", "provider", "sample", "sample_human" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient", "provider", "sample", "sample_human" });
 
         Date recievedDateStart = Date.valueOf("2024-06-03");
         Date recievedDateEnd = Date.valueOf("2024-06-04");

@@ -38,13 +38,12 @@ public class PatientServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void init() throws Exception {
-        truncateTables(new String[] { "person", "patient" });
         executeDataSetWithStateManagement("testdata/patient.xml");
     }
 
     @Test
     public void createPatient_shouldCreateNewPatient() throws Exception {
-        truncateTables(new String[] { "person", "patient" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient" });
         String firstName = "John";
         String lastname = "Doe";
         String dob = "12/12/1992";
@@ -249,7 +248,7 @@ public class PatientServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void getDOB_shouldReturnDOB() throws Exception {
-        truncateTables(new String[] { "person", "patient" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient" });
         String firstName = "John";
         String lastname = "Doe";
         String dob = "12/12/1992";
@@ -373,7 +372,7 @@ public class PatientServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void createPatientType_shouldCreateNewPatientType() throws SQLException, DatabaseUnitException {
-        truncateTables(new String[] { "patient_type", "patient" });
+        cleanRowsInCurrentConnection(new String[] { "patient_type", "patient" });
         PatientType patientType = new PatientType();
         patientType.setDescription("Test Type Description");
         patientType.setType("Test Type");
@@ -528,7 +527,7 @@ public class PatientServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void getBirthdayForDisplay_shouldReturnBirthdayForDisplay() throws Exception {
-        truncateTables(new String[] { "person", "patient" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient" });
         String firstName = "John";
         String lastname = "Doe";
         String dob = "12/12/1992";

@@ -51,13 +51,12 @@ public class SampleHumanServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void setUp() throws Exception {
-        truncateTables(new String[] { "person", "patient", "provider", "sample", "sample_human" });
         executeDataSetWithStateManagement("testdata/samplehuman.xml");
     }
 
     @Test
     public void createSampleHuman_shouldCreateNewSampleHuman() throws Exception {
-        truncateTables(new String[] { "person", "patient", "provider", "sample", "sample_human" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient", "provider", "sample", "sample_human" });
         SampleHuman sampleHuman = creatSampleHuman(SAMPLE_ENTERED_DATE);
 
         Assert.assertEquals(0, humanService.getAll().size());

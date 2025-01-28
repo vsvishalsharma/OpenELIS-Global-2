@@ -17,7 +17,6 @@ public class PatientTypeServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void init() throws Exception {
-        truncateTables(new String[] { "patient_type", "patient", "person", "patient_identity" });
         executeDataSetWithStateManagement("testdata/patient.xml");
     }
 
@@ -28,7 +27,7 @@ public class PatientTypeServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void createPatientType_shouldCreateNewPatientType() throws Exception {
-        truncateTables(new String[] { "patient_type", "patient", "person", "patient_identity" });
+        cleanRowsInCurrentConnection(new String[] { "patient_type", "patient", "person", "patient_identity" });
         PatientType patientType = new PatientType();
         patientType.setDescription("Test Type Description");
         patientType.setType("Test Type");

@@ -77,7 +77,6 @@ public class SearchResultsServiceTest extends BaseWebContextSensitiveTest {
     public void getSearchResults_shouldGetSearchResultsFromDB(String searchFirstName, String searchLastName,
             String searchDateOfBirth, String searchGender) throws Exception {
 
-        truncateTables(new String[] { "person", "patient" });
         executeDataSetWithStateManagement("testdata/patient-person-search.xml");
 
         String firstName = "John";
@@ -98,7 +97,6 @@ public class SearchResultsServiceTest extends BaseWebContextSensitiveTest {
     public void getSearchResultsExact_shouldGetExactSearchResultsFromDB(String searchFirstName, String searchLastName,
             String searchDateOfBirth, String searchGender) throws Exception {
 
-        truncateTables(new String[] { "person", "patient" });
         executeDataSetWithStateManagement("testdata/patient-person-search.xml");
 
         String firstName = "John";
@@ -118,7 +116,7 @@ public class SearchResultsServiceTest extends BaseWebContextSensitiveTest {
     @Parameters
     public void getSearchResults_shouldGetSearchResultsFromLuceneIndexes(String searchFirstName, String searchLastName,
             String searchDateOfBirth, String searchGender) throws Exception {
-        truncateTables(new String[] { "person", "patient" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient" });
 
         String firstName = "John";
         String lastname = "Doe";
@@ -143,7 +141,7 @@ public class SearchResultsServiceTest extends BaseWebContextSensitiveTest {
     @Parameters
     public void getSearchResultsExact_shouldGetExactSearchResultsFromLuceneIndexes(String searchFirstName,
             String searchLastName, String searchDateOfBirth, String searchGender) throws Exception {
-        truncateTables(new String[] { "person", "patient" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient" });
 
         String firstName = "John";
         String lastname = "Doe";

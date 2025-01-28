@@ -16,7 +16,6 @@ public class AddressPartServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void init() throws Exception {
-        truncateTables(new String[] { "address_part", "person_address", "person", "organization_address" });
         executeDataSetWithStateManagement("testdata/personaddress.xml");
     }
 

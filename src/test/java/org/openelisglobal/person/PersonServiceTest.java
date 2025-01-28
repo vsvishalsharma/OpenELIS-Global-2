@@ -37,7 +37,6 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
 
     @Before
     public void setUp() throws Exception {
-        truncateTables(new String[] { "person", "patient" });
         executeDataSetWithStateManagement("testdata/person.xml");
     }
 
@@ -50,7 +49,7 @@ public class PersonServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void createPerson_shouldCreateNewPerson() throws Exception {
-        truncateTables(new String[] { "person", "patient" });
+        cleanRowsInCurrentConnection(new String[] { "person", "patient" });
         String firstName = "John";
         String lastname = "moe";
 
