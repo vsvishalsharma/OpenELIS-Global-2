@@ -50,42 +50,32 @@ public class RegionServiceTest extends BaseWebContextSensitiveTest {
     }
 
     @Test
-    public void updateRegion_shouldUpdateRegionInformation() throws Exception {
-        String regionName = "Northeast";
-        String regionId = "2";
-        Region region = createRegion(regionName, regionId);
-        String savedRegionId = regionService.insert(region);
-        Region savedRegion = regionService.get(savedRegionId);
-        savedRegion.setRegion("Southeast");
-        regionService.update(savedRegion);
-        Region updatedRegion = regionService.get(savedRegionId);
-        Assert.assertEquals("Southeast", updatedRegion.getRegion());
+    public void updateRegion_shouldUpdateExistingRegion() throws Exception {
+        Region existingRegion = regionService.get("2");
+        Assert.assertNotNull(existingRegion);
+
+        existingRegion.setRegion("Updated Northeast");
+        regionService.update(existingRegion);
+
+        Region updatedRegion = regionService.get("2");
+        Assert.assertEquals("Updated Northeast", updatedRegion.getRegion());
     }
 
     @Test
     public void getAllRegions_shouldReturnAllRegions() throws Exception {
-        List<Region> initialRegions = regionService.getAll();
-        Assert.assertEquals(5, initialRegions.size());
-
-        Region region = new Region();
-        region.setRegion("Southwest");
-        region.setLastupdated(new Timestamp(System.currentTimeMillis()));
-        regionService.insert(region);
-
-        List<Region> updatedRegions = regionService.getAll();
-        Assert.assertEquals(6, updatedRegions.size());
+        List<Region> regions = regionService.getAll();
+        Assert.assertEquals(5, regions.size());
     }
 
     @Test
-    public void deleteRegion_shouldRemoveRegion() throws Exception {
-        Assert.assertEquals(5, regionService.getAll().size());
+    public void deleteRegion_shouldRemoveAnExistingRegion() throws Exception {
+        Region region = regionService.get("1");
+        Assert.assertNotNull(region);
 
-        Region region = createRegion("Northwest", "9");
-        regionService.insert(region);
-        Assert.assertEquals(6, regionService.getAll().size());
+        Assert.assertEquals(5, regionService.getAll().size());
 
         regionService.delete(region);
-        Assert.assertEquals(5, regionService.getAll().size());
+        Assert.assertEquals(4, regionService.getAll().size());
     }
 
     private Region createRegion(String regionName, String regionId) {
