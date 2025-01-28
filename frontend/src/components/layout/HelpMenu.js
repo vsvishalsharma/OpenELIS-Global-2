@@ -1,83 +1,99 @@
-import React, { useState } from 'react';
-import { 
-  HeaderGlobalAction, 
-  HeaderPanel,
-} from "@carbon/react";
-import { 
-  Help, 
-} from "@carbon/icons-react";
+import React, { useState, useEffect, useRef } from "react";
+import { HeaderGlobalAction, HeaderPanel } from "@carbon/react";
+import { Help } from "@carbon/icons-react";
 
 const HelpMenu = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const panelRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isExpanded &&
+        panelRef.current &&
+        !panelRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setIsExpanded(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isExpanded]);
 
   const togglePanel = () => setIsExpanded(!isExpanded);
 
   const openHelp = (type) => {
     let url;
-    switch(type) {
-      case 'manual':
-        url = 'https://uwdigi.atlassian.net/wiki/spaces/OG/folder/261455874';
+    switch (type) {
+      case "manual":
+        url = "https://uwdigi.atlassian.net/wiki/spaces/OG/folder/261455874";
         break;
-      case 'tutorials':
-        url = 'https://video.openelis-global.org';
+      case "tutorials":
+        url = "https://video.openelis-global.org";
         break;
-      case 'release-notes':
-        url = 'https://roadmap.openelis-global.org';
+      case "release-notes":
+        url = "https://roadmap.openelis-global.org";
         break;
       default:
         return;
     }
-    window.open(url, '_blank');
+    window.open(url, "_blank");
     setIsExpanded(false);
   };
 
   return (
     <>
       <HeaderGlobalAction
+        ref={buttonRef}
         aria-label="Help"
         onClick={togglePanel}
         isActive={isExpanded}
       >
         <Help size={20} />
       </HeaderGlobalAction>
-
       <HeaderPanel
+        ref={panelRef}
         aria-label="Help Panel"
         expanded={isExpanded}
-        style={{
-          background: ' #295785',
-          color: 'white'
-        }}
+        style={{ background: "#295785", color: "white" }}
       >
-        <ul style={{
-          listStyle: 'none',
-          padding: 0,
-          margin: 0
-        }}>
-          {['manual', 'tutorials', 'release-notes'].map((type) => (
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {["manual", "tutorials", "release-notes"].map((type) => (
             <li key={type}>
-              <button 
+              <button
                 style={{
-                  width: '100%',
-                  padding: '1rem 1.5rem',
-                  background: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  transition: 'all 0.2s ease',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  color: 'white'
+                  width: "100%",
+                  padding: "1rem 1.5rem",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  transition: "all 0.2s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  color: "white",
                 }}
                 onClick={() => openHelp(type)}
-                onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.15)'}
-                onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                onMouseEnter={(e) =>
+                  (e.target.style.background = "rgba(255,255,255,0.15)")
+                }
+                onMouseLeave={(e) =>
+                  (e.target.style.background = "transparent")
+                }
               >
                 <Help size={16} />
-                {type === 'manual' ? 'User Manual' : 
-                 type === 'tutorials' ? 'Video Tutorials' : 
-                 'Release Notes'}
+                {type === "manual"
+                  ? "User Manual"
+                  : type === "tutorials"
+                    ? "Video Tutorials"
+                    : "Release Notes"}
               </button>
             </li>
           ))}
