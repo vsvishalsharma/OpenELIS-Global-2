@@ -238,7 +238,7 @@ export const NCECorrectiveAction = () => {
             <FormattedMessage id={`nonconform.corrective.title`} />
           </h2>
         </Column>
-        <Column lg={4} md={4} sm={2}>
+        <Column lg={16} md={8} sm={4}>
           <Form>
             <Grid fullWidth={true}>
               <Column lg={4} md={4} sm={2}>
