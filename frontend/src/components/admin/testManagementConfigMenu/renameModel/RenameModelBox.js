@@ -29,130 +29,14 @@ const RenameModelBox = ({
   lang,
   langPost,
   selectedItem,
+  hasFrench,
 }) => {
   return (
     <>
       {data ? (
         <Grid fullWidth={true}>
           {data.map((item, index) => (
-            <Column key={index} lg={4} md={4} sm={4}>
-              <Modal
-                open={isModalOpen}
-                size="md"
-                modalHeading={`${modalHeading} : ${selectedItem?.value}`}
-                primaryButtonText={
-                  confirmationStep ? (
-                    <>
-                      <FormattedMessage id="column.name.accept" />
-                    </>
-                  ) : (
-                    <>
-                      <FormattedMessage id="column.name.save" />
-                    </>
-                  )
-                }
-                secondaryButtonText={
-                  confirmationStep ? (
-                    <>
-                      <FormattedMessage id="header.reject" />
-                    </>
-                  ) : (
-                    <>
-                      <FormattedMessage id="label.button.cancel" />
-                    </>
-                  )
-                }
-                onRequestSubmit={onSubmit}
-                onRequestClose={closeModel}
-              >
-                {lang && lang?.name && langPost && langPost?.name ? (
-                  <Grid fullWidth={true}>
-                    <Column lg={16} md={8} sm={4}>
-                      {/* Edit or Confirmation */}
-                      <Section>
-                        <Section>
-                          <Heading>
-                            <FormattedMessage id={heading} />
-                          </Heading>
-                        </Section>
-                      </Section>
-                      <br />
-                      <Section>
-                        <Section>
-                          <Section>
-                            <Heading>
-                              {/* main blue lable */}
-                              <FormattedMessage id={mainLabel} />
-                            </Heading>
-                          </Section>
-                        </Section>
-                      </Section>
-                      <br />
-                      <>
-                        <FormattedMessage id="english.current" /> :{" "}
-                        {lang?.name?.english}
-                      </>
-                      <br />
-                      <br />
-                      <TextInput
-                        id={`eng-${index}`}
-                        labelText=""
-                        hideLabel
-                        value={`${langPost?.name?.english}` || ""}
-                        onChange={(e) => {
-                          onInputChangeEn(e);
-                        }}
-                        required
-                        invalid={inputError}
-                        invalidText={
-                          <FormattedMessage id="required.invalidtext" />
-                        }
-                      />
-                      <br />
-                      <>
-                        <FormattedMessage id="french.current" /> :{" "}
-                        {lang?.name?.french}
-                      </>
-                      <br />
-                      <br />
-                      <TextInput
-                        id={`fr-${index}`}
-                        labelText=""
-                        hideLabel
-                        value={`${langPost?.name?.french}` || ""}
-                        onChange={(e) => {
-                          onInputChangeFr(e);
-                        }}
-                        required
-                        invalid={inputError}
-                        invalidText={
-                          <FormattedMessage id="required.invalidtext" />
-                        }
-                      />
-                    </Column>
-                  </Grid>
-                ) : (
-                  <>
-                    <div>
-                      <Loading />
-                    </div>
-                  </>
-                )}
-                <br />
-                {confirmationStep && (
-                  <>
-                    <Section>
-                      <Section>
-                        <Section>
-                          <Heading>
-                            <FormattedMessage id="confirmation.rename" />
-                          </Heading>
-                        </Section>
-                      </Section>
-                    </Section>
-                  </>
-                )}
-              </Modal>
+            <Column key={index} lg={5} md={5} sm={5}>
               <Button
                 id={`button-${index}`}
                 kind="ghost"
@@ -172,6 +56,124 @@ const RenameModelBox = ({
           <Loading active={isLoading} />
         </>
       )}
+
+      <Modal
+        open={isModalOpen}
+        size="sm"
+        modalHeading={`${modalHeading} : ${selectedItem?.value}`}
+        primaryButtonText={
+          confirmationStep ? (
+            <>
+              <FormattedMessage id="column.name.accept" />
+            </>
+          ) : (
+            <>
+              <FormattedMessage id="column.name.save" />
+            </>
+          )
+        }
+        secondaryButtonText={
+          confirmationStep ? (
+            <>
+              <FormattedMessage id="header.reject" />
+            </>
+          ) : (
+            <>
+              <FormattedMessage id="label.button.cancel" />
+            </>
+          )
+        }
+        onRequestSubmit={onSubmit}
+        onRequestClose={closeModel}
+      >
+        {lang && lang?.name && langPost && langPost?.name ? (
+          <Grid fullWidth={true}>
+            <Column lg={16} md={8} sm={4}>
+              {/* Edit or Confirmation */}
+              <Section>
+                <Section>
+                  <Heading>
+                    <FormattedMessage id={heading} />
+                  </Heading>
+                </Section>
+              </Section>
+              <br />
+              <Section>
+                <Section>
+                  <Section>
+                    <Heading>
+                      {/* main blue lable */}
+                      <FormattedMessage id={mainLabel} />
+                    </Heading>
+                  </Section>
+                </Section>
+              </Section>
+              <br />
+              <>
+                <FormattedMessage id="english.current" /> :{" "}
+                {lang?.name?.english}
+              </>
+              <br />
+              <br />
+              <TextInput
+                id={`eng`}
+                labelText=""
+                hideLabel
+                value={`${langPost?.name?.english}` || ""}
+                onChange={(e) => {
+                  onInputChangeEn(e);
+                }}
+                required
+                invalid={inputError}
+                invalidText={<FormattedMessage id="required.invalidtext" />}
+              />
+              <br />
+              {hasFrench && (
+                <>
+                  <>
+                    <FormattedMessage id="french.current" /> :{" "}
+                    {lang?.name?.french}
+                  </>
+                  <br />
+                  <br />
+                  <TextInput
+                    id={`fr`}
+                    labelText=""
+                    hideLabel
+                    value={`${langPost?.name?.french}` || ""}
+                    onChange={(e) => {
+                      onInputChangeFr(e);
+                    }}
+                    required
+                    invalid={inputError}
+                    invalidText={<FormattedMessage id="required.invalidtext" />}
+                  />
+                </>
+              )}
+            </Column>
+          </Grid>
+        ) : (
+          <>
+            <div>
+              <Loading />
+            </div>
+          </>
+        )}
+        <br />
+        {confirmationStep && (
+          <>
+            <Section>
+              <Section>
+                <Section>
+                  <Heading>
+                    <FormattedMessage id="confirmation.rename" />
+                  </Heading>
+                </Section>
+              </Section>
+            </Section>
+          </>
+        )}
+      </Modal>
     </>
   );
 };

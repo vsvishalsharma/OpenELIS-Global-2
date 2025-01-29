@@ -50,8 +50,14 @@ function TestRenameEntry() {
   const [testNamePost, setTestNamesPost] = useState({});
   const [testNamesShow, setTestNamesShow] = useState([]);
   const [selectedTest, setSelectedTest] = useState({});
-  const [testNamesLangs, setTestNamesLangs] = useState({ name: { english: "", french: "" }, reportingName: { english: "", french: "" }, });
-  const [testNamesLangsPost, setTestNamesLangsPost] = useState({ name: { english: "", french: "" }, reportingName: { english: "", french: "" }, });
+  const [testNamesLangs, setTestNamesLangs] = useState({
+    name: { english: "", french: "" },
+    reportingName: { english: "", french: "" },
+  });
+  const [testNamesLangsPost, setTestNamesLangsPost] = useState({
+    name: { english: "", french: "" },
+    reportingName: { english: "", french: "" },
+  });
 
   useEffect(() => {
     componentMounted.current = true;
@@ -119,6 +125,9 @@ function TestRenameEntry() {
       });
       setNotificationVisible(true);
       setIsAddModalOpen(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 10);
     } else {
       addNotification({
         kind: NotificationKinds.error,
@@ -128,7 +137,7 @@ function TestRenameEntry() {
       setNotificationVisible(true);
       setTimeout(() => {
         window.location.reload();
-      }, 200);
+      }, 10);
     }
   }
 
@@ -173,199 +182,11 @@ function TestRenameEntry() {
           <br />
           <hr />
           <br />
-          <Grid fullWidth={true}>
-            <Column lg={16} md={8} sm={4}>
-              <Button
-                disabled={finished}
-                id="finishdButton"
-                type="button"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                <FormattedMessage id="label.button.finished" />
-              </Button>
-            </Column>
-          </Grid>
           <br />
           {testNamesShow ? (
             <Grid fullWidth={true}>
               {testNamesShow.map((test, index) => (
-                <Column key={index} lg={4} md={4} sm={4}>
-                  <Modal
-                    open={isAddModalOpen}
-                    size="md"
-                    modalHeading={`Test : ${selectedTest?.value}`}
-                    primaryButtonText={
-                      confirmationStep ? (
-                        <>
-                          <FormattedMessage id="column.name.accept" />
-                        </>
-                      ) : (
-                        <>
-                          <FormattedMessage id="column.name.save" />
-                        </>
-                      )
-                    }
-                    secondaryButtonText={
-                      confirmationStep ? (
-                        <>
-                          <FormattedMessage id="header.reject" />
-                        </>
-                      ) : (
-                        <>
-                          <FormattedMessage id="label.button.cancel" />
-                        </>
-                      )
-                    }
-                    onRequestSubmit={testRenameEntryPost}
-                    onRequestClose={closeAddModal}
-                  >
-                    {testNamesLangs && testNamesLangs.name ? (
-                      <Grid fullWidth={true}>
-                        <Column lg={16} md={8} sm={4}>
-                          <FormattedMessage id="column.name.testName" />
-                          <br />
-                          <br />
-                          <>
-                            <FormattedMessage id="english.current" /> :{" "}
-                            {testNamesLangs?.name.english}
-                          </>
-                          <TextInput
-                            id={`eng-${index}`}
-                            labelText=""
-                            hideLabel
-                            value={testNamesLangsPost?.name?.english || ""}
-                            onChange={(e) => {
-                              const englishName = e.target.value;
-                              setTestNamesLangsPost((prev) => ({
-                                ...prev,
-                                name: {
-                                  ...prev.name,
-                                  english: englishName,
-                                },
-                              }));
-                              setInputError(false);
-                            }}
-                            required
-                            invalid={inputError}
-                            invalidText={
-                              <FormattedMessage id="required.invalidtext" />
-                            }
-                          />
-                          <br />
-                          <>
-                            <FormattedMessage id="french.current" /> :{" "}
-                            {testNamesLangs?.name?.french}
-                          </>
-                          <TextInput
-                            id={`fr-${index}`}
-                            labelText=""
-                            hideLabel
-                            value={testNamesLangsPost?.name?.french || ""}
-                            onChange={(e) => {
-                              const frenchName = e.target.value;
-                              setTestNamesLangsPost((prev) => ({
-                                ...prev,
-                                name: {
-                                  ...prev.name,
-                                  french: frenchName,
-                                },
-                              }));
-                              setInputError(false);
-                            }}
-                            required
-                            invalid={inputError}
-                            invalidText={
-                              <FormattedMessage id="required.invalidtext" />
-                            }
-                          />
-                          <br />
-                          <br />
-                          <FormattedMessage id="reporting.label.testName" />
-                          <br />
-                          <br />
-                          <>
-                            <FormattedMessage id="english.current" /> :{" "}
-                            {testNamesLangs?.reportingName?.english}
-                          </>
-                          <TextInput
-                            id={`eng-${index}`}
-                            labelText=""
-                            hideLabel
-                            value={
-                              testNamesLangsPost?.reportingName?.english || ""
-                            }
-                            onChange={(e) => {
-                              const englishName = e.target.value;
-                              setTestNamesLangsPost((prev) => ({
-                                ...prev,
-                                reportingName: {
-                                  ...prev.reportingName,
-                                  english: englishName,
-                                },
-                              }));
-                              setInputError(false);
-                            }}
-                            required
-                            invalid={inputError}
-                            invalidText={
-                              <FormattedMessage id="required.invalidtext" />
-                            }
-                          />
-                          <br />
-                          <>
-                            <FormattedMessage id="french.current" /> :{" "}
-                            {testNamesLangs?.reportingName?.french}
-                          </>
-                          <TextInput
-                            id={`fr-${index}`}
-                            labelText=""
-                            hideLabel
-                            value={
-                              testNamesLangsPost?.reportingName?.french || ""
-                            }
-                            onChange={(e) => {
-                              const frenchName = e.target.value;
-                              setTestNamesLangsPost((prev) => ({
-                                ...prev,
-                                reportingName: {
-                                  ...prev.reportingName,
-                                  french: frenchName,
-                                },
-                              }));
-                              setInputError(false);
-                            }}
-                            required
-                            invalid={inputError}
-                            invalidText={
-                              <FormattedMessage id="required.invalidtext" />
-                            }
-                          />
-                        </Column>
-                      </Grid>
-                    ) : (
-                      <>
-                        <div>
-                          <Loading />
-                        </div>
-                      </>
-                    )}
-                    <br />
-                    {confirmationStep && (
-                      <>
-                        <Section>
-                          <Section>
-                            <Section>
-                              <Heading>
-                                <FormattedMessage id="confirmation.rename" />
-                              </Heading>
-                            </Section>
-                          </Section>
-                        </Section>
-                      </>
-                    )}
-                  </Modal>
+                <Column key={index} lg={5} md={5} sm={5}>
                   <Button
                     id={`button-${index}`}
                     kind="ghost"
@@ -379,6 +200,176 @@ function TestRenameEntry() {
                   </Button>
                 </Column>
               ))}
+              <Modal
+                open={isAddModalOpen}
+                size="md"
+                modalHeading={`Test : ${selectedTest?.value}`}
+                primaryButtonText={
+                  confirmationStep ? (
+                    <>
+                      <FormattedMessage id="column.name.accept" />
+                    </>
+                  ) : (
+                    <>
+                      <FormattedMessage id="column.name.save" />
+                    </>
+                  )
+                }
+                secondaryButtonText={
+                  confirmationStep ? (
+                    <>
+                      <FormattedMessage id="header.reject" />
+                    </>
+                  ) : (
+                    <>
+                      <FormattedMessage id="label.button.cancel" />
+                    </>
+                  )
+                }
+                onRequestSubmit={testRenameEntryPost}
+                onRequestClose={closeAddModal}
+              >
+                {testNamesLangs && testNamesLangs.name ? (
+                  <Grid fullWidth={true}>
+                    <Column lg={16} md={8} sm={4}>
+                      <FormattedMessage id="column.name.testName" />
+                      <br />
+                      <br />
+                      <>
+                        <FormattedMessage id="english.current" /> :{" "}
+                        {testNamesLangs?.name.english}
+                      </>
+                      <TextInput
+                        id={`eng`}
+                        labelText=""
+                        hideLabel
+                        value={testNamesLangsPost?.name?.english || ""}
+                        onChange={(e) => {
+                          const englishName = e.target.value;
+                          setTestNamesLangsPost((prev) => ({
+                            ...prev,
+                            name: {
+                              ...prev.name,
+                              english: englishName,
+                            },
+                          }));
+                          setInputError(false);
+                        }}
+                        required
+                        invalid={inputError}
+                        invalidText={
+                          <FormattedMessage id="required.invalidtext" />
+                        }
+                      />
+                      <br />
+                      <>
+                        <FormattedMessage id="french.current" /> :{" "}
+                        {testNamesLangs?.name?.french}
+                      </>
+                      <TextInput
+                        id={`fr`}
+                        labelText=""
+                        hideLabel
+                        value={testNamesLangsPost?.name?.french || ""}
+                        onChange={(e) => {
+                          const frenchName = e.target.value;
+                          setTestNamesLangsPost((prev) => ({
+                            ...prev,
+                            name: {
+                              ...prev.name,
+                              french: frenchName,
+                            },
+                          }));
+                          setInputError(false);
+                        }}
+                        required
+                        invalid={inputError}
+                        invalidText={
+                          <FormattedMessage id="required.invalidtext" />
+                        }
+                      />
+                      <br />
+                      <br />
+                      <FormattedMessage id="reporting.label.testName" />
+                      <br />
+                      <br />
+                      <>
+                        <FormattedMessage id="english.current" /> :{" "}
+                        {testNamesLangs?.reportingName?.english}
+                      </>
+                      <TextInput
+                        id={`eng`}
+                        labelText=""
+                        hideLabel
+                        value={testNamesLangsPost?.reportingName?.english || ""}
+                        onChange={(e) => {
+                          const englishName = e.target.value;
+                          setTestNamesLangsPost((prev) => ({
+                            ...prev,
+                            reportingName: {
+                              ...prev.reportingName,
+                              english: englishName,
+                            },
+                          }));
+                          setInputError(false);
+                        }}
+                        required
+                        invalid={inputError}
+                        invalidText={
+                          <FormattedMessage id="required.invalidtext" />
+                        }
+                      />
+                      <br />
+                      <>
+                        <FormattedMessage id="french.current" /> :{" "}
+                        {testNamesLangs?.reportingName?.french}
+                      </>
+                      <TextInput
+                        id={`fr`}
+                        labelText=""
+                        hideLabel
+                        value={testNamesLangsPost?.reportingName?.french || ""}
+                        onChange={(e) => {
+                          const frenchName = e.target.value;
+                          setTestNamesLangsPost((prev) => ({
+                            ...prev,
+                            reportingName: {
+                              ...prev.reportingName,
+                              french: frenchName,
+                            },
+                          }));
+                          setInputError(false);
+                        }}
+                        required
+                        invalid={inputError}
+                        invalidText={
+                          <FormattedMessage id="required.invalidtext" />
+                        }
+                      />
+                    </Column>
+                  </Grid>
+                ) : (
+                  <>
+                    <div>
+                      <Loading />
+                    </div>
+                  </>
+                )}
+                <br />
+                {confirmationStep && (
+                  <>
+                    <Section>
+                      <Section>
+                        <Section>
+                          <Heading>
+                            <FormattedMessage id="confirmation.rename" />
+                          </Heading>
+                        </Section>
+                      </Section>
+                    </Section>
+                  </>
+                )}
+              </Modal>
             </Grid>
           ) : (
             <>

@@ -125,6 +125,9 @@ function SampleTypeRenameEntry() {
       });
       setNotificationVisible(true);
       setIsAddModalOpen(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 10);
     } else {
       addNotification({
         kind: NotificationKinds.error,
@@ -203,20 +206,6 @@ function SampleTypeRenameEntry() {
           <br />
           <hr />
           <br />
-          <Grid fullWidth={true}>
-            <Column lg={16} md={8} sm={4}>
-              <Button
-                disabled={finished}
-                id="finishdButton"
-                type="button"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                <FormattedMessage id="label.button.finished" />
-              </Button>
-            </Column>
-          </Grid>
           <br />
           <RenameModelBox
             data={sampleTypeListShow}
@@ -235,6 +224,7 @@ function SampleTypeRenameEntry() {
             lang={entityNamesProvider}
             langPost={entityNamesProviderPost}
             selectedItem={selectedItem}
+            hasFrench={true}
           />
         </div>
       </div>

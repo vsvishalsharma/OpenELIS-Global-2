@@ -56,6 +56,7 @@ function SelectListRenameEntry() {
   const [selectListRenamePost, setSelectListRenamePost] = useState({});
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedItemChange, setSelectedItemChange] = useState({});
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   useEffect(() => {
     componentMounted.current = true;
@@ -108,6 +109,9 @@ function SelectListRenameEntry() {
       });
       setNotificationVisible(true);
       setIsAddModalOpen(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 10);
     } else {
       addNotification({
         kind: NotificationKinds.error,
@@ -121,19 +125,22 @@ function SelectListRenameEntry() {
     }
   }
 
-  const openAppModle = (item) => {
+  const openAppModle = (item, index) => {
     setConfirmationStep(false);
     setIsAddModalOpen(true);
     setSelectedItem(item);
     setSelectedItemChange(item);
+    setSelectedIndex(index);
   };
 
-  const onInputChangeEn = (e, index) => {
+  const onInputChangeEn = (e) => {
     e.preventDefault();
     const updatedValue = e.target.value;
     setDisplayValueList((prevList) =>
       prevList.map((item, i) =>
-        i === index ? { ...item, displayValueEnglish: updatedValue } : item,
+        i === selectedIndex
+          ? { ...item, displayValueEnglish: updatedValue }
+          : item,
       ),
     );
     // setSelectedItem((prev) => ({ ...prev, displayValueEnglish: updatedValue }));
@@ -144,12 +151,14 @@ function SelectListRenameEntry() {
     setInputError(false);
   };
 
-  const onInputChangeFr = (e, index) => {
+  const onInputChangeFr = (e) => {
     e.preventDefault();
     const updatedValue = e.target.value;
     setDisplayValueList((prevList) =>
       prevList.map((item, i) =>
-        i === index ? { ...item, displayValueFrench: updatedValue } : item,
+        i === selectedIndex
+          ? { ...item, displayValueFrench: updatedValue }
+          : item,
       ),
     );
     // setSelectedItem((prev) => ({ ...prev, displayValueFrench: updatedValue }));
@@ -204,150 +213,16 @@ function SelectListRenameEntry() {
           <br />
           <hr />
           <br />
-          <Grid fullWidth={true}>
-            <Column lg={16} md={8} sm={4}>
-              <Button
-                disabled={finished}
-                id="finishdButton"
-                type="button"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                <FormattedMessage id="label.button.finished" />
-              </Button>
-            </Column>
-          </Grid>
-          <br />
           {displayValueList ? (
             <Grid fullWidth={true}>
               {displayValueList.map((valueItem, index) => (
-                <Column key={index} lg={4} md={4} sm={4}>
-                  <Modal
-                    open={isAddModalOpen}
-                    size="md"
-                    modalHeading={`${modalHeading} : ${selectedItem?.displayValueEnglish}`} // secondary lable
-                    primaryButtonText={
-                      confirmationStep ? (
-                        <>
-                          <FormattedMessage id="column.name.accept" />
-                        </>
-                      ) : (
-                        <>
-                          <FormattedMessage id="column.name.save" />
-                        </>
-                      )
-                    }
-                    secondaryButtonText={
-                      confirmationStep ? (
-                        <>
-                          <FormattedMessage id="header.reject" />
-                        </>
-                      ) : (
-                        <>
-                          <FormattedMessage id="label.button.cancel" />
-                        </>
-                      )
-                    }
-                    onRequestSubmit={selectListRenameUpdatePost}
-                    onRequestClose={closeAddModal}
-                  >
-                    {displayValueList &&
-                    valueItem &&
-                    valueItem.id &&
-                    valueItem.displayValueEnglish &&
-                    valueItem.displayValueFrench ? (
-                      <Grid fullWidth={true}>
-                        <Column lg={16} md={8} sm={4}>
-                          <Section>
-                            <Section>
-                              <Heading>
-                                <FormattedMessage id="banner.menu.patientEdit" />
-                              </Heading>
-                            </Section>
-                          </Section>
-                          <br />
-                          <Section>
-                            <Section>
-                              <Section>
-                                <Heading>
-                                  <FormattedMessage id="selectListRenameEntry.selectList" />
-                                </Heading>
-                              </Section>
-                            </Section>
-                          </Section>
-                          <br />
-                          <>
-                            <FormattedMessage id="english.current" /> :{" "}
-                            {selectedItem.displayValueEnglish}
-                          </>
-                          <br />
-                          <br />
-                          <TextInput
-                            id={`eng-${index}`}
-                            labelText=""
-                            hideLabel
-                            value={selectedItemChange.displayValueEnglish || ""}
-                            onChange={(e) => {
-                              onInputChangeEn(e, index);
-                            }}
-                            required
-                            invalid={inputError}
-                            invalidText={
-                              <FormattedMessage id="required.invalidtext" />
-                            }
-                          />
-                          <br />
-                          <>
-                            <FormattedMessage id="french.current" /> :{" "}
-                            {selectedItem.displayValueFrench}
-                          </>
-                          <br />
-                          <br />
-                          <TextInput
-                            id={`fr-${index}`}
-                            labelText=""
-                            hideLabel
-                            value={selectedItemChange.displayValueFrench || ""}
-                            onChange={(e) => {
-                              onInputChangeFr(e, index);
-                            }}
-                            required
-                            invalid={inputError}
-                            invalidText={
-                              <FormattedMessage id="required.invalidtext" />
-                            }
-                          />
-                        </Column>
-                      </Grid>
-                    ) : (
-                      <>
-                        <div>
-                          <Loading />
-                        </div>
-                      </>
-                    )}
-                    <br />
-                    {confirmationStep && (
-                      <>
-                        <Section>
-                          <Section>
-                            <Section>
-                              <Heading>
-                                <FormattedMessage id="confirmation.rename" />
-                              </Heading>
-                            </Section>
-                          </Section>
-                        </Section>
-                      </>
-                    )}
-                  </Modal>
+                <Column key={index} lg={5} md={5} sm={5}>
                   <Button
                     id={`button-${index}`}
                     kind="ghost"
                     type="button"
                     onClick={() => {
-                      openAppModle(valueItem);
+                      openAppModle(valueItem, index);
                     }}
                     style={{ color: "#000000" }}
                   >
@@ -355,6 +230,125 @@ function SelectListRenameEntry() {
                   </Button>
                 </Column>
               ))}
+              <Modal
+                open={isAddModalOpen}
+                size="md"
+                modalHeading={`${modalHeading} : ${selectedItem?.displayValueEnglish}`} // secondary lable
+                primaryButtonText={
+                  confirmationStep ? (
+                    <>
+                      <FormattedMessage id="column.name.accept" />
+                    </>
+                  ) : (
+                    <>
+                      <FormattedMessage id="column.name.save" />
+                    </>
+                  )
+                }
+                secondaryButtonText={
+                  confirmationStep ? (
+                    <>
+                      <FormattedMessage id="header.reject" />
+                    </>
+                  ) : (
+                    <>
+                      <FormattedMessage id="label.button.cancel" />
+                    </>
+                  )
+                }
+                onRequestSubmit={selectListRenameUpdatePost}
+                onRequestClose={closeAddModal}
+              >
+                {displayValueList &&
+                selectedItem &&
+                selectedItem.id &&
+                selectedItem.displayValueEnglish &&
+                selectedItem.displayValueFrench ? (
+                  <Grid fullWidth={true}>
+                    <Column lg={16} md={8} sm={4}>
+                      <Section>
+                        <Section>
+                          <Heading>
+                            <FormattedMessage id="banner.menu.patientEdit" />
+                          </Heading>
+                        </Section>
+                      </Section>
+                      <br />
+                      <Section>
+                        <Section>
+                          <Section>
+                            <Heading>
+                              <FormattedMessage id="selectListRenameEntry.selectList" />
+                            </Heading>
+                          </Section>
+                        </Section>
+                      </Section>
+                      <br />
+                      <>
+                        <FormattedMessage id="english.current" /> :{" "}
+                        {selectedItem.displayValueEnglish}
+                      </>
+                      <br />
+                      <br />
+                      <TextInput
+                        id={`eng`}
+                        labelText=""
+                        hideLabel
+                        value={selectedItemChange.displayValueEnglish || ""}
+                        onChange={(e) => {
+                          onInputChangeEn(e);
+                        }}
+                        required
+                        invalid={inputError}
+                        invalidText={
+                          <FormattedMessage id="required.invalidtext" />
+                        }
+                      />
+                      <br />
+                      {/* <>
+                        <FormattedMessage id="french.current" /> :{" "}
+                        {selectedItem.displayValueFrench}
+                      </>
+                      <br />
+                      <br />
+                      <TextInput
+                        id={`fr`}
+                        labelText=""
+                        hideLabel
+                        value={selectedItemChange.displayValueFrench || ""}
+                        onChange={(e) => {
+                          onInputChangeFr(e);
+                        }}
+                        required
+                        invalid={inputError}
+                        invalidText={
+                          <FormattedMessage id="required.invalidtext" />
+                        }
+                      /> */}
+                    </Column>
+                  </Grid>
+                ) : (
+                  <>
+                    <div>
+                      <Loading />
+                    </div>
+                  </>
+                )}
+                <br />
+                {confirmationStep && (
+                  <>
+                    <Section>
+                      <Section>
+                        <Section>
+                          <Heading>
+                            <FormattedMessage id="confirmation.rename" />
+                          </Heading>
+                        </Section>
+                      </Section>
+                    </Section>
+                  </>
+                )}
+              </Modal>
             </Grid>
           ) : (
             <>
