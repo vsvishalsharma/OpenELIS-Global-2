@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.openelisglobal.common.action.IActionConstants;
 import org.openelisglobal.common.constants.Constants;
 import org.openelisglobal.common.controller.BaseController;
+import org.openelisglobal.common.exception.LIMSRuntimeException;
+import org.openelisglobal.common.log.LogEvent;
 import org.openelisglobal.common.util.ConfigurationProperties;
 import org.openelisglobal.common.util.ConfigurationProperties.Property;
 import org.openelisglobal.localization.service.LocalizationService;
 import org.openelisglobal.login.bean.UserSession;
+import org.openelisglobal.login.bean.UserSession.LoginMethod;
 import org.openelisglobal.login.form.LoginForm;
 import org.openelisglobal.login.valueholder.UserSessionData;
 import org.openelisglobal.role.service.RoleService;
@@ -34,12 +37,14 @@ import org.springframework.core.ResolvableType;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.saml2.provider.service.authentication.DefaultSaml2AuthenticatedPrincipal;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -135,6 +140,7 @@ public class LoginPageController extends BaseController {
         session.setSessionId(request.getSession().getId());
         if (authenticated) {
             SystemUser user = systemUserService.get(getSysUserId(request));
+            setLoginMethod(request, session);
             session.setUserId(user.getId());
             session.setLoginName(user.getLoginName());
             session.setFirstName(user.getFirstName());
@@ -152,6 +158,16 @@ public class LoginPageController extends BaseController {
             setLabunitRolesForExistingUser(request, session);
         }
         return session;
+    }
+
+    private void setLoginMethod(HttpServletRequest request, UserSession session) {
+        if (Boolean.TRUE.equals(request.getSession().getAttribute("samlSession"))) {
+            session.setLoginMethod(LoginMethod.SAML);
+        } else if (Boolean.TRUE.equals(request.getSession().getAttribute("oauthSession"))) {
+            session.setLoginMethod(LoginMethod.OAUTH);
+        } else {
+            session.setLoginMethod(LoginMethod.FORM);
+        }
     }
 
     private void setLabunitRolesForExistingUser(HttpServletRequest request, UserSession session) {

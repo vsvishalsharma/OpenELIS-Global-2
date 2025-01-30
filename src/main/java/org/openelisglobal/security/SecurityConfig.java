@@ -270,7 +270,7 @@ public class SecurityConfig {
                     .createDefaultAssertionValidator();
             authenticationProvider.setAssertionValidator(validator);
             http.requestMatcher(new SamlRequestedMatcher()).authorizeRequests().anyRequest().authenticated().and()
-                    .saml2Logout().and().saml2Login().authenticationManager(new ProviderManager(authenticationProvider))
+                    .saml2Logout().logoutUrl("/Logout").and().saml2Login().authenticationManager(new ProviderManager(authenticationProvider))
                     .failureHandler(customAuthenticationFailureHandler())
                     .successHandler(customAuthenticationSuccessHandler())
                     .relyingPartyRegistrationRepository(relyingPartyRegistrationRepository());
