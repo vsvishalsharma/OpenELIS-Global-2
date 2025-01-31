@@ -66,7 +66,7 @@ public class OrganizationImportServiceImpl implements OrganizationImportService 
     @Transactional
     @Async
     @Scheduled(initialDelay = 1000, fixedRateString = "${facilitylist.schedule.fixedRate}")
-    public void importOrganizationList() throws FhirGeneralException, IOException {
+    public void importList() throws FhirGeneralException, IOException {
         if (!GenericValidator.isBlankOrNull(facilityFhirStore)) {
             IGenericClient client;
             if (facilityAuth.equals("token")) {
