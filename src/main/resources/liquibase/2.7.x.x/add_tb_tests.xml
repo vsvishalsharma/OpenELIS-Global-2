@@ -9,13 +9,15 @@
 	<changeSet author="CIV developer Group" id="2023091801"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE french = 'GeneXpert MTB/RIF'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'GeneXpert MTB/RIF'
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.localization(id, description, english,french, lastupdated) VALUES
             (nextval('localization_seq'),'test name','GeneXpert MTB/RIF','GeneXpert MTB/RIF',now()),
             (nextval('localization_seq'),'test name','TB LAMP','TB LAMP',now()),
@@ -81,21 +83,24 @@
             (nextval('localization_seq'),'test report name','Bedaquilline','Bedaquilline',now()),
             (nextval('localization_seq'),'test report name','Delamanide','Delamanide',now()),
             (nextval('localization_seq'),'test report name','TB LAM urinaire','TB LAM urinaire',now());
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023091802"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary WHERE dict_entry = 'MTB non détecté' </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary WHERE dict_entry = 'MTB non détecté'
+			</sqlCheck>
+
 		</preConditions>
 
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.dictionary(id,is_active,dict_entry,lastupdated,local_abbrev,dictionary_category_id,display_key,sort_order,name_localization_id)
             VALUES
@@ -135,20 +140,23 @@
             'dictionary.tb.result.culture_res',80017,null),
             (nextval('dictionary_seq'),'Y','Sensible',now(),'Sensible',null,
             'dictionary.tb.result.culture_sens',80018,null);
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023091803"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'GeneXpert MTB/RIF'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
+				WHERE description = 'GeneXpert MTB/RIF'
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.test(id, method_id, uom_id, description,loinc, reporting_description,sticker_req_flag, is_active,active_begin, active_end, is_reportable,
             time_holding, time_wait,time_ta_average, time_ta_warning,time_ta_max, label_qty, lastupdated,label_id, test_trailer_id,test_section_id, scriptlet_id,
             test_format_id, local_code,	sort_order, name, orderable,guid,name_localization_id, reporting_name_localization_id,default_test_result_id, notify_results)
@@ -303,19 +311,23 @@
             null,null,'TB LAM urinaire',1,'TB LAM urinaire','t','f41361dc-1c51-4684-a42d-5ec34435a387',
             (select id	from localization where description = 'test name' and french = 'TB LAM urinaire' limit 1),
             (select id from localization where	description = 'test report name' and french = 'TB LAM urinaire' limit 1),null,'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091804"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Sputum' OR description = 'Crachat limit 1'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Sputum' OR description
+				= 'Crachat limit 1'
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Sputum' OR description = 'Crachat' limit 1),
@@ -378,19 +390,23 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Sputum' OR description = 'Crachat' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091805"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide pleural' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide pleural' limit
+				1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide pleural' limit 1),
@@ -453,19 +469,22 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide pleural' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091806"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'LCR' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'LCR' limit 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'LCR' limit 1),
@@ -528,19 +547,23 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'LCR' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091807"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Pus ganglionnaires' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Pus ganglionnaires'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Pus ganglionnaires' limit 1),
@@ -603,19 +626,23 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Pus ganglionnaires' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091808"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide d’ascite' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide d’ascite' limit
+				1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide d’ascite' limit 1),
@@ -678,19 +705,23 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide d’ascite' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091809"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide articulaire' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide articulaire'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide articulaire' limit 1),
@@ -753,19 +784,23 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide articulaire' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091810"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide de ponction péricardique' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide de ponction
+				péricardique' limit 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide de ponction péricardique' limit 1),
@@ -828,19 +863,22 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide de ponction péricardique' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091811"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Selles' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Selles' limit 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Selles' limit 1),
@@ -903,19 +941,22 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Selles' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091812"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Urines' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Urines' limit 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Urines' limit 1),
@@ -978,19 +1019,23 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Urines' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091813"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide d’aspiration gastrique' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide d’aspiration
+				gastrique' limit 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide d’aspiration gastrique' limit 1),
@@ -1053,19 +1098,23 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide d’aspiration gastrique' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091814"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide d’aspiration broncho-alvéolaire' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide d’aspiration
+				broncho-alvéolaire' limit 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id,is_panel)
             VALUES
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide d’aspiration broncho-alvéolaire' limit 1),
@@ -1128,20 +1177,24 @@
             (select id from	test where description = 'Delamanide'),'f'),
             (nextval('sample_type_test_seq'),(select id from type_of_sample where description = 'Liquide d’aspiration broncho-alvéolaire' limit 1),
             (select id from	test where description = 'TB LAM urinaire'),'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091815"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
-                (select id from clinlims.test where description = 'GeneXpert MTB/RIF')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.result_limits WHERE test_id =
+				(select id from clinlims.test
+				where description = 'GeneXpert MTB/RIF')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.result_limits(id, test_id,	test_result_type_id,min_age, max_age, gender, low_normal,
             high_normal, low_valid,	high_valid, lastupdated, normal_dictionary_id,	always_validate)
             VALUES
@@ -1209,20 +1262,23 @@
             2,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f'),
             (nextval('result_limits_seq'),(select id from test where description = 'TB LAM urinaire'),
             2,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091845"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'GeneXpert MTB/RIF')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'GeneXpert MTB/RIF')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1240,20 +1296,23 @@
             (select id from dictionary where dict_entry = 'Invalide' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'GeneXpert MTB/RIF'),	null,null,'D',
             (select id from dictionary where dict_entry = 'Pas de résultat' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091816"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'TB LAMP')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'TB LAMP')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1261,20 +1320,23 @@
             (select id from dictionary where dict_entry = 'MTB non détecté' limit 1),	null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'TB LAMP'),	null,null,'D',
             (select id from dictionary where dict_entry = 'MTB détecté' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091817"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Bacilloscopie Auramine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Bacilloscopie Auramine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1288,20 +1350,23 @@
             (select id from dictionary where dict_entry = 'Positif Rare BAAR' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Bacilloscopie Auramine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Négatif' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091818"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Bacilloscopie Ziehl-Neelsen')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Bacilloscopie Ziehl-Neelsen')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1315,20 +1380,23 @@
             (select id from dictionary where dict_entry = 'Positif Rare BAAR' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Bacilloscopie Ziehl-Neelsen'),null,null,'D',
             (select id from dictionary where dict_entry = 'Négatif' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091819"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Culture Milieu LJ')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Culture Milieu LJ')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1338,20 +1406,23 @@
             (select id from dictionary where dict_entry = 'Culture négative' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Culture Milieu LJ'),null,null,'D',
             (select id from dictionary where dict_entry = 'Culture positive' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091820"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Culture Milieu MGIT')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Culture Milieu MGIT')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1361,20 +1432,23 @@
             (select id from dictionary where dict_entry = 'Culture négative' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Culture Milieu MGIT'),null,null,'D',
             (select id from dictionary where dict_entry = 'Culture positive' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091821"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Rifampicine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Rifampicine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1382,20 +1456,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Rifampicine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091822"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Isoniazide')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Isoniazide')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1403,20 +1480,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Isoniazide'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091823"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Fluoroquinolone')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Fluoroquinolone')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1424,20 +1504,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Fluoroquinolone'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091824"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Injectable')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Injectable')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1445,20 +1528,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Injectable'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091825"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Pyrazinamide')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Pyrazinamide')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1466,20 +1552,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Pyrazinamide'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091826"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Ethambutol')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Ethambutol')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1487,20 +1576,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Ethambutol'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091827"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Capreomicine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Capreomicine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1508,20 +1600,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Capreomicine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091828"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Teridizone')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Teridizone')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1529,20 +1624,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Teridizone'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091829"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Kanamycine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Kanamycine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1550,20 +1648,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Kanamycine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091830"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Imipenem')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Imipenem')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1571,20 +1672,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Imipenem'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091831"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Streptomicine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Streptomicine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1592,20 +1696,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Streptomicine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091832"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Ethionamide')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Ethionamide')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1613,20 +1720,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Ethionamide'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091833"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Prothionamide')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Prothionamide')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1634,20 +1744,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Prothionamide'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091834"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Cyclosérine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Cyclosérine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1655,20 +1768,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Cyclosérine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091835"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Linezolid')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Linezolid')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1676,20 +1792,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Linezolid'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091836"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Moxifloxacine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Moxifloxacine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1697,20 +1816,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Moxifloxacine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091837"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Clofazimine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Clofazimine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1718,20 +1840,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Clofazimine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091838"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Levofloxacine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Levofloxacine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1739,20 +1864,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Levofloxacine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091839"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'PAS')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'PAS')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1760,20 +1888,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'PAS'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091840"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Imipénème-Cilastatine')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Imipénème-Cilastatine')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1781,20 +1912,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Imipénème-Cilastatine'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091841"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Meropenem')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Meropenem')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1802,20 +1936,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Meropenem'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091842"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Bedaquilline')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Bedaquilline')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1823,20 +1960,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Bedaquilline'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091843"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'Delamanide')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'Delamanide')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1844,20 +1984,23 @@
             (select id from dictionary where dict_entry = 'Resistant' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'Delamanide'),null,null,'D',
             (select id from dictionary where dict_entry = 'Sensible' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091844"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_result WHERE test_id =(select id from clinlims.test where description = 'TB LAM urinaire')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_result WHERE test_id =(select id from clinlims.test
+				where description = 'TB LAM urinaire')
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,
             is_quantifiable,is_active,is_normal) VALUES
@@ -1865,8 +2008,9 @@
             (select id from dictionary where dict_entry = 'Positif' limit 1),null,null,null,now(),null,1,'f','t','f'),
             (nextval('test_result_seq'), (select id from test where description = 'TB LAM urinaire'),null,null,'D',
             (select id from dictionary where dict_entry = 'Négatif' limit 1),null,null,null,now(),null,1,'f','t','f');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023092101"
 		context="ci_TB">
@@ -1907,14 +2051,17 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="tb_method_test" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM dictionary WHERE dict_entry ='Diagnostic moléculaire TB'	LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM dictionary
+				WHERE dict_entry ='Diagnostic moléculaire
+				TB' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.tb_method_test(id,method_id,test_id,is_active) VALUES
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Diagnostic moléculaire TB' limit 1),
@@ -1922,22 +2069,25 @@
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Diagnostic moléculaire TB' limit 1),
             (select id from test where name ='TB LAMP' limit 1),'Y');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092104"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="tb_method_test" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM dictionary WHERE dict_entry ='Microscopie TB' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM dictionary
+				WHERE dict_entry ='Microscopie TB' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.tb_method_test(id,method_id,test_id,is_active) VALUES
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Microscopie TB' limit 1),
@@ -1945,22 +2095,25 @@
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Microscopie TB' limit 1),
             (select id from test where name ='Bacilloscopie Ziehl-Neelsen' limit 1),'Y');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092105"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="tb_method_test" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM dictionary WHERE dict_entry ='Culture TB' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM dictionary
+				WHERE dict_entry ='Culture TB' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.tb_method_test(id,method_id,test_id,is_active) VALUES
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Culture TB' limit 1),
@@ -1968,42 +2121,50 @@
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Culture TB' limit 1),
             (select id from test where name ='Culture Milieu MGIT' limit 1),'Y');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092106"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="tb_method_test" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM dictionary WHERE dict_entry ='Diagnostic Immunologique TB' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM dictionary
+				WHERE dict_entry ='Diagnostic
+				Immunologique TB' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.tb_method_test(id,method_id,test_id,is_active) VALUES
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Diagnostic Immunologique TB' limit 1),
             (select id from test where name ='TB LAM urinaire' limit 1),'Y');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092107"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="tb_method_test" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM dictionary WHERE dict_entry ='Tests de sensibilité genotypique LPA' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM dictionary
+				WHERE dict_entry ='Tests de sensibilité
+				genotypique LPA' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.tb_method_test(id,method_id,test_id,is_active) VALUES
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Tests de sensibilité genotypique LPA' limit 1),
@@ -2017,22 +2178,26 @@
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Tests de sensibilité genotypique LPA' limit 1),
             (select id from test where name ='Injectable' limit 1),'Y');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092108"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="tb_method_test" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM dictionary WHERE dict_entry ='Tests de sensibilité phénotypique' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM dictionary
+				WHERE dict_entry ='Tests de sensibilité
+				phénotypique' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.tb_method_test(id,method_id,test_id,is_active) VALUES
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Tests de sensibilité phénotypique' limit 1),
@@ -2097,22 +2262,25 @@
             (nextval('tb_method_test_seq'), (select id from dictionary where
             dict_entry ='Tests de sensibilité phénotypique' limit 1),
             (select id from test where name ='Delamanide' limit 1),'Y');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<!-- add TB panels -->
 	<changeSet author="CIV developer Group" id="2023092109"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT count(*) FROM panel WHERE name ='MTBDRplus'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT count(*) FROM panel WHERE
+				name ='MTBDRplus'
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.panel(id,name,description,lastupdated,sort_order,is_active,name_localization_id) VALUES
             (nextval('panel_seq'), 'MTBDRplus','MTBDRplus', now(), 51,'Y', (select id from clinlims.localization where
             french ='MTBDRplus' limit 1)),
@@ -2122,62 +2290,72 @@
             french ='Antibiogramme TB 1ere Ligne' limit 1)),
             (nextval('panel_seq'), 'Antibiogramme TB 2e Ligne','Antibiogramme TB 2e Ligne', now(), 54,'Y', (select id from clinlims.localization where
             french ='Antibiogramme TB 2e Ligne' limit 1));
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<!-- add TB panelItems -->
 	<changeSet author="CIV developer Group" id="2023092111"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT  count(*)  FROM panel WHERE name ='MTBDRplus' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM panel WHERE
+				name ='MTBDRplus' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.panel_item(id,panel_id,lastupdated,test_id) VALUES
             (nextval('panel_item_seq'),(select id from clinlims.panel where name ='MTBDRplus' limit 1),now(),(select id from clinlims.test where
             name ='Rifampicine' limit 1)),
             (nextval('panel_item_seq'),(select id from clinlims.panel where name ='MTBDRplus' limit 1),now(),(select id from clinlims.test where
             name ='Isoniazide' limit 1));
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092112"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM panel WHERE name ='MTBDRsl' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM panel WHERE
+				name ='MTBDRsl' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.panel_item(id,panel_id,lastupdated,test_id) VALUES
             (nextval('panel_item_seq'),(select id from clinlims.panel where name ='MTBDRsl' limit 1),now(),(select id from clinlims.test where
             name ='Fluoroquinolone' limit 1)),
             (nextval('panel_item_seq'),(select id from clinlims.panel where name ='MTBDRsl' limit 1),now(),(select id from clinlims.test where
             name ='Injectable' limit 1));
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092113"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM panel WHERE name ='Antibiogramme TB 1ere Ligne' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM panel WHERE
+				name ='Antibiogramme TB 1ere Ligne' LIMIT
+				1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.panel_item(id,panel_id,lastupdated,test_id) VALUES
             (nextval('panel_item_seq'),(select id from clinlims.panel where name ='Antibiogramme TB 1ere Ligne' limit 1),now(),(select id from clinlims.test where
             name ='Rifampicine' limit 1)),
@@ -2187,21 +2365,24 @@
             name ='Pyrazinamide' limit 1)),
             (nextval('panel_item_seq'),(select id from clinlims.panel where name ='Antibiogramme TB 1ere Ligne' limit 1),now(),(select id from clinlims.test where
             name ='Ethambutol' limit 1));
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092114"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM panel WHERE name ='Antibiogramme TB 2e Ligne' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM panel WHERE
+				name ='Antibiogramme TB 2e Ligne' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.panel_item(id,panel_id,lastupdated,test_id) VALUES
             (nextval('panel_item_seq'),(select id from clinlims.panel where name ='Antibiogramme TB 2e Ligne' limit 1),now(),(select id from clinlims.test where
             name ='Capreomicine' limit 1)),
@@ -2239,8 +2420,9 @@
             name ='Bedaquilline' limit 1)),
             (nextval('panel_item_seq'),(select id from clinlims.panel where name ='Antibiogramme TB 2e Ligne' limit 1),now(),(select id from clinlims.test where
             name ='Delamanide' limit 1));
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 
@@ -2250,12 +2432,14 @@
 			<tableExists tableName="tb_method_test"
 				schemaName="clinlims" />
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             ALTER TABLE clinlims.tb_method_test ALTER COLUMN method_id TYPE	numeric(10) USING method_id::numeric;
             ALTER TABLE clinlims.tb_method_test ALTER COLUMN test_id TYPE numeric(10) USING test_id::numeric;
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 	<changeSet author="CIV developer Group" id="2023092202"
@@ -2298,14 +2482,17 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="tb_method_panel" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM dictionary WHERE dict_entry ='Tests de sensibilité genotypique LPA' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM dictionary
+				WHERE dict_entry ='Tests de sensibilité
+				genotypique LPA' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.tb_method_panel(id,method_id,panel_id,is_active) VALUES
             (nextval('tb_method_panel_seq'), (select id from dictionary where
             dict_entry ='Tests de sensibilité genotypique LPA' limit 1),
@@ -2313,21 +2500,25 @@
             (nextval('tb_method_panel_seq'), (select id from dictionary where
             dict_entry ='Tests de sensibilité genotypique LPA' limit 1),
             (select id from panel where name ='MTBDRsl' limit 1),'Y');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023092205"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="tb_method_panel" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM dictionary WHERE dict_entry ='Tests de sensibilité phénotypique' LIMIT 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM dictionary
+				WHERE dict_entry ='Tests de sensibilité
+				phénotypique' LIMIT 1
+			</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.tb_method_panel(id,method_id,panel_id,is_active) VALUES
             (nextval('tb_method_panel_seq'), (select id from dictionary where
             dict_entry ='Tests de sensibilité phénotypique' limit 1),
@@ -2335,8 +2526,9 @@
             (nextval('tb_method_panel_seq'), (select id from dictionary where
             dict_entry ='Tests de sensibilité phénotypique' limit 1),
             (select id from panel where name ='Antibiogramme TB 2e Ligne' limit 1),'Y');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 </databaseChangeLog>

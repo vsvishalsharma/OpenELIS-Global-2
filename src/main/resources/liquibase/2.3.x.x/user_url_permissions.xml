@@ -7,9 +7,10 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.system_module_url WHERE url_path = '/TestModifyEntry'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path = '/TestModifyEntry'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module_url">
 			<column name="id" valueSequenceNext="system_module_url_seq" />
@@ -28,9 +29,10 @@
 
 	<changeSet author="csteele" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.system_module_url WHERE url_path = '/BarcodeConfiguration'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path = '/BarcodeConfiguration'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module">
 			<column name="id" valueSequenceNext="system_module_seq" />
@@ -55,9 +57,10 @@
 
 	<changeSet author="csteele" id="3">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.system_module_url WHERE url_path = '/ReportConfiguration'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path = '/ReportConfiguration'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module">
 			<column name="id" valueSequenceNext="system_module_seq" />
@@ -82,9 +85,10 @@
 
 	<changeSet author="csteele" id="4">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.system_module_url WHERE url_path = '/BatchTestReassignment'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path = '/BatchTestReassignment'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module">
 			<column name="id" valueSequenceNext="system_module_seq" />
@@ -109,9 +113,11 @@
 
 	<changeSet author="csteele" id="5">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.system_module_url WHERE url_path = '/ExternalConnectionsMenu'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path =
+				'/ExternalConnectionsMenu'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module">
 			<column name="id" valueSequenceNext="system_module_seq" />
@@ -148,9 +154,11 @@
 
 	<changeSet author="csteele" id="6">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.system_module_url WHERE url_path = '/ValidationConfigurationMenu'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path =
+				'/ValidationConfigurationMenu'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module">
 			<column name="id" valueSequenceNext="system_module_seq" />
@@ -181,9 +189,10 @@
 
 	<changeSet author="csteele" id="7">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.system_module_url WHERE url_path = '/ListPlugins'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path = '/ListPlugins'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module">
 			<column name="id" valueSequenceNext="system_module_seq" />
@@ -208,9 +217,10 @@
 
 	<changeSet author="csteele" id="8">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.system_module WHERE name = 'ReportCovid'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module WHERE name = 'ReportCovid'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module">
 			<column name="id" valueSequenceNext="system_module_seq" />

@@ -9,9 +9,10 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_microbiology'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_microbiology'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for microbiology</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -32,9 +33,10 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_microbiology_tb'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_microbiology_tb'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for microbiology</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -56,9 +58,10 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_microbiology_classic'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_microbiology_classic'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for microbiology</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -82,9 +85,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_module"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.system_module WHERE name = 'MicrobiologyTBView'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module WHERE name = 'MicrobiologyTBView'</sqlCheck>
+
 		</preConditions>
 		<comment>Add a module for microbiology TB</comment>
 		<insert tableName="system_module" schemaName="clinlims">
@@ -103,16 +107,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role_module"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.system_module WHERE name = 'MicrobiologyTBView'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name =
+				'MicrobiologyTBView'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add roles for Microbiology </comment>
 		<insert tableName="system_module_url" schemaName="clinlims">
@@ -139,9 +146,10 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_report_microbiology'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_report_microbiology'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for microbiology report</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -162,9 +170,10 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_report'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_report'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for tb report</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -188,16 +197,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role_module"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.system_module WHERE name = 'MicrobiologyTBView'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name =
+				'MicrobiologyTBView'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add roles for Microbiology </comment>
 		<insert tableName="system_module_url" schemaName="clinlims">
@@ -221,9 +233,10 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_report_microbiology_classic'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_report_microbiology_classic'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for microbiology</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -245,9 +258,10 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_report'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_report'</sqlCheck>
+
 		</preConditions>
 		<update tableName="menu" schemaName="clinlims">
 			<column name="action_url" value="" />
@@ -263,12 +277,14 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_report'</sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_patient_report'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_report'</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_patient_report'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for tb report</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -292,12 +308,14 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_report'</sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_result_export'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_report'</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_result_export'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for tb report</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -318,12 +336,14 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_report'</sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_order_report'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_report'</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_order_report'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for tb report</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -345,9 +365,10 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_tb_order_report'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_tb_order_report'</sqlCheck>
+
 		</preConditions>
 		<update tableName="menu" schemaName="clinlims">
 			<column name="is_active" valueBoolean="false" />

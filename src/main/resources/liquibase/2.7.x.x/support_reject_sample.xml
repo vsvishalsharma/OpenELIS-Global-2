@@ -30,16 +30,22 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="status_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.status_of_sample WHERE name = 'Sample Rejected' and status_type = 'ANALYSIS'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.status_of_sample WHERE name = 'Sample Rejected' and status_type = 'SAMPLE'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM
+				clinlims.status_of_sample WHERE name = 'Sample
+				Rejected' and
+				status_type = 'ANALYSIS'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM
+				clinlims.status_of_sample WHERE name = 'Sample
+				Rejected' and
+				status_type = 'SAMPLE'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add sample rejected Analysis status </comment>
 		<insert tableName="status_of_sample" schemaName="clinlims">
@@ -68,9 +74,10 @@
 	<changeSet author="moses_mutesa" id="3">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_reports_management_rejection'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_reports_management_rejection'</sqlCheck>
+
 		</preConditions>
 		<comment>Add Rejection report to the Reports Management menu</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -92,9 +99,12 @@
 	<changeSet author="moses_mutesa" id="4">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="dictionary" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.dictionary WHERE dict_entry='Please submit another sample. Need to re-test .' AND dictionary_category_id = (SELECT dc.id FROM dictionary_category dc WHERE dc.name = 'resultRejectionReasons')</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.dictionary WHERE dict_entry='Please submit another sample.
+				Need to re-test .' AND dictionary_category_id = (SELECT dc.id FROM
+				dictionary_category dc WHERE dc.name = 'resultRejectionReasons')</sqlCheck>
+
 		</preConditions>
 		<comment>Remove 'Please submit another sample. Need to re-test .' From
 			the rejection Reasons</comment>

@@ -8,11 +8,13 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role_module"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.system_role WHERE name = 'Global Administrator'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Global
+				Administrator'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update Global Administrator Roles to have Acees to Test
 			Catalogue Management

@@ -9,11 +9,11 @@
 	<changeSet author="CIV developer Group" id="2023091525"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Order Reasons'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Order Reasons'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="dictionary_category" schemaName="clinlims">
 			<column name="id" valueSequenceNext="dictionary_category_seq" />
@@ -26,11 +26,12 @@
 	<changeSet author="CIV developer Group" id="2023091526"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Diagnostic Reasons'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Diagnostic
+				Reasons'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="dictionary_category" schemaName="clinlims">
 			<column name="id" valueSequenceNext="dictionary_category_seq" />
@@ -43,11 +44,12 @@
 	<changeSet author="CIV developer Group" id="2023091527"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Followup Reasons'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Followup
+				Reasons'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="dictionary_category" schemaName="clinlims">
 			<column name="id" valueSequenceNext="dictionary_category_seq" />
@@ -60,11 +62,12 @@
 	<changeSet author="CIV developer Group" id="2023091528"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Analysis Methods'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Analysis
+				Methods'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="dictionary_category" schemaName="clinlims">
 			<column name="id" valueSequenceNext="dictionary_category_seq" />
@@ -77,11 +80,11 @@
 	<changeSet author="CIV developer Group" id="2023091529"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Sample Aspects'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Sample Aspects'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="dictionary_category" schemaName="clinlims">
 			<column name="id" valueSequenceNext="dictionary_category_seq" />
@@ -99,17 +102,19 @@
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="dictionary" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Order Reasons' limit 1</sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary WHERE dict_entry = 'Diagnostic'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Order Reasons'
+				limit 1</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary WHERE dict_entry = 'Diagnostic'</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.dictionary(id,is_active,dict_entry,lastupdated,local_abbrev,dictionary_category_id,display_key,sort_order,name_localization_id)
             VALUES
@@ -117,24 +122,27 @@
             'dictionary.tb.order.diagnostic',55000,null),
             (nextval('dictionary_seq'),'Y','Follow up',now(),'Followup',(select id from clinlims.dictionary_category where description = 'TB Order Reasons' limit 1),
             'dictionary.tb.order.followup',55000,null);
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091531"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="dictionary" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Diagnostic Reasons' limit 1</sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary WHERE dict_entry = 'Cas présumé jamais traité'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Diagnostic
+				Reasons' limit 1</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary WHERE dict_entry = 'Cas présumé jamais traité'</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.dictionary(id,is_active,dict_entry,lastupdated,local_abbrev,dictionary_category_id,display_key,sort_order,name_localization_id)
             VALUES
@@ -148,24 +156,28 @@
             'dictionary.tb.order.resumption',60004,null),
             (nextval('dictionary_seq'),'Y','Frottis positif à M2',now(),'positifM2',(select id from clinlims.dictionary_category where description = 'TB Diagnostic Reasons' limit 1),
             'dictionary.tb.order.smear_positivem2',60005,null);
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091532"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="dictionary" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Followup Reasons' limit 1</sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary WHERE dict_entry = 'Examen de suivi 1ère ligne (TB Sensible)'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Followup
+				Reasons' limit 1</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary WHERE dict_entry = 'Examen de suivi 1ère ligne
+				(TB Sensible)'</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.dictionary(id,is_active,dict_entry,lastupdated,local_abbrev,dictionary_category_id,display_key,sort_order,name_localization_id)
             VALUES
@@ -173,24 +185,27 @@
             'dictionary.tb.followup.line1',60001,null),
             (nextval('dictionary_seq'),'Y','Examen de suivi 2ième ligne (TB/RR ; TBXDR)',now(),'TB Line2',(select id from clinlims.dictionary_category where description = 'TB Followup Reasons' limit 1),
             'dictionary.tb.followup.line2',60002,null);
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091533"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="dictionary" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Analysis Methods' limit 1</sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary WHERE dict_entry = 'Diagnostic moléculaire TB'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Analysis
+				Methods' limit 1</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary WHERE dict_entry = 'Diagnostic moléculaire TB'</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.dictionary(id,is_active,dict_entry,lastupdated,local_abbrev,dictionary_category_id,display_key,sort_order,name_localization_id)
             VALUES
@@ -206,24 +221,27 @@
             'dictionary.tb.lpa_tests',60005,null),
             (nextval('dictionary_seq'),'Y','Tests de sensibilité phénotypique',now(),'PhenoTests',(select id from clinlims.dictionary_category where description = 'TB Analysis Methods' limit 1),
             'dictionary.tb.phenotypic_tests',60006,null);
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV developer Group" id="2023091534"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="dictionary" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM
-                clinlims.dictionary_category WHERE description = 'TB Sample Aspects' limit 1</sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM
-                clinlims.dictionary WHERE dict_entry = 'Muco-purulent'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE description = 'TB Sample Aspects'
+				limit 1</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary WHERE dict_entry = 'Muco-purulent'</sqlCheck>
+
 		</preConditions>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO
             clinlims.dictionary(id,is_active,dict_entry,lastupdated,local_abbrev,dictionary_category_id,display_key,sort_order,name_localization_id)
             VALUES
@@ -233,7 +251,8 @@
             'dictionary.tb.aspect.salivary',60002,null),
             (nextval('dictionary_seq'),'Y','Sanglant',now(),'Sanglant',(select id from clinlims.dictionary_category where description = 'TB Sample Aspects' limit 1),
             'dictionary.tb.aspect.bloody',60003,null);
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 </databaseChangeLog>

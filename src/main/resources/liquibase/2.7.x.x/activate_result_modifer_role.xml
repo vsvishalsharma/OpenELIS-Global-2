@@ -9,20 +9,20 @@
 		<preConditions onFail="CONTINUE">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                select count(*) from
-                clinlims.system_role
-                where name = 'Results modifier' limit 1;
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                select count(*) from
-                clinlims.system_role
-                where name = 'Lab Unit Roles' limit 1;
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				select count(*) from
+				clinlims.system_role
+				where name = 'Results modifier' limit 1;
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				select count(*) from
+				clinlims.system_role
+				where name = 'Lab Unit Roles' limit 1;
+			</sqlCheck>
+
 		</preConditions>
 		<update tableName="system_role" schemaName="clinlims">
 			<column name="active" valueBoolean="true" />

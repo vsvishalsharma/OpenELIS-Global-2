@@ -8,9 +8,10 @@
 	<changeSet author="CIV developer Group" id="202208311">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_reports_export_valid'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_reports_export_valid'</sqlCheck>
+
 		</preConditions>
 		<comment>Disable menu option for export study valid result </comment>
 		<update tableName="menu" schemaName="clinlims">

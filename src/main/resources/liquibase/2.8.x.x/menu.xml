@@ -7,11 +7,12 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.menu WHERE element_id = 'menu_billing'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM clinlims.menu
+				WHERE element_id = 'menu_billing'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>create billing tab menu option</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -30,11 +31,12 @@
 	<changeSet author="csteele" id="2">
 		<validCheckSum>8:620478311cf02d94f80878d0f8ab3a1b</validCheckSum>
 		<preConditions>
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.menu WHERE element_id = 'menu_nonconformity'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM clinlims.menu
+				WHERE element_id = 'menu_nonconformity'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update nonconform tab menu option</comment>
 		<update tableName="menu" schemaName="clinlims">
@@ -52,11 +54,12 @@
 	<changeSet author="csteele" id="3">
 		<validCheckSum>8:ee04bcb56f3968937708c47b637e7149</validCheckSum>
 		<preConditions>
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.menu WHERE element_id = 'menu_patient'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM clinlims.menu
+				WHERE element_id = 'menu_patient'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update patient tab menu option</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -91,11 +94,12 @@
 
 	<changeSet author="csteele" id="4">
 		<preConditions>
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.menu WHERE element_id = 'menu_sample_create'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM clinlims.menu
+				WHERE element_id = 'menu_sample_create'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update study tab menu option</comment>
 		<update tableName="menu" schemaName="clinlims">
@@ -149,11 +153,12 @@
 
 	<changeSet author="csteele" id="6">
 		<preConditions>
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.menu WHERE element_id = 'menu_pathology'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM clinlims.menu
+				WHERE element_id = 'menu_pathology'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>insert pathology tab menu option</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -184,11 +189,12 @@
 
 	<changeSet author="csteele" id="7">
 		<preConditions>
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.menu WHERE element_id = 'menu_immunochem'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM clinlims.menu
+				WHERE element_id = 'menu_immunochem'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>insert immunochem tab menu option</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -220,11 +226,12 @@
 
 	<changeSet author="csteele" id="8">
 		<preConditions>
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.menu WHERE element_id = 'menu_cytology'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM clinlims.menu
+				WHERE element_id = 'menu_cytology'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>insert immunochem tab menu option</comment>
 		<insert tableName="menu" schemaName="clinlims">

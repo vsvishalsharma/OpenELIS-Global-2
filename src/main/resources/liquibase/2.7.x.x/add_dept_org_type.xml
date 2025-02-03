@@ -9,9 +9,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="organization_type"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.organization_type WHERE short_name = 'dept'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.organization_type WHERE short_name = 'dept'</sqlCheck>
+
 		</preConditions>
 		<comment>Add dept as one of the default Organization Types</comment>
 		<insert tableName="organization_type" schemaName="clinlims">

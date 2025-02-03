@@ -8,13 +8,13 @@
 		context="ci_general,ci_regional,CDIRetroCI">
 		<preConditions onFail="CONTINUE">
 			<tableExists tableName="test" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                select count(*) from
-                clinlims.test
-                where name = 'Viral Load' limit 1;
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				select count(*) from
+				clinlims.test
+				where name = 'Viral Load' limit 1;
+			</sqlCheck>
+
 		</preConditions>
 		<update tableName="test" schemaName="clinlims">
 			<column name="loinc" value="25836-8" />

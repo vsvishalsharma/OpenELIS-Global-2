@@ -8,11 +8,14 @@
 	<changeSet author="csteele" id="1" runAlways="true">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                    SELECT COUNT(*) FROM clinlims.panel_item WHERE test_id NOT IN (SELECT id FROM clinlims.test)
-                </sqlCheck>
-<!-- spotless:on -->
+
+				<sqlCheck expectedResult="0">
+					SELECT COUNT(*) FROM
+					clinlims.panel_item WHERE test_id NOT IN (SELECT id
+					FROM
+					clinlims.test)
+				</sqlCheck>
+
 			</not>
 		</preConditions>
 		<comment>remove panel items that test no longer exist in db</comment>

@@ -14,8 +14,9 @@
 			</not>
 		</preConditions>
 		<comment>create data_resource table and map tables in RetroCI database</comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             CREATE TABLE clinlims.data_resource (
             "id" NUMERIC (20),
             "name" VARCHAR (20),
@@ -41,8 +42,9 @@
             "data_resource_id" NUMERIC (20),
             PRIMARY KEY ("id")
             );
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 </databaseChangeLog>

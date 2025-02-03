@@ -9,12 +9,14 @@
 	<changeSet author="moses_mutesa" id="1">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="user_lab_unit_roles" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                    SELECT COUNT(*) FROM
-                      clinlims.user_lab_unit_roles ul WHERE ul.system_user_id = (SELECT su.id FROM clinlims.system_user su WHERE su.login_name = 'admin')
-                </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM
+				clinlims.user_lab_unit_roles ul WHERE ul.system_user_id = (SELECT
+				su.id FROM
+				clinlims.system_user su WHERE su.login_name = 'admin')
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add default Lab Unit Roles to admin User </comment>
 		<insert tableName="user_lab_unit_roles" schemaName="clinlims">
@@ -59,11 +61,14 @@
 	<changeSet author="moses_mutesa" id="2">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_user_role" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                    SELECT COUNT(*) FROM system_user_role WHERE system_user_id = (SELECT id FROM system_user WHERE login_name = 'admin')
-                </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM
+				system_user_role WHERE system_user_id = (SELECT id
+				FROM system_user
+				WHERE login_name = 'admin')
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add default Global Roles to admin User </comment>
 		<insert tableName="system_user_role" schemaName="clinlims">

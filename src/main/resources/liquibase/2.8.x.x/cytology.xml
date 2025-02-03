@@ -121,9 +121,11 @@
 	</changeSet>
 	<changeSet author="mozzymutesa" id="5">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.test_section where name = 'Cytology'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.test_section where name = 'Cytology';
+			</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="localization">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -150,11 +152,12 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.system_role WHERE name = 'Cytopathologist'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Cytopathologist'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Create Cytopathologist Role and permission for pages</comment>
 		<insert tableName="system_role" schemaName="clinlims">
@@ -205,10 +208,12 @@
 
 	<changeSet author="mozzymutesa" id="7">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.dictionary_category where description = 'Cytology Specimen Adequacy - Satisfactory';
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.dictionary_category where description = 'Cytology Specimen
+				Adequacy - Satisfactory';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>adds Cytology adequacy in dictionary_category</comment>
 
@@ -297,10 +302,12 @@
 
 	<changeSet author="mozzymutesa" id="11">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.dictionary_category where name = 'cytology_epithelial_cell_abnomalit_squamous';
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.dictionary_category where name =
+				'cytology_epithelial_cell_abnomalit_squamous';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>adds Cytology Diagnosis Results in dictionary_category</comment>
 

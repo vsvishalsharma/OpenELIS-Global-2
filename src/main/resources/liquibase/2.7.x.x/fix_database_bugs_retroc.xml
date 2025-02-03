@@ -10,18 +10,18 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SamplePatientEntry' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SamplePatientEntry' limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Fix roles issues while migrating from OE9.1 to OE Global</comment>
 		<insert tableName="system_role_module" schemaName="clinlims">
@@ -41,18 +41,18 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleEntryByProject' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleEntryByProject' limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -71,19 +71,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleEntryByProject:initial'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleEntryByProject:initial'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -102,19 +102,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleEntryByProject:verify'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleEntryByProject:verify'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -133,19 +133,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleEdit'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleEdit'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -164,19 +164,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleEdit:readwrite'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleEdit:readwrite'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -195,19 +195,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleEdit:readonly'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleEdit:readonly'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -226,19 +226,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'PrintBarcode'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'PrintBarcode'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -257,19 +257,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'PatientEntryByProject'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'PatientEntryByProject'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -288,19 +288,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'PatientEntryByProject:initial'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'PatientEntryByProject:initial'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -319,19 +319,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'PatientEntryByProject:verify'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'PatientEntryByProject:verify'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -350,19 +350,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'PatientEditByProject'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'PatientEditByProject'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -381,19 +381,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'PatientEditByProject:readwrite'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'PatientEditByProject:readwrite'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -412,19 +412,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'PatientEditByProject:readonly'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'PatientEditByProject:readonly'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -443,19 +443,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleBatchEntry'
-                limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleBatchEntry'
+				limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -474,20 +474,20 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleBatchEntryOnDemand'
-                limit
-                1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleBatchEntryOnDemand'
+				limit
+				1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -506,20 +506,20 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name = 'SampleBatchEntryPrePrinted'
-                limit
-                1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name = 'SampleBatchEntryPrePrinted'
+				limit
+				1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="system_role_module" schemaName="clinlims">
 			<column name="id" valueSequenceNext="system_role_module_seq" />
@@ -538,13 +538,13 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM
-                clinlims.system_module WHERE name =
-                'ResultValidation'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name =
+				'ResultValidation'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Fix roles issues while migrating from OE9.1 to OE Global</comment>
 		<insert tableName="system_module_url" schemaName="clinlims">

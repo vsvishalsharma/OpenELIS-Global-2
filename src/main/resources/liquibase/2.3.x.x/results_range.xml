@@ -9,11 +9,11 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.system_module_url WHERE url_path = '/RangeResults'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path = '/RangeResults'
+			</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module">
 			<column name="id" valueSequenceNext="system_module_seq" />
@@ -52,15 +52,16 @@
 
 	<changeSet author="csteele" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.menu
-                where element_id = 'menu_results_range';
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from clinlims.menu
+				where element_id = 'menu_results_range';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Insert in Results by search by accession range</comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             INSERT INTO clinlims.menu(id, parent_id, presentation_order, element_id,
             action_url, click_action,
             display_key, tool_tip_key, new_window, is_active)
@@ -69,8 +70,9 @@
             element_id='menu_results_search'),3,'menu_results_range','/RangeResults.do',default,'menu.results.range','tooltip.results.range',default,default);
 
             UPDATE clinlims.menu SET presentation_order = 4 WHERE element_id = 'menu_results_status';
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 

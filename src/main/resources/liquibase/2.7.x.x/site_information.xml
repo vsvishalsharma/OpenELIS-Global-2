@@ -6,9 +6,10 @@
 	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.site_information WHERE name = 'validateAccessionNumber'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.site_information WHERE name = 'validateAccessionNumber'</sqlCheck>
+
 		</preConditions>
 		<comment>create validate accession number row in site information</comment>
 		<insert schemaName="clinlims" tableName="site_information">
@@ -31,9 +32,10 @@
 	</changeSet>
 	<changeSet author="cliff" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.site_information WHERE name = 'customCriticalMessage'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.site_information WHERE name = 'customCriticalMessage'</sqlCheck>
+
 		</preConditions>
 		<comment>create a custom critical message in site information</comment>
 		<insert schemaName="clinlims" tableName="site_information">

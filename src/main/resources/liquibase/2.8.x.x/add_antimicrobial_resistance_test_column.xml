@@ -21,10 +21,12 @@
 
 	<changeSet author="rossumg" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0"> SELECT COUNT(*) FROM clinlims.menu WHERE element_id =
-                'menu_reports_whonet_export' </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0"> SELECT COUNT(*) FROM clinlims.menu
+				WHERE element_id =
+				'menu_reports_whonet_export'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for whonet export</comment>
 		<insert tableName="menu" schemaName="clinlims">

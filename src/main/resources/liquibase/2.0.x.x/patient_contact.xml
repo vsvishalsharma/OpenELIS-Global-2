@@ -8,9 +8,10 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.reference_tables WHERE name = 'PATIENT_CONTACT'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.reference_tables WHERE name = 'PATIENT_CONTACT'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="reference_tables">
 			<column name="id" valueSequenceNext="reference_tables_seq" />

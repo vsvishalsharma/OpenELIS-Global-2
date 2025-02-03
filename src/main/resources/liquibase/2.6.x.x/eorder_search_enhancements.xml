@@ -7,8 +7,9 @@
 
 	<changeSet author="csteele" id="1">
 		<comment>create indices on older tables</comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
         CREATE INDEX IF NOT EXISTS e_order_external_id_idx on clinlims.electronic_order (
             external_id
         );
@@ -30,8 +31,9 @@
         CREATE INDEX IF NOT EXISTS patient_identity_patient_id_idx on clinlims.patient_identity (
             patient_id
         );
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 
 	</changeSet>
 

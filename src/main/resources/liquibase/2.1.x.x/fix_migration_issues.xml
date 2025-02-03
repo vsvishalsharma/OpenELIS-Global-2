@@ -10,23 +10,27 @@
 		<comment>Update next value for observation_history_type_seq after
 			database migration
 		</comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             SELECT setval('clinlims.observation_history_type_seq', CAST
             ((SELECT coalesce(MAX(id),0) FROM clinlims.observation_history_type)
             AS BIGINT) + 1);
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV Developer Group" id="202303245"
 		context="CDIRetroCI">
 		<comment>Update localisation english label </comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             update clinlims.localization set english = 'Serum' where english
             = 'Sérum';
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV Developer Group" id="202303246"
 		context="CDIRetroCI">
@@ -35,14 +39,16 @@
 				schemaName="clinlims" />
 		</preConditions>
 		<comment>Update localisation english label </comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             alter table clinlims.system_role drop constraint
             role_parent_role_fk,add constraint role_parent_role_fk foreign key
             (grouping_parent) references clinlims.system_role (id) MATCH SIMPLE
             ON UPDATE NO ACTION ON DELETE CASCADE;
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 
 </databaseChangeLog>

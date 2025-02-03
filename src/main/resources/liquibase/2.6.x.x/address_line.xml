@@ -11,9 +11,10 @@
 	<changeSet author="cliff" id="1">
 		<validCheckSum>8:f0a5a2d50b1a1db52b1ee22e9165294a</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.site_information WHERE name = 'Address line 1 label'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.site_information WHERE name = 'Address line 1 label'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="site_information">
 			<column name="id" valueSequenceNext="site_information_seq" />

@@ -7,11 +7,13 @@
 
 	<changeSet author="csteele" id="1">
 		<comment>remove all .do suffixes</comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
         UPDATE clinlims.menu SET action_url = REPLACE(action_url, '.do', '');
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 
 	</changeSet>
 

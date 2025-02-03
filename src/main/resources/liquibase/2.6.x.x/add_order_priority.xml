@@ -37,9 +37,10 @@
 	<changeSet author="moses_mutesa" id="3">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_workplan_priority'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_workplan_priority'</sqlCheck>
+
 		</preConditions>
 		<comment>add Option 'By Priority' to the WorkPlan menu</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -62,11 +63,16 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role_module"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT count(*) FROM clinlims.system_module_url smu WHERE smu.system_module_id = (SELECT sm.id FROM clinlims.system_module sm WHERE sm.name ='Workplan') AND smu.url_path = '/WorkPlanByPriority'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT count(*) FROM
+				clinlims.system_module_url smu WHERE
+				smu.system_module_id = (SELECT
+				sm.id FROM clinlims.system_module sm
+				WHERE sm.name ='Workplan') AND
+				smu.url_path = '/WorkPlanByPriority'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update Results Role to have Acces to WorkPlan By Priority Tab </comment>
 		<insert tableName="system_module_url" schemaName="clinlims">
@@ -78,16 +84,21 @@
 	</changeSet>
 	<changeSet author="moses_mutesa" id="5">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_workplan_priority'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_workplan_priority' AND action_url = '/WorkPlanByPriority?type=priority'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT count(*) FROM clinlims.menu
+				WHERE element_id =
+				'menu_workplan_priority'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="0">
+				SELECT count(*) FROM clinlims.menu
+				WHERE element_id =
+				'menu_workplan_priority' AND action_url =
+				'/WorkPlanByPriority?type=priority'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update correct WorkPlanByPriority action url</comment>
 		<update tableName="menu" schemaName="clinlims">

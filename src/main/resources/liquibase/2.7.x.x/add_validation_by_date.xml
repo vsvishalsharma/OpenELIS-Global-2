@@ -8,9 +8,10 @@
 	<changeSet author="moses_mutesa" id="1">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_resultvalidation_date'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_resultvalidation_date'</sqlCheck>
+
 		</preConditions>
 		<comment>Add Validation Search By Date to the Validation Tab menu</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -28,11 +29,12 @@
 	</changeSet>
 	<changeSet author="moses_mutesa" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                                clinlims.system_module_url WHERE url_path = '/ResultValidationByTestDate'
-                        </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path =
+				'/ResultValidationByTestDate'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add ResultValidationByTestDate module url to the
 			ResultsValidationGeneral module</comment>

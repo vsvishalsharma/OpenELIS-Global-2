@@ -8,9 +8,10 @@
 	<changeSet author="moses_mutesa" id="1">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_reports_aggregate_statistics'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_reports_aggregate_statistics'</sqlCheck>
+
 		</preConditions>
 		<comment>Add Statistics report to the Aggregate Reports menu</comment>
 		<insert tableName="menu" schemaName="clinlims">

@@ -12,11 +12,12 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.system_role WHERE name = 'Pathologist'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Pathologist'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Create Pathologist Role and permission for pages</comment>
 		<insert tableName="system_role" schemaName="clinlims">
@@ -202,10 +203,12 @@
 	<changeSet author="csteele" id="6">
 		<validCheckSum>8:22d5e9de87e5470c6339d61a9d3dbbb2</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.dictionary_category where description = 'Pathology - Techniques';
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.dictionary_category where description = 'Pathology -
+				Techniques';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>adds in dictionary_type</comment>
 
@@ -236,10 +239,11 @@
 	<changeSet author="csteele" id="6.1">
 		<validCheckSum>8:dcab853f5da450cfcf7bbf2d73b32e61</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.dictionary where dict_entry = 'Haematoxylin and Eosin';
-        </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.dictionary where dict_entry = 'Haematoxylin and Eosin';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>adds in dictionary</comment>
 		<insert tableName="dictionary" schemaName="clinlims">
@@ -537,9 +541,11 @@
 	<changeSet author="csteele" id="12">
 		<validCheckSum>8:6ea7ba511bcc261dc818d7fa2a2e57b8</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.test_section where name = 'Pathology'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.test_section where name = 'Pathology';
+			</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="localization">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -565,9 +571,11 @@
 	<changeSet author="csteele" id="13">
 		<validCheckSum>8:0f7785e668a69e7676ec4c50ec2c7f91</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.program where name = 'Routine Testing'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.program where name = 'Routine Testing';
+			</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="program">
 			<column name="id" valueSequenceNext="program_seq" />
@@ -639,9 +647,11 @@
 	<changeSet author="csteele" id="16">
 		<validCheckSum>8:0f174323c09cd2b45a5fc041d18f9c1f</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.test where description = 'Histopathology examination'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from clinlims.test
+				where description = 'Histopathology examination';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add pathology test info</comment>
 		<insert schemaName="clinlims" tableName="localization">
@@ -679,9 +689,12 @@
 	<changeSet author="csteele" id="16.1">
 		<validCheckSum>8:0f174323c09cd2b45a5fc041d18f9c1f</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.type_of_sample where description = 'Histopathology specimen'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.type_of_sample where description = 'Histopathology
+				specimen';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add pathology test info</comment>
 		<insert schemaName="clinlims" tableName="localization">

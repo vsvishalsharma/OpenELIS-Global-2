@@ -11,9 +11,11 @@
 	<changeSet author="cliff" id="1">
 		<validCheckSum>8:f41594bce075c4f423f54cf8b0c67d83</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.site_information WHERE name = 'Geographic Unit 1 (EG: Region ) Label'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.site_information WHERE name = 'Geographic Unit 1 (EG:
+				Region ) Label'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="site_information">
 			<column name="id" valueSequenceNext="site_information_seq" />
@@ -53,9 +55,10 @@
 	<changeSet author="cliff" id="2">
 		<validCheckSum>8:d0eed534f8421378388b6c61b7325708</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.site_information WHERE name = 'restrictFreeTextMethodEntry'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.site_information WHERE name = 'restrictFreeTextMethodEntry'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="site_information">
 			<column name="id" valueSequenceNext="site_information_seq" />

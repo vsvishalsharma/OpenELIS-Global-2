@@ -10,9 +10,10 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.dictionary_category WHERE name = 'specimen nature'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary_category WHERE name = 'specimen nature'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="dictionary_category">
 			<column name="id" valueSequenceNext="dictionary_category_seq" />
@@ -42,9 +43,10 @@
 	</changeSet>
 	<changeSet author="csteele" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.dictionary WHERE dict_entry = 'Ante mortum'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.dictionary WHERE dict_entry = 'Ante mortum'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="dictionary">
 			<column name="id" valueSequenceNext="dictionary_seq" />

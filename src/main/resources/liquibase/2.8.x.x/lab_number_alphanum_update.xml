@@ -8,9 +8,11 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.site_information where name = 'alphanumAccessionPrefix'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.site_information where name = 'alphanumAccessionPrefix';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add alphanum lab number info</comment>
 		<insert schemaName="clinlims"
@@ -54,9 +56,12 @@
 	</changeSet>
 	<changeSet author="csteele" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">select count(*) from clinlims.site_information where name = 'acessionFormat' AND value = 'SiteYearNum'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">select count(*) from
+				clinlims.site_information where name = 'acessionFormat' AND value =
+				'SiteYearNum';
+			</sqlCheck>
+
 		</preConditions>
 		<update schemaName="clinlims" tableName="site_information">
 			<column name="description"

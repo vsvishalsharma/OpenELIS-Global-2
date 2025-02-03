@@ -8,10 +8,12 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0"> SELECT COUNT(*) FROM clinlims.reference_tables WHERE name
-                = 'PATHOLOGY_SAMPLE' </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0"> SELECT COUNT(*) FROM
+				clinlims.reference_tables WHERE name
+				= 'PATHOLOGY_SAMPLE'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Create program sample reference tables entries</comment>
 		<insert tableName="reference_tables" schemaName="clinlims">

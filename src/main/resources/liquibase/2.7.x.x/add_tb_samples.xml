@@ -9,11 +9,11 @@
 	<changeSet author="CIV developer Group" id="202309141"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Sputum'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Sputum'
+			</sqlCheck>
+
 		</preConditions>
 		<update tableName="localization" schemaName="clinlims">
 			<column name="french" value="Crachat"></column>
@@ -24,11 +24,11 @@
 	<changeSet author="CIV developer Group" id="202309142"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Crachat'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Crachat'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -41,11 +41,11 @@
 	<changeSet author="CIV developer Group" id="202309151"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Liquide pleural'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Liquide pleural'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -58,11 +58,11 @@
 	<changeSet author="CIV developer Group" id="202309152"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'LCR'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'LCR'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -75,11 +75,11 @@
 	<changeSet author="CIV developer Group" id="202309153"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Pus ganglionnaires'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Pus ganglionnaires'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -92,11 +92,11 @@
 	<changeSet author="CIV developer Group" id="202309154"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Liquide d’ascite'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Liquide d’ascite'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -109,11 +109,11 @@
 	<changeSet author="CIV developer Group" id="202309155"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Liquide articulaire'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Liquide articulaire'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -126,11 +126,12 @@
 	<changeSet author="CIV developer Group" id="202309156"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Liquide de ponction péricardique'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Liquide de ponction
+				péricardique'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -143,11 +144,11 @@
 	<changeSet author="CIV developer Group" id="202309157"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Selles'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Selles'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -160,11 +161,11 @@
 	<changeSet author="CIV developer Group" id="202309158"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Urines'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Urines'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -177,11 +178,12 @@
 	<changeSet author="CIV developer Group" id="202309159"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Liquide d’aspiration gastrique'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Liquide d’aspiration
+				gastrique'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -194,11 +196,12 @@
 	<changeSet author="CIV developer Group" id="2023091510"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Liquide d’aspiration broncho-alvéolaire'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Liquide d’aspiration
+				broncho-alvéolaire'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -217,9 +220,11 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Sputum' OR description = 'Crachat'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Sputum' OR description
+				= 'Crachat'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -237,9 +242,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide pleural'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide pleural'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -257,9 +263,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'LCR'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'LCR'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -277,9 +284,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Pus ganglionnaires'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Pus ganglionnaires'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -297,9 +305,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide d’ascite'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide d’ascite'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -317,9 +326,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide articulaire'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide articulaire'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -337,9 +347,11 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Liquide de ponction péricardique'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Liquide de ponction
+				péricardique'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -359,9 +371,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Selles'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Selles'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -379,9 +392,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description in ('Urines','Urine')</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description in ('Urines','Urine')</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -399,9 +413,11 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description ='Liquide d’aspiration gastrique'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description ='Liquide d’aspiration
+				gastrique'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -420,9 +436,11 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description ='Liquide d’aspiration broncho-alvéolaire'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description ='Liquide d’aspiration
+				broncho-alvéolaire'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -442,11 +460,11 @@
 	<changeSet author="CIV developer Group" id="2023091522"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.localization WHERE french = 'Tuberculose'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE french = 'Tuberculose'
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -461,9 +479,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="test_section"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_section WHERE name ='TB'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_section WHERE name ='TB'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="test_section" schemaName="clinlims">
 			<column name="id" valueSequenceNext="test_section_seq" />
@@ -480,11 +499,11 @@
 	<changeSet author="CIV developer Group" id="2023091524"
 		context="ci_TB">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                clinlims.test_section WHERE name ='TB' limit 1
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.test_section WHERE name ='TB' limit 1
+			</sqlCheck>
+
 		</preConditions>
 		<insert tableName="lab_unit_role_map" schemaName="clinlims">
 			<column name="lab_unit_role_map_id"

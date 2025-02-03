@@ -10,12 +10,12 @@
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
 			<not>
-				<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                    SELECT COUNT(*) FROM
-                    clinlims.system_role
-                </sqlCheck>
-<!-- spotless:on -->
+
+				<sqlCheck expectedResult="0">
+					SELECT COUNT(*) FROM
+					clinlims.system_role
+				</sqlCheck>
+
 			</not>
 		</preConditions>
 		<comment>update existing roles and Create new ones</comment>
@@ -146,12 +146,12 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                    SELECT COUNT(*) FROM
-                    clinlims.system_role WHERE name = 'Reception'
-                </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update Recetion Role</comment>
 		<update tableName="system_role" schemaName="clinlims">
@@ -170,24 +170,25 @@
 		<preConditions onFail="CONTINUE">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                select count(*) from
-                clinlims.system_role
-                where name = 'Reception';
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                select count(*) from
-                clinlims.system_role
-                where name = 'Lab Unit Roles' limit 1;
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				select count(*) from
+				clinlims.system_role
+				where name = 'Reception';
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				select count(*) from
+				clinlims.system_role
+				where name = 'Lab Unit Roles' limit 1;
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update roles for RetroCI context </comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             insert into clinlims.system_role
             values(nextval('clinlims.system_role_seq'),'Reception','Sample entry
             and patient management.',FALSE,(select id from clinlims.system_role
@@ -202,31 +203,33 @@
             clinlims.system_role where name =
             'Global Roles') where name = 'Audit
             Trail';
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 	<changeSet author="CIV Developer Group" id="202303248">
 		<preConditions onFail="CONTINUE">
 			<tableExists tableName="system_role"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                select count(*) from
-                clinlims.system_role
-                where name = 'Reception';
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                select count(*) from
-                clinlims.system_role
-                where name = 'Lab Unit Roles' limit 1;
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				select count(*) from
+				clinlims.system_role
+				where name = 'Reception';
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				select count(*) from
+				clinlims.system_role
+				where name = 'Lab Unit Roles' limit 1;
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add role Reception if missing </comment>
-		<!-- spotless:off -->
-<sql> 
+
+		<sql>
+			<!-- spotless:off --> 
             insert into clinlims.system_role
             values(nextval('clinlims.system_role_seq'),'Reception','Sample entry
             and patient management.',FALSE,(select id from clinlims.system_role
@@ -241,7 +244,8 @@
             clinlims.system_role where name =
             'Global Roles') where name = 'Audit
             Trail';
-        </sql> 
-<!-- spotless:on -->
+        <!-- spotless:on -->
+		</sql>
+
 	</changeSet>
 </databaseChangeLog>

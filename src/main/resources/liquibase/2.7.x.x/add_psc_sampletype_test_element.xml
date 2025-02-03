@@ -10,9 +10,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="localization"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE description = 'PSC'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.localization WHERE description = 'PSC'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="localization" schemaName="clinlims">
 			<column name="id" valueSequenceNext="localization_seq" />
@@ -27,9 +28,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="type_of_sample"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'PSC'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'PSC'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="type_of_sample" schemaName="clinlims">
 			<column name="id" valueSequenceNext="type_of_sample_seq" />
@@ -47,9 +49,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="sampletype_test"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'PSC'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'PSC'</sqlCheck>
+
 		</preConditions>
 		<insert tableName="sampletype_test" schemaName="clinlims">
 			<column name="id" valueSequenceNext="sample_type_test_seq" />

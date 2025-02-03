@@ -8,9 +8,10 @@
 	<changeSet author="CIV developer Group" id="202208291">
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="menu" schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_study_sample_eorder'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_study_sample_eorder'</sqlCheck>
+
 		</preConditions>
 		<comment>Add menu entry for study electronic orders</comment>
 		<insert tableName="menu" schemaName="clinlims">
@@ -31,9 +32,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_module"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.system_module WHERE name = 'StudyElectronicOrderView'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module WHERE name = 'StudyElectronicOrderView'</sqlCheck>
+
 		</preConditions>
 		<comment>Add a module for study electronic orders</comment>
 		<insert tableName="system_module" schemaName="clinlims">
@@ -50,16 +52,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role_module"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.system_role WHERE name = 'Reception'
-            </sqlCheck>
-<!-- spotless:on -->
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM clinlims.system_module WHERE name = 'StudyElectronicOrderView'
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_role WHERE name = 'Reception'
+			</sqlCheck>
+
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM
+				clinlims.system_module WHERE name =
+				'StudyElectronicOrderView'
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add roles for Study Electronic Order </comment>
 		<insert tableName="system_module_url" schemaName="clinlims">

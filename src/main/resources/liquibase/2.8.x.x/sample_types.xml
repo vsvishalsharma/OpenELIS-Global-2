@@ -8,9 +8,11 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.type_of_sample where description = 'Tissue antemortem'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.type_of_sample where description = 'Tissue antemortem';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add pathology test info</comment>
 		<insert schemaName="clinlims" tableName="localization">
@@ -68,9 +70,11 @@
 	</changeSet>
 	<changeSet author="csteele" id="1.1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="2">select count(*) from clinlims.type_of_sample where local_abbrev = 'TAM'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="2">select count(*) from
+				clinlims.type_of_sample where local_abbrev = 'TAM';
+			</sqlCheck>
+
 		</preConditions>
 		<update schemaName="clinlims" tableName="type_of_sample">
 			<column name="lastupdated" valueDate="now()" />
@@ -81,15 +85,20 @@
 
 	<changeSet author="csteele" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                select count(*)
-                from clinlims.sampletype_test
-                where sample_type_id = ( select id from clinlims.type_of_sample where description = 'Tissue antemortem' LIMIT 1)
-                AND test_id = ( select id from clinlims.test where description = 'Anti-Pan Keratin' LIMIT 1)
-                ;
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				select count(*)
+				from
+				clinlims.sampletype_test
+				where sample_type_id = ( select id from
+				clinlims.type_of_sample where
+				description = 'Tissue antemortem' LIMIT
+				1)
+				AND test_id = ( select id from clinlims.test where description =
+				'Anti-Pan Keratin' LIMIT 1)
+				;
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add immunohistochemistry tests to antemortem</comment>
 		<insert schemaName="clinlims" tableName="sampletype_test">
@@ -552,15 +561,21 @@
 
 	<changeSet author="csteele" id="4">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                select count(*)
-                from clinlims.sampletype_test
-                where sample_type_id = ( select id from clinlims.type_of_sample where description = 'Tissue post mortem' LIMIT 1)
-                AND test_id = ( select id from clinlims.test where description = 'Anti-Pan Keratin' LIMIT 1)
-                ;
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				select count(*)
+				from
+				clinlims.sampletype_test
+				where sample_type_id = ( select id from
+				clinlims.type_of_sample where
+				description = 'Tissue post mortem'
+				LIMIT 1)
+				AND test_id = ( select id from clinlims.test where
+				description =
+				'Anti-Pan Keratin' LIMIT 1)
+				;
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add immunohistochemistry tests to post mortem</comment>
 		<insert schemaName="clinlims" tableName="sampletype_test">

@@ -43,9 +43,11 @@
 
 	<changeSet author="mozzymutesa" id="2">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.test_section where name = 'Immunohistochemistry'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.test_section where name = 'Immunohistochemistry';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>Add Immunohistochemistry test section</comment>
 		<insert schemaName="clinlims" tableName="localization">
@@ -127,9 +129,12 @@
 	<changeSet author="csteele" id="5">
 		<validCheckSum>8:08ff7e2e5eb4c04bd2b7f5bb869f5b14</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.type_of_sample where description = 'Immunohistochemistry specimen'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.type_of_sample where description = 'Immunohistochemistry
+				specimen';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add immunohistochemistry sample type info</comment>
 		<insert schemaName="clinlims" tableName="localization">
@@ -157,11 +162,12 @@
 	<changeSet author="csteele" id="6">
 		<validCheckSum>8:0fb458f9d4381982c866b642617489ba</validCheckSum>
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                select count(*) from clinlims.test where description = 'Anti-Pan Keratin';
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				select count(*) from clinlims.test
+				where description = 'Anti-Pan Keratin';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add immunohistochemistry test and sample type info</comment>
 		<insert schemaName="clinlims" tableName="localization">
@@ -3022,10 +3028,12 @@
 	</changeSet>
 	<changeSet author="mozzymutesa" id="7">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.dictionary_category where name = 'ihc_breast_cancer_report_intensity';
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.dictionary_category where name =
+				'ihc_breast_cancer_report_intensity';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>adds Breast Cancer Hormone Receptor Status Report Parameter
 			Lists in dictionary_category</comment>
@@ -3059,10 +3067,11 @@
 	</changeSet>
 	<changeSet author="mozzymutesa" id="8">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.dictionary where dict_entry = 'Strong';
-        </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.dictionary where dict_entry = 'Strong';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add default IHC Intensity Options in Dictionary</comment>
 		<insert tableName="dictionary" schemaName="clinlims">

@@ -10,9 +10,10 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.site_information WHERE name = 'labDirectorSignature'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.site_information WHERE name = 'labDirectorSignature'</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="site_information">
 			<column name="id" valueSequenceNext="site_information_seq" />

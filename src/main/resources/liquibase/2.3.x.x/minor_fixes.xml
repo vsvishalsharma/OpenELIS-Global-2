@@ -9,9 +9,10 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.site_information WHERE name = 'non-conformity signature'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.site_information WHERE name = 'non-conformity signature'</sqlCheck>
+
 		</preConditions>
 		<delete schemaName="clinlims" tableName="site_information">
 			<where>name='non-conformity signature'</where>
@@ -22,9 +23,10 @@
 	<changeSet author="csteele" id="2" runAlways="true">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.login_user WHERE last_updated is null</sqlCheck>
-<!-- spotless:on -->
+
+				<sqlCheck expectedResult="0">SELECT count(*) FROM
+					clinlims.login_user WHERE last_updated is null</sqlCheck>
+
 			</not>
 		</preConditions>
 		<update schemaName="clinlims" tableName="login_user">

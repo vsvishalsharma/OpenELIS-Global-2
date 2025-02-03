@@ -7,11 +7,13 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="1">
-                SELECT COUNT(*) FROM localization WHERE french = 'Determine' AND english = 'Murex' ;
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">
+				SELECT COUNT(*) FROM localization
+				WHERE french = 'Determine' AND english =
+				'Murex' ;
+			</sqlCheck>
+
 		</preConditions>
 		<comment>rename Murex/Determine to not collide with other Murex test
 			in CSV export</comment>

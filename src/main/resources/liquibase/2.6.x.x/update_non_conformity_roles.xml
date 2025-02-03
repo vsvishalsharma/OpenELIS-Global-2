@@ -8,11 +8,19 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="system_role_module"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM clinlims.system_role_module srm WHERE srm.system_role_id = (select sr.id  FROM clinlims.system_role sr WHERE sr.name = 'Validation') AND srm.system_module_id = (SELECT sm.id FROM clinlims.system_module sm WHERE sm.name = 'NonConformity')
-            </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM
+				clinlims.system_role_module srm WHERE
+				srm.system_role_id = (select
+				sr.id FROM clinlims.system_role sr
+				WHERE sr.name = 'Validation') AND
+				srm.system_module_id = (SELECT
+				sm.id FROM clinlims.system_module sm
+				WHERE sm.name =
+				'NonConformity')
+			</sqlCheck>
+
 		</preConditions>
 		<comment>update Validation, Results and Reception Roles to have Acces
 			to Non Conformity Tab

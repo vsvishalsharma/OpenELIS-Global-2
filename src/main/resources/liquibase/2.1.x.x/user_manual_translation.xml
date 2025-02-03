@@ -10,9 +10,11 @@
 
 	<changeSet author="csteele" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.menu WHERE element_id = 'menu_help_user_manual' AND action_url = '/docs/UserManual'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.menu
+				WHERE element_id = 'menu_help_user_manual' AND action_url =
+				'/docs/UserManual'</sqlCheck>
+
 		</preConditions>
 		<update schemaName="clinlims" tableName="menu">
 			<column name="action_url" value="/docs/UserManual" />

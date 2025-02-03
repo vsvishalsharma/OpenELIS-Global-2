@@ -7,11 +7,12 @@
 
 	<changeSet author="rossumg" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">SELECT count(*) FROM
-                                clinlims.system_module_url WHERE url_path = '/AccessionValidationRange'
-                        </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">SELECT count(*) FROM
+				clinlims.system_module_url WHERE url_path =
+				'/AccessionValidationRange'
+			</sqlCheck>
+
 		</preConditions>
 		<insert schemaName="clinlims" tableName="system_module_url">
 			<column name="id" valueSequenceNext="system_module_url_seq" />

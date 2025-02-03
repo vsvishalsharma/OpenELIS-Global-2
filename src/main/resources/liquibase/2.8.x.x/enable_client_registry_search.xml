@@ -8,9 +8,11 @@
 
 	<changeSet author="mherman22" id="1">
 		<preConditions onFail="MARK_RAN">
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="0">select count(*) from clinlims.site_information where name = 'enableClientRegistry'; </sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="0">select count(*) from
+				clinlims.site_information where name = 'enableClientRegistry';
+			</sqlCheck>
+
 		</preConditions>
 		<comment>add Config to enable client registry search</comment>
 		<insert schemaName="clinlims" tableName="site_information">

@@ -10,9 +10,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="sampletype_test"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Dry Tube'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'Dry Tube'</sqlCheck>
+
 		</preConditions>
 		<comment>Add elements to map retroci tests to sampletype 'Dry Tube'</comment>
 		<insert tableName="sampletype_test" schemaName="clinlims">
@@ -126,9 +127,10 @@
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="sampletype_test"
 				schemaName="clinlims" />
-			<!-- spotless:off --> 
-<sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'EDTA Tube'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="1">SELECT count(*) FROM
+				clinlims.type_of_sample WHERE description = 'EDTA Tube'</sqlCheck>
+
 		</preConditions>
 		<comment>Add elements to map retroci tests to sampletype 'EDTA Tube'</comment>
 		<insert tableName="sampletype_test" schemaName="clinlims">

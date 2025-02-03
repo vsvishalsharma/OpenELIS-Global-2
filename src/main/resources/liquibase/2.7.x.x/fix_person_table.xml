@@ -7,9 +7,11 @@
 	<changeSet author="mozzymutesa" id="1">
 		<preConditions onFail="MARK_RAN">
 			<columnExists tableName="person" columnName="state" />
-			<!-- spotless:off --> 
-<sqlCheck expectedResult="2">SELECT character_maximum_length FROM information_schema.columns WHERE table_name='person' AND column_name='state'</sqlCheck>
-<!-- spotless:on -->
+
+			<sqlCheck expectedResult="2">SELECT character_maximum_length
+				FROM information_schema.columns WHERE table_name='person' AND
+				column_name='state'</sqlCheck>
+
 		</preConditions>
 		<comment>Increase size of the person.state column</comment>
 		<modifyDataType tableName="person" columnName="state"
