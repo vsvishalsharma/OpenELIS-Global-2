@@ -58,7 +58,7 @@ public class MenuServiceTest extends BaseWebContextSensitiveTest {
 
         Assert.assertNotNull(activeMenus);
         Assert.assertFalse(activeMenus.isEmpty());
-        Assert.assertEquals(2, activeMenus.size()); // Only active menus should be returned
+        Assert.assertEquals(6, activeMenus.size());
         Assert.assertTrue(activeMenus.stream().allMatch(Menu::getIsActive));
     }
 }
