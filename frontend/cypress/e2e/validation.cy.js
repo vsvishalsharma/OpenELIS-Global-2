@@ -13,6 +13,7 @@ before("login", () => {
   loginPage.visit();
 });
 
+
 const navigateToValidationPage = (validationType) => {
   homePage = loginPage.goToHomePage();
   validation = homePage[`goToValidationBy${validationType}`]();

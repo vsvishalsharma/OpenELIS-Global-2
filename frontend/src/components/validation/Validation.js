@@ -212,7 +212,7 @@ const Validation = (props) => {
               hasIconOnly
               renderIcon={Copy}
             />
-            <div className="sampleInfo">
+            <div className="sampleInfo" data-testid='LabNo'>
               <br></br>
               {formatLabNum
                 ? convertAlphaNumLabNumForDisplay(row.accessionNumber)
@@ -234,7 +234,7 @@ const Validation = (props) => {
         );
       case "testName":
         return (
-          <div className="sampleInfo">
+          <div className="sampleInfo" data-testid='sampleInfo'>
             <br></br>
             {testName}
             <br></br>
@@ -470,6 +470,7 @@ const Validation = (props) => {
               onClick={() => handleSave(values)}
               id="submit"
               style={{ marginTop: "16px" }}
+              data-testis='Save-btn'
               disabled={isSubmitting}
             >
               <FormattedMessage id="label.button.save" />
