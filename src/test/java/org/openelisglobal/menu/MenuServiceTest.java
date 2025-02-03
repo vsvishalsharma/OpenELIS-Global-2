@@ -1,7 +1,6 @@
 package org.openelisglobal.menu;
 
 import java.util.List;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,16 +11,13 @@ import org.openelisglobal.menu.valueholder.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MenuServiceTest extends BaseWebContextSensitiveTest {
+
     @Autowired
     private MenuService menuService;
 
     @Before
     public void init() throws Exception {
         executeDataSetWithStateManagement("testdata/menu.xml");
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test
