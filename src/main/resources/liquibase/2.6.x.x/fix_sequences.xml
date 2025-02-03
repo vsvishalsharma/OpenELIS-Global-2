@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet author="csteele" id="1">
-        <comment>Set all sequences to the max value that their tables are currently at</comment>
-        <sql>
+	<changeSet author="csteele" id="1">
+		<comment>Set all sequences to the max value that their tables are
+			currently at</comment>
+		<!-- spotless:off -->
+<sql> 
         SELECT setval('clinlims.action_seq', CAST ((SELECT coalesce(MAX(id),0) FROM clinlims.action) AS BIGINT) + 1);
         SELECT setval('clinlims.address_part_seq', CAST ((SELECT coalesce(MAX(id),0) FROM clinlims.address_part) AS BIGINT) + 1);
         SELECT setval('clinlims.analysis_notification_config_seq', CAST ((SELECT coalesce(MAX(id),0) FROM clinlims.analysis_notification_config) AS BIGINT) + 1);
@@ -134,8 +136,9 @@
         SELECT setval('clinlims.unit_of_measure_seq', CAST ((SELECT coalesce(MAX(id),0) FROM clinlims.unit_of_measure) AS BIGINT) + 1);
         SELECT setval('clinlims.external_connection_authentication_data_seq', CAST ((SELECT coalesce(MAX(a.id),0) FROM (SELECT id FROM clinlims.basic_authentication_data UNION SELECT id FROM clinlims.certificate_authentication_data) AS a) AS BIGINT) + 1);
         SELECT setval('clinlims.system_user_module_seq', CAST ((SELECT coalesce(MAX(a.id),0) FROM (SELECT id FROM clinlims.system_user_module UNION SELECT id FROM clinlims.system_role_module) AS a) AS BIGINT) + 1);
-        </sql>
+        </sql> 
+<!-- spotless:on -->
 
-    </changeSet>
+	</changeSet>
 
 </databaseChangeLog>

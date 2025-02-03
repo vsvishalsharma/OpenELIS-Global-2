@@ -158,7 +158,7 @@ const AddOrder = (props) => {
     });
   };
 
-  function  handleOtherLocationCode(e) {
+  function handleOtherLocationCode(e) {
     setOrderFormValues({
       ...orderFormValues,
       sampleOrderItems: {
