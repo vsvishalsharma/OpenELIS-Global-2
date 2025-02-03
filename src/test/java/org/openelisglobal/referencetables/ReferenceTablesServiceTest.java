@@ -71,14 +71,16 @@ public class ReferenceTablesServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void getAllReferenceTables_shouldReturnAllTables() throws Exception {
+        int expectedCount = referenceTablesService.getTotalReferenceTableCount();
         List<ReferenceTables> allTables = referenceTablesService.getAllReferenceTables();
-        assertTrue(allTables.size() >= 6);
+        assertEquals(expectedCount, allTables.size());
     }
 
     @Test
     public void getTotalReferenceTableCount_shouldReturnCorrectCount() throws Exception {
+        int expectedCount = 8;
         int count = referenceTablesService.getTotalReferenceTableCount();
-        assertTrue(count >= 8);
+        assertEquals(expectedCount, count);
     }
 
     @Test
