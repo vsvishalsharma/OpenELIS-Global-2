@@ -16,27 +16,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class ImportController {
 
     private enum ResourceType {
-        ORGANIZATION,
-        PROVIDER
+        ORGANIZATION, PROVIDER
     }
 
-    private void importDataFromFhir(ResourceType resourceType) throws FhirLocalPersistingException, FhirGeneralException, IOException {
+    private void importDataFromFhir(ResourceType resourceType)
+            throws FhirLocalPersistingException, FhirGeneralException, IOException {
         ImportService importService;
         switch (resourceType) {
-            case ORGANIZATION:
-                importService = SpringContext.getBean(OrganizationImportService.class);
-                break;
-            case PROVIDER:
-                importService = SpringContext.getBean(ProviderImportService.class);
-                break;
-            default:
-                // Handle invalid resource type
-                throw new UnsupportedOperationException("Unsupported resource type");
+        case ORGANIZATION:
+            importService = SpringContext.getBean(OrganizationImportService.class);
+            break;
+        case PROVIDER:
+            importService = SpringContext.getBean(ProviderImportService.class);
+            break;
+        default:
+            // Handle invalid resource type
+            throw new UnsupportedOperationException("Unsupported resource type");
         }
 
         importService.importList();
     }
-
 
     @GetMapping(value = "/all")
     public void importAll() throws FhirLocalPersistingException, FhirGeneralException, IOException {
