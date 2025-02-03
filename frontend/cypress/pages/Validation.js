@@ -20,7 +20,7 @@ class Validation {
   saveResults(note) {
     cy.get("[data-testid='Checkbox']").click();
     cy.get("#resultList0\\.note").type(note);
-    cy.get("[data-testis='Save-btn']").click();
+    cy.get("[data-testid='Save-btn']").click();
   }
 }
 
