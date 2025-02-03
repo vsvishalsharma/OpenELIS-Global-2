@@ -1,125 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
 
-	<!-- create extension if not exists "uuid-ossp"; !must be superuser -->
+    <!-- create extension if not exists "uuid-ossp"; !must be superuser -->
 
-	<changeSet author="rossumg" id="5">
-
-		<sql>
-			<!-- spotless:off --> 
+        <changeSet author="rossumg" id="5">
+                <sql>
                         update clinlims.localization set english = 'COVID-19 PCR', french = 'COVID-19 PCR' where description = 'test name' and english in ('Covid PCR', 'Covid(PCR)');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
-
-	<changeSet author="rossumg" id="10">
-
-		<sql>
-			<!-- spotless:off --> 
+        <changeSet author="rossumg" id="10">
+                <sql>
                         update localization set english = 'SARS-CoV-2 RNA by qRT-PCR', french = 'SARS-CoV-2 RNA by qRT-PCR' where description = 'test report name' and english in ( 'Covid PCR', 'Covid(PCR)');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="15">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'Respiratory Swab'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="15">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'Respiratory Swab'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'type of sample name','Respiratory Swab','Respiratory Swab', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="16">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'Fluid'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="16">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'Fluid'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'type of sample name','Fluid','Fluid', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="17">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'Sputum'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="17">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'Sputum'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'type of sample name','Sputum','Sputum', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="20">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'COVID-19 PCR'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="20">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'COVID-19 PCR'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'test name','COVID-19 PCR','COVID-19 PCR', now()),
                  (nextval('localization_seq'),'test report name','SARS-CoV-2 RNA by qRT-PCR','SARS-CoV-2 RNA by qRT-PCR', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="25">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'COVIDPCR(Respiratory Swab)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="25">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'COVIDPCR(Respiratory Swab)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable,
                 guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
@@ -128,130 +87,82 @@
             (select id from localization where description = 'test name' and english = 'COVID-19 PCR' limit 1),
             (select id from localization where description = 'test report name' and english = 'SARS-CoV-2 RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="30">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Respiratory Swab'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="30">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.type_of_sample WHERE description = 'Respiratory Swab'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.type_of_sample
             (id, description, domain, lastupdated, local_abbrev, is_active, sort_order, name_localization_id, display_key)
             VALUES (nextval('type_of_sample_seq') , 'Respiratory Swab', 'H', now(), 'Resp Swab', 't', 0 ,
             (select id from localization where english = 'Respiratory Swab' limit 1),
             'Sample.type.Swab');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="31">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Respiratory Swab'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="31">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="1">SELECT count(*) FROM
-				clinlims.type_of_sample WHERE description = 'Respiratory Swab'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
                 UPDATE clinlims.type_of_sample SET local_abbrev = 'Resp Swab' WHERE description = 'Respiratory Swab';
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="35">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Respiratory Swab)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="35">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'COVIDPCR(Respiratory
-				Swab)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Respiratory Swab' limit 1),
             (select id from test where description = 'COVIDPCR(Respiratory Swab)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="40">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Respiratory Swab)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="40">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'COVIDPCR(Respiratory
-				Swab)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'COVIDPCR(Respiratory Swab)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="45">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Respiratory Swab)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="45">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'COVIDPCR(Respiratory
-				Swab)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES (nextval('test_result_seq'),
             (select id from test where description = 'COVIDPCR(Respiratory Swab)'),
             null,null,'N',null,null,null,null,now(),null,1,'f','t','f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="50">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'COVIDPCR(Sputum)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="50">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'COVIDPCR(Sputum)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'COVIDPCR(Sputum)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'COVIDPCR',1,'COVIDPCR','t',
@@ -259,109 +170,71 @@
             (select id from localization where description = 'test name' and english = 'COVID-19 PCR' limit 1),
             (select id from localization where description = 'test report name' and english = 'SARS-CoV-2 RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="55">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Sputum'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="55">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.type_of_sample WHERE description = 'Sputum'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.type_of_sample( id, description, domain, lastupdated, local_abbrev, is_active, sort_order, name_localization_id, display_key)
             VALUES (nextval('type_of_sample_seq') , 'Sputum', 'H', now(), 'Sputum', 't', 0 ,
             (select id from localization where english = 'Sputum' limit 1),
             'Sample.type.Sputum');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="60">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Sputum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="60">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'COVIDPCR(Sputum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Sputum' limit 1),
             (select id from test where description = 'COVIDPCR(Sputum)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="65">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Sputum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="65">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'COVIDPCR(Sputum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'COVIDPCR(Sputum)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="70">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Sputum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="70">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'COVIDPCR(Sputum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES (nextval('test_result_seq'),
             (select id from test where description = 'COVIDPCR(Sputum)'),
             null,null,'N',null,null,null,null,now(),null,1,'f','t','f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="75">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'COVIDPCR(Fluid)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="75">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'COVIDPCR(Fluid)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'COVIDPCR(Fluid)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'COVIDPCR',1,'COVIDPCR','t',
@@ -369,110 +242,71 @@
             (select id from localization where description = 'test name' and english = 'COVID-19 PCR' limit 1),
             (select id from localization where description = 'test report name' and english = 'SARS-CoV-2 RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="80">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Fluid'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="80">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.type_of_sample WHERE description = 'Fluid'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.type_of_sample( id, description, domain, lastupdated, local_abbrev, is_active, sort_order, name_localization_id, display_key)
             VALUES (nextval('type_of_sample_seq') , 'Fluid', 'H', now(), 'Fluid', 't', 0 ,
             (select id from localization where english = 'Fluid' limit 1),
             'Sample.type.Fluid');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="85">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Fluid)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="85">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'COVIDPCR(Fluid)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Fluid' limit 1),
             (select id from test where description = 'COVIDPCR(Fluid)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="90">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Fluid)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="90">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'COVIDPCR(Fluid)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'COVIDPCR(Fluid)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="95">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'COVIDPCR(Fluid)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="95">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'COVIDPCR(Fluid)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES (nextval('test_result_seq'),
             (select id from test where description = 'COVIDPCR(Fluid)'),
             null,null,'N',null,null,null,null,now(),null,1,'f','t','f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="100">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.dictionary WHERE dict_entry = 'IgM DETECTED' </sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="100">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.dictionary WHERE dict_entry = 'IgM DETECTED'
-			</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.dictionary(id,is_active,dict_entry,lastupdated,local_abbrev,dictionary_category_id,display_key,sort_order,name_localization_id)
             VALUES
             (nextval('dictionary_seq'),'Y','IgM DETECTED',now(),'IgM DETECTED',
@@ -512,44 +346,30 @@
             (nextval('dictionary_seq'),'Y','Invalid',now(),'Invalid',
             (select id from dictionary_category where name = 'Haiti Lab'),
             'dictionary.result.Invalid',54430,null);
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="105">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'COVID-19 ANTIBODY IgM'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="105">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'COVID-19 ANTIBODY IgM'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'test name','COVID-19 ANTIBODY IgM','COVID-19 ANITBODY IgM', now()),
                  (nextval('localization_seq'),'test report name','IgM to SARS-CoV-2 by EIA or LFA','IgM to SARS-CoV-2 by EIA or LFA', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="110">
 
-	<changeSet author="rossumg" id="110">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'COVID-19ANTIBODYIgM(Serum)'</sqlCheck>
+                </preConditions>
 
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'COVID-19ANTIBODYIgM(Serum)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'COVID-19ANTIBODYIgM(Serum)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'COVIDPCR',1,'COVIDPCR','t',
@@ -557,92 +377,58 @@
             (select id from localization where description = 'test name' and english = 'COVID-19 ANTIBODY IgM' limit 1),
             (select id from localization where description = 'test report name' and english = 'IgM to SARS-CoV-2 by EIA or LFA' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="115">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Serum'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="115">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.type_of_sample WHERE description = 'Serum'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into type_of_sample( id, description, domain, lastupdated, local_abbrev, is_active, sort_order, name_localization_id, display_key)
             VALUES (nextval('type_of_sample_seq') , 'Serum', 'H', now(), 'Serum', 't', 0 ,
             (select id from localization where english = 'Serum' limit 1),
             'Sample.type.Serum');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="120">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgM(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="120">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'COVID-19ANTIBODYIgM(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Serum' limit 1),
             (select id from test where description = 'COVID-19ANTIBODYIgM(Serum)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="125">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgM(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="125">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'COVID-19ANTIBODYIgM(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'COVID-19ANTIBODYIgM(Serum)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="130">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgM(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="130">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'COVID-19ANTIBODYIgM(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -663,22 +449,15 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="135">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'COVID-19ANTIBODYIgM(Plasma)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="135">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'COVID-19ANTIBODYIgM(Plasma)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'COVID-19ANTIBODYIgM(Plasma)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'COVIDPCR',1,'COVIDPCR','t',
@@ -686,92 +465,58 @@
             (select id from localization where description = 'test name' and english = 'COVID-19 ANTIBODY IgM' limit 1),
             (select id from localization where description = 'test report name' and english = 'IgM to SARS-CoV-2 by EIA or LFA' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="140">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'Plasma'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="140">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.type_of_sample WHERE description = 'Plasma'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into type_of_sample( id, description, domain, lastupdated, local_abbrev, is_active, sort_order, name_localization_id, display_key )
             VALUES (nextval('type_of_sample_seq') , 'Plasma', 'H', now(), 'Plasma', 't', 0 ,
             (select id from localization where english = 'Plasma' limit 1),
             'Sample.type.Plasma');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="145">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgM(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="145">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'COVID-19ANTIBODYIgM(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Plasma' limit 1),
             (select id from test where description = 'COVID-19ANTIBODYIgM(Plasma)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="150">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgM(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="150">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'COVID-19ANTIBODYIgM(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'COVID-19ANTIBODYIgM(Plasma)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="155">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgM(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="155">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'COVID-19ANTIBODYIgM(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -790,43 +535,29 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="160">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'COVID-19 ANTIBODY IgG'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="160">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'COVID-19 ANTIBODY IgG'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'test name','COVID-19 ANTIBODY IgG','COVID-19 ANITBODY IgG', now()),
                  (nextval('localization_seq'),'test report name','IgG to SARS-CoV-2 by EIA or LFA','IgG to SARS-CoV-2 by EIA or LFA', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="165">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'COVID-19ANTIBODYIgG(Serum)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="165">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'COVID-19ANTIBODYIgG(Serum)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'COVID-19ANTIBODYIgG(Serum)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'COVIDPCR',1,'COVIDPCR','t',
@@ -834,72 +565,45 @@
             (select id from localization where description = 'test name' and english = 'COVID-19 ANTIBODY IgG' limit 1),
             (select id from localization where description = 'test report name' and english = 'IgG to SARS-CoV-2 by EIA or LFA' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="175">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgG(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="175">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'COVID-19ANTIBODYIgG(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Serum' limit 1),
             (select id from test where description = 'COVID-19ANTIBODYIgG(Serum)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="180">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgG(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="180">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'COVID-19ANTIBODYIgG(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'COVID-19ANTIBODYIgG(Serum)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="185">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgG(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="185">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'COVID-19ANTIBODYIgG(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -918,22 +622,15 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="190">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'COVID-19ANTIBODYIgG(Plasma)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="190">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'COVID-19ANTIBODYIgG(Plasma)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'COVID-19ANTIBODYIgG(Plasma)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'COVIDPCR',1,'COVIDPCR','t',
@@ -941,72 +638,45 @@
             (select id from localization where description = 'test name' and english = 'COVID-19 ANTIBODY IgG' limit 1),
             (select id from localization where description = 'test report name' and english = 'IgG to SARS-CoV-2 by EIA or LFA' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="205">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgG(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="205">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'COVID-19ANTIBODYIgG(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Plasma' limit 1),
             (select id from test where description = 'COVID-19ANTIBODYIgG(Plasma)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="210">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgG(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="210">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'COVID-19ANTIBODYIgG(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'COVID-19ANTIBODYIgG(Plasma)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="215">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'COVID-19ANTIBODYIgG(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="215">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'COVID-19ANTIBODYIgG(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -1025,43 +695,29 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="220">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'DENGUE PCR'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="220">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'DENGUE PCR'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'test name','DENGUE PCR','DENGUE PCR', now()),
                  (nextval('localization_seq'),'test report name','Dengue virus RNA by qRT-PCR','Dengue virus RNA by qRT-PCR', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="225">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'DENGUEPCR(Serum)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="225">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'DENGUEPCR(Serum)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'DENGUEPCR(Serum)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'DENGUEPCR',1,'DENGUEPCR','t',
@@ -1069,69 +725,45 @@
             (select id from localization where description = 'test name' and english = 'DENGUE PCR' limit 1),
             (select id from localization where description = 'test report name' and english = 'Dengue virus RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="235">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="235">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'DENGUEPCR(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Serum' limit 1),
             (select id from test where description = 'DENGUEPCR(Serum)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="240">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="240">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'DENGUEPCR(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'DENGUEPCR(Serum)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="245">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="245">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'DENGUEPCR(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -1160,22 +792,15 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="250">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'DENGUEPCR(Plasma)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="250">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'DENGUEPCR(Plasma)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'DENGUEPCR(Plasma)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'DENGUEPCR',1,'DENGUEPCR','t',
@@ -1183,69 +808,45 @@
             (select id from localization where description = 'test name' and english = 'DENGUE PCR' limit 1),
             (select id from localization where description = 'test report name' and english = 'Dengue virus RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="260">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="260">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'DENGUEPCR(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Plasma' limit 1),
             (select id from test where description = 'DENGUEPCR(Plasma)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="265">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="265">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'DENGUEPCR(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'DENGUEPCR(Plasma)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="270">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="270">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'DENGUEPCR(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -1274,22 +875,15 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="275">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'DENGUEPCR(DBS)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="275">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'DENGUEPCR(DBS)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'DENGUEPCR(DBS)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'DENGUEPCR',1,'DENGUEPCR','t',
@@ -1297,89 +891,58 @@
             (select id from localization where description = 'test name' and english = 'DENGUE PCR' limit 1),
             (select id from localization where description = 'test report name' and english = 'Dengue virus RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="280">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.type_of_sample WHERE description = 'DBS'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="280">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.type_of_sample WHERE description = 'DBS'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into type_of_sample( id, description, domain, lastupdated, local_abbrev, is_active, sort_order, name_localization_id, display_key )
             VALUES (nextval('type_of_sample_seq') , 'DBS', 'H', now(), 'DBS', 't', 0 ,
             (select id from localization where english = 'DBS' limit 1),
             'Sample.type.DBS');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="285">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="285">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'DENGUEPCR(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'DBS' limit 1),
             (select id from test where description = 'DENGUEPCR(DBS)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="290">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="290">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'DENGUEPCR(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'DENGUEPCR(DBS)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="295">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'DENGUEPCR(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="295">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'DENGUEPCR(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -1408,43 +971,29 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="300">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'HIV INFANT VIRAL LOAD'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="300">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'HIV INFANT VIRAL LOAD'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'test name','HIV INFANT VIRAL LOAD','HIV INFANT VIRAL LOAD', now()),
                  (nextval('localization_seq'),'test report name','HIV-1 DNA by qRT-PCR','HIV-1 DNA by qRT-PCR', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="305">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HIVINFANTVIRALLOAD(Serum)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="305">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HIVINFANTVIRALLOAD(Serum)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HIVINFANTVIRALLOAD(Serum)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HIVINFANTVIRALLOAD',1,'HIVINFANTVIRALLOAD','t',
@@ -1452,72 +1001,45 @@
             (select id from localization where description = 'test name' and english = 'HIV INFANT VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HIV-1 DNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="315">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="315">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'HIVINFANTVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Serum' limit 1),
             (select id from test where description = 'HIVINFANTVIRALLOAD(Serum)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="320">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="320">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HIVINFANTVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HIVINFANTVIRALLOAD(Serum)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="325">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="325">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HIVINFANTVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -1544,22 +1066,15 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="330">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HIVINFANTVIRALLOAD(Plasma)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="330">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HIVINFANTVIRALLOAD(Plasma)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HIVINFANTVIRALLOAD(Plasma)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HIVINFANTVIRALLOAD',1,'HIVINFANTVIRALLOAD','t',
@@ -1567,93 +1082,58 @@
             (select id from localization where description = 'test name' and english = 'HIV INFANT VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HIV INFANT VIRAL LOAD' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="csteele" id="331">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.test WHERE description = 'HIVINFANTVIRALLOAD(Plasma)' AND reporting_name_localization_id IS NULL</sqlCheck>
+                </preConditions>
 
-	<changeSet author="csteele" id="331">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HIVINFANTVIRALLOAD(Plasma)' AND
-				reporting_name_localization_id IS NULL</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             UPDATE clinlims.test
             SET reporting_name_localization_id = (select id from localization where description = 'test report name' and english = 'HIV-1 DNA by qRT-PCR' limit 1)
             WHERE description = 'HIVINFANTVIRALLOAD(Plasma)';
-                <!-- spotless:on -->
-		</sql>
-
-	</changeSet>
+                </sql>
+        </changeSet>
 
 
-	<changeSet author="rossumg" id="340">
-		<preConditions onFail="MARK_RAN">
+        <changeSet author="rossumg" id="340">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'HIVINFANTVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Plasma' limit 1),
             (select id from test where description = 'HIVINFANTVIRALLOAD(Plasma)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="345">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="345">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HIVINFANTVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HIVINFANTVIRALLOAD(Plasma)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="350">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="350">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HIVINFANTVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -1680,22 +1160,15 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="355">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HIVINFANTVIRALLOAD(DBS)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="355">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HIVINFANTVIRALLOAD(DBS)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HIVINFANTVIRALLOAD(DBS)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HIVINFANTVIRALLOAD',1,'HIVINFANTVIRALLOAD','t',
@@ -1703,92 +1176,57 @@
             (select id from localization where description = 'test name' and english = 'HIV INFANT VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HIV INFANT VIRAL LOAD' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="csteele" id="336">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="1">SELECT count(*) FROM clinlims.test WHERE description = 'HIVINFANTVIRALLOAD(DBS)' AND reporting_name_localization_id IS NULL</sqlCheck>
+                </preConditions>
 
-	<changeSet author="csteele" id="336">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="1">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HIVINFANTVIRALLOAD(DBS)' AND
-				reporting_name_localization_id IS NULL</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             UPDATE clinlims.test
             SET reporting_name_localization_id = (select id from localization where description = 'test report name' and english = 'HIV-1 DNA by qRT-PCR' limit 1)
             WHERE description = 'HIVINFANTVIRALLOAD(DBS)';
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="365">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="365">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'HIVINFANTVIRALLOAD(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'DBS' limit 1),
             (select id from test where description = 'HIVINFANTVIRALLOAD(DBS)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="370">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="370">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HIVINFANTVIRALLOAD(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HIVINFANTVIRALLOAD(DBS)'),
             4,0,'Infinity',null,'-Infinity','Infinity','-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="375">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HIVINFANTVIRALLOAD(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="375">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HIVINFANTVIRALLOAD(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
         (nextval('test_result_seq'),
@@ -1815,43 +1253,29 @@
         (select id from dictionary where dict_entry = 'Invalid' limit 1),
         null,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="380">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'HIV VIRAL LOAD'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="380">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'HIV VIRAL LOAD'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'test name','HIV VIRAL LOAD','HIV VIRAL LOAD', now()),
                  (nextval('localization_seq'),'test report name','HIV-1 RNA by qRT-PCR','HIV-1 RNA by qRT-PCR', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="385">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HIVVIRALLOAD(Serum)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="385">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HIVVIRALLOAD(Serum)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HIVVIRALLOAD(Serum)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HIVVIRALLOAD',1,'HIVVIRALLOAD','t',
@@ -1859,91 +1283,60 @@
             (select id from localization where description = 'test name' and english = 'HIV VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HIV-1 RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="395">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="395">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'HIVVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Serum' limit 1),
             (select id from test where description = 'HIVVIRALLOAD(Serum)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="400">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="400">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'HIVVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HIVVIRALLOAD(Serum)'),
             4,0,'Infinity',null,'40',10000000,'-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="405">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="405">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'HIVVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
             (nextval('test_result_seq'),
             (select id from test where description = 'HIVVIRALLOAD(Serum)'),
             null,null,'N',null,2,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="410">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HIVVIRALLOAD(Plasma)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="410">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HIVVIRALLOAD(Plasma)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HIVVIRALLOAD(Plasma)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HIVVIRALLOAD',1,'HIVVIRALLOAD','t',
@@ -1951,92 +1344,61 @@
             (select id from localization where description = 'test name' and english = 'HIV VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HIV-1 RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="420">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="420">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'HIVVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Plasma' limit 1),
             (select id from test where description = 'HIVVIRALLOAD(Plasma)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="425">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="425">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'HIVVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HIVVIRALLOAD(Plasma)'),
             4,0,'Infinity',null,'40',10000000,'-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="430">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="430">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'HIVVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
             (nextval('test_result_seq'),
             (select id from test where description = 'HIVVIRALLOAD(Plasma)'),
             null,null,'N',null,2,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
-
-	</changeSet>
+                </sql>
+        </changeSet>
 
 
-	<changeSet author="rossumg" id="435">
-		<preConditions onFail="MARK_RAN">
+        <changeSet author="rossumg" id="435">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HIVVIRALLOAD(DBS)'</sqlCheck>
+                </preConditions>
 
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HIVVIRALLOAD(DBS)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HIVVIRALLOAD(DBS)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HIVVIRALLOAD',1,'HIVVIRALLOAD','t',
@@ -2044,112 +1406,74 @@
             (select id from localization where description = 'test name' and english = 'HIV VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HIV-1 RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="445">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="445">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description = 'HIVVIRALLOAD(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'DBS' limit 1),
             (select id from test where description = 'HIVVIRALLOAD(DBS)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="450">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="450">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description = 'HIVVIRALLOAD(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HIVVIRALLOAD(DBS)'),
             4,0,'Infinity',null,'40',10000000,'-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="455">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HIVVIRALLOAD(DBS)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="455">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description = 'HIVVIRALLOAD(DBS)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
             (nextval('test_result_seq'),
             (select id from test where description = 'HIVVIRALLOAD(DBS)'),
             null,null,'N',null,2,null,null,now(),null,1,'f','t','f');
 
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="490">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'HEPATITIS C VIRAL LOAD'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="490">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'HEPATITIS C VIRAL LOAD'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'test name','HEPATITIS C VIRAL LOAD','HEPATITIS C VIRAL LOAD', now()),
                  (nextval('localization_seq'),'test report name','HCV RNA by qRT-PCR','HCV RNA by qRT-PCR', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="495">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HEPATITISCVIRALLOAD(Serum)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="495">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HEPATITISCVIRALLOAD(Serum)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HEPATITISCVIRALLOAD(Serum)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HEPATITISCVIRALLOAD',1,'HEPATITISCVIRALLOAD','t',
@@ -2157,93 +1481,59 @@
             (select id from localization where description = 'test name' and english = 'HEPATITIS C VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HCV RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="505">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISCVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="505">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'HEPATITISCVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Serum' limit 1),
             (select id from test where description = 'HEPATITISCVIRALLOAD(Serum)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="510">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISCVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="510">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HEPATITISCVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HEPATITISCVIRALLOAD(Serum)'),
             4,0,'Infinity',null,'10',10000000,'-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="515">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISCVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="515">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HEPATITISCVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
             (nextval('test_result_seq'),
             (select id from test where description = 'HEPATITISCVIRALLOAD(Serum)'),
             null,null,'N',null,2,null,null,now(),null,1,'f','t','f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="520">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HEPATITISCVIRALLOAD(Plasma)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="520">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HEPATITISCVIRALLOAD(Plasma)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HEPATITISCVIRALLOAD(Plasma)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HEPATITISCVIRALLOAD',1,'HEPATITISCVIRALLOAD','t',
@@ -2251,114 +1541,73 @@
             (select id from localization where description = 'test name' and english = 'HEPATITIS C VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HCV RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="530">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISCVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="530">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'HEPATITISCVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Plasma' limit 1),
             (select id from test where description = 'HEPATITISCVIRALLOAD(Plasma)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="535">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISCVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="535">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HEPATITISCVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HEPATITISCVIRALLOAD(Plasma)'),
             4,0,'Infinity',null,'10',10000000,'-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="540">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISCVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="540">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HEPATITISCVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
             (nextval('test_result_seq'),
             (select id from test where description = 'HEPATITISCVIRALLOAD(Plasma)'),
             null,null,'N',null,2,null,null,now(),null,1,'f','t','f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="545">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.localization WHERE english = 'HEPATITIS B VIRAL LOAD'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="545">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.localization WHERE english = 'HEPATITIS B VIRAL LOAD'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.localization(
                 id, description, english, french, lastupdated)
                 VALUES
                  (nextval('localization_seq'),'test name','HEPATITIS B VIRAL LOAD','HEPATITIS B VIRAL LOAD', now()),
                  (nextval('localization_seq'),'test report name','HBV RNA by qRT-PCR','HBV RNA by qRT-PCR', now());
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="550">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HEPATITISBVIRALLOAD(Serum)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="550">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HEPATITISBVIRALLOAD(Serum)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HEPATITISBVIRALLOAD(Serum)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HEPATITISBVIRALLOAD',1,'HEPATITISBVIRALLOAD','t',
@@ -2366,93 +1615,59 @@
             (select id from localization where description = 'test name' and english = 'HEPATITIS B VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HBV RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="560">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISBVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="560">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'HEPATITISBVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Serum' limit 1),
             (select id from test where description = 'HEPATITISBVIRALLOAD(Serum)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="565">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISBVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="565">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HEPATITISBVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HEPATITISBVIRALLOAD(Serum)'),
             4,0,'Infinity',null,'10',10000000,'-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="570">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISBVIRALLOAD(Serum)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="570">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HEPATITISBVIRALLOAD(Serum)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
             (nextval('test_result_seq'),
             (select id from test where description = 'HEPATITISBVIRALLOAD(Serum)'),
             null,null,'N',null,2,null,null,now(),null,1,'f','t','f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="575">
+        <preConditions onFail="MARK_RAN">
+                        <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test WHERE description = 'HEPATITISBVIRALLOAD(Plasma)'</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="575">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM clinlims.test
-				WHERE description = 'HEPATITISBVIRALLOAD(Plasma)'</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test(
                 id, method_id, uom_id, description, loinc, reporting_description, sticker_req_flag, is_active, active_begin, active_end, is_reportable, time_holding, time_wait, time_ta_average, time_ta_warning, time_ta_max, label_qty, lastupdated, label_id, test_trailer_id, test_section_id, scriptlet_id, test_format_id, local_code, sort_order, name, orderable, guid, name_localization_id, reporting_name_localization_id, default_test_result_id, notify_results)
             VALUES (nextval('test_seq'),null,null,'HEPATITISBVIRALLOAD(Plasma)','94500-6',null,null,'Y',null,null,'N',null,null,null,null,null,null,now(),null,null,136,null,null,'HEPATITISBVIRALLOAD',1,'HEPATITISBVIRALLOAD','t',
@@ -2460,94 +1675,59 @@
             (select id from localization where description = 'test name' and english = 'HEPATITIS B VIRAL LOAD' limit 1),
             (select id from localization where description = 'test report name' and english = 'HBV RNA by qRT-PCR' limit 1),
             null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="585">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.sampletype_test WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISBVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="585">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.sampletype_test WHERE test_id =
-				(select id from
-				clinlims.test where description =
-				'HEPATITISBVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT into clinlims.sampletype_test(id, sample_type_id, test_id, is_panel)
             VALUES (nextval('sample_type_test_seq'),
             (select id from type_of_sample where description = 'Plasma' limit 1),
             (select id from test where description = 'HEPATITISBVIRALLOAD(Plasma)'),
             'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="590">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.result_limits WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISBVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="590">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.result_limits WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HEPATITISBVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
         INSERT INTO clinlims.result_limits(id, test_id, test_result_type_id, min_age, max_age, gender, low_normal, high_normal, low_valid, high_valid, lastupdated, normal_dictionary_id, always_validate)
             VALUES (nextval('result_limits_seq'),
             (select id from test where description = 'HEPATITISBVIRALLOAD(Plasma)'),
             4,0,'Infinity',null,'10',10000000,'-Infinity','Infinity',now(),null,'f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="595">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.test_result WHERE test_id =
+                (select id from clinlims.test where description = 'HEPATITISBVIRALLOAD(Plasma)')</sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="595">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.test_result WHERE test_id =
-				(select id from clinlims.test
-				where description =
-				'HEPATITISBVIRALLOAD(Plasma)')</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
             INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
             VALUES
             (nextval('test_result_seq'),
             (select id from test where description = 'HEPATITISBVIRALLOAD(Plasma)'),
             null,null,'N',null,2,null,null,now(),null,1,'f','t','f');
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="rossumg" id="624">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">SELECT count(*) FROM clinlims.dictionary WHERE dict_entry = 'SARS-COV-2 RNA NOT DETECTED' </sqlCheck>
+                </preConditions>
 
-	<changeSet author="rossumg" id="624">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">SELECT count(*) FROM
-				clinlims.dictionary WHERE dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
-			</sqlCheck>
-
-		</preConditions>
-
-
-		<sql>
-			<!-- spotless:off --> 
+                <sql>
                 INSERT INTO clinlims.dictionary(id,is_active,dict_entry,lastupdated,local_abbrev,dictionary_category_id,display_key,sort_order,name_localization_id)
             VALUES
             (nextval('dictionary_seq'),'Y','SARS-COV-2 RNA NOT DETECTED',now(),'SARS-COV-2 RNA NOT DETECTED',
@@ -2560,638 +1740,434 @@
             (nextval('dictionary_seq'),'Y','RETEST - INCONCLUSIVE',now(),'RETEST - INCONCLUSIVE',
             (select id from dictionary_category where name = 'Haiti Lab'),
             'dictionary.result.sarscov2Inconclusive',54530,null);
-                <!-- spotless:on -->
-		</sql>
+                </sql>
+        </changeSet>
 
-	</changeSet>
+        <changeSet author="csteele" id="625">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="1">
+                SELECT count(*)
+                FROM clinlims.test_result
+                WHERE tst_rslt_type = 'N'
+                AND test_id = (select id from test where description = 'COVIDPCR(Respiratory Swab)' limit 1)
+                </sqlCheck>
+            </preConditions>
+            <sql splitStatements="true">
+                DELETE FROM clinlims.test_result
+                WHERE tst_rslt_type = 'N' AND test_id = (select id from test where description = 'COVIDPCR(Respiratory Swab)' limit 1);
 
-	<changeSet author="csteele" id="625">
-		<preConditions onFail="MARK_RAN">
+                INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
+                VALUES
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Respiratory Swab)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'SARS-COV-2 RNA NOT DETECTED' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Respiratory Swab)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'SARS-CoV-2 RNA DETECTED' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Respiratory Swab)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'RETEST - INCONCLUSIVE' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Respiratory Swab)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'Invalid' limit 1),
+                    null,null,null,now(),null,1,'f','t','f');
 
-			<sqlCheck expectedResult="1">
-				SELECT count(*)
-				FROM
-				clinlims.test_result
-				WHERE tst_rslt_type = 'N'
-				AND test_id = (select
-				id from test where description =
-				'COVIDPCR(Respiratory Swab)' limit
-				1)
-			</sqlCheck>
+                UPDATE clinlims.test t
+                SET default_test_result_id = (
+                    SELECT tr.id
+                    FROM clinlims.test_result tr
+                    WHERE CAST (tr.value as NUMERIC) in (
+                        SELECT d.id FROM clinlims.dictionary d
+                        WHERE d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
+                    )
+                    AND tr.test_id = t.id
+                )
+                WHERE description = 'COVIDPCR(Respiratory Swab)';
 
-		</preConditions>
-		<sql splitStatements="true">
-			DELETE FROM clinlims.test_result
-			WHERE
-			tst_rslt_type = 'N' AND test_id
-			= (select id from test where
-			description = 'COVIDPCR(Respiratory
-			Swab)' limit 1);
+                UPDATE clinlims.result_limits rl
+                SET normal_dictionary_id = (
+                    SELECT d.id FROM clinlims.dictionary d
+                    WHERE d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
+                )
+                WHERE rl.test_id in (
+                    SELECT id FROM clinlims.test
+                    WHERE description = 'COVIDPCR(Respiratory Swab)'
+                );
+            </sql>
+        </changeSet>
 
-			INSERT INTO
-			clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
-			VALUES
-			(nextval('test_result_seq'),
-			(select id from test where
-			description = 'COVIDPCR(Respiratory Swab)' limit
-			1),
-			null,null,'D',
-			(select id from dictionary where dict_entry = 'SARS-COV-2 RNA NOT
-			DETECTED'
-			limit 1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Respiratory Swab)' limit
-			1),
-			null,null,'D',
-			(select id from
-			dictionary where dict_entry = 'SARS-CoV-2 RNA DETECTED'
-			limit 1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Respiratory Swab)' limit
-			1),
-			null,null,'D',
-			(select id from
-			dictionary where dict_entry = 'RETEST - INCONCLUSIVE' limit
-			1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Respiratory Swab)' limit
-			1),
-			null,null,'D',
-			(select id from
-			dictionary where dict_entry = 'Invalid' limit 1),
-			null,null,null,now(),null,1,'f','t','f');
+        <changeSet author="csteele" id="630">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="1">
+                SELECT count(*)
+                FROM clinlims.test_result
+                WHERE tst_rslt_type = 'N'
+                AND test_id = (select id from test where description = 'COVIDPCR(Sputum)' limit 1)
+                </sqlCheck>
+            </preConditions>
+            <sql splitStatements="true">
+                DELETE FROM clinlims.test_result
+                WHERE tst_rslt_type = 'N' AND test_id = (select id from test where description = 'COVIDPCR(Sputum)' limit 1);
 
-			UPDATE clinlims.test t
-			SET
-			default_test_result_id = (
-			SELECT tr.id
-			FROM clinlims.test_result tr
-			WHERE CAST (tr.value as NUMERIC) in (
-			SELECT d.id FROM
-			clinlims.dictionary d
-			WHERE d.dict_entry = 'SARS-COV-2 RNA NOT
-			DETECTED'
-			)
-			AND tr.test_id = t.id
-			)
-			WHERE description =
-			'COVIDPCR(Respiratory Swab)';
+                INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
+                VALUES
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Sputum)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'SARS-COV-2 RNA NOT DETECTED' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Sputum)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'SARS-CoV-2 RNA DETECTED' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Sputum)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'RETEST - INCONCLUSIVE' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Sputum)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'Invalid' limit 1),
+                    null,null,null,now(),null,1,'f','t','f');
 
-			UPDATE clinlims.result_limits rl
-			SET
-			normal_dictionary_id = (
-			SELECT d.id FROM clinlims.dictionary d
-			WHERE
-			d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
-			)
-			WHERE rl.test_id in (
-			SELECT id FROM clinlims.test
-			WHERE description = 'COVIDPCR(Respiratory
-			Swab)'
-			);
-			<!-- spotless:on -->
-		</sql>
+                UPDATE clinlims.test t
+                SET default_test_result_id = (
+                    SELECT tr.id
+                    FROM clinlims.test_result tr
+                    WHERE CAST (tr.value as NUMERIC) in (
+                        SELECT d.id FROM clinlims.dictionary d
+                        WHERE d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
+                    )
+                    AND tr.test_id = t.id
+                )
+                WHERE description = 'COVIDPCR(Sputum)';
 
-	</changeSet>
+                UPDATE clinlims.result_limits rl
+                SET normal_dictionary_id = (
+                    SELECT d.id FROM clinlims.dictionary d
+                    WHERE d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
+                )
+                WHERE rl.test_id in (
+                    SELECT id FROM clinlims.test
+                    WHERE description = 'COVIDPCR(Sputum)'
+                );
+            </sql>
+        </changeSet>
 
-	<changeSet author="csteele" id="630">
-		<preConditions onFail="MARK_RAN">
+        <changeSet author="csteele" id="631">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="1">
+                SELECT count(*)
+                FROM clinlims.test_result
+                WHERE tst_rslt_type = 'N'
+                AND test_id = (select id from test where description = 'COVIDPCR(Fluid)' limit 1)
+                </sqlCheck>
+            </preConditions>
+            <sql splitStatements="true">
+                DELETE FROM clinlims.test_result
+                WHERE tst_rslt_type = 'N' AND test_id = (select id from test where description = 'COVIDPCR(Fluid)' limit 1);
+                INSERT INTO clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
+                VALUES
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Fluid)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'SARS-COV-2 RNA NOT DETECTED' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Fluid)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'SARS-CoV-2 RNA DETECTED' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Fluid)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'RETEST - INCONCLUSIVE' limit 1),
+                    null,null,null,now(),null,1,'f','t','f'),
+                    (nextval('test_result_seq'),
+                    (select id from test where description = 'COVIDPCR(Fluid)' limit 1),
+                    null,null,'D',
+                    (select id from dictionary where dict_entry = 'Invalid' limit 1),
+                    null,null,null,now(),null,1,'f','t','f');
 
-			<sqlCheck expectedResult="1">
-				SELECT count(*)
-				FROM
-				clinlims.test_result
-				WHERE tst_rslt_type = 'N'
-				AND test_id = (select
-				id from test where description =
-				'COVIDPCR(Sputum)' limit 1)
-			</sqlCheck>
+                UPDATE clinlims.test t
+                SET default_test_result_id = (
+                    SELECT tr.id
+                    FROM clinlims.test_result tr
+                    WHERE CAST (tr.value as NUMERIC) in (
+                        SELECT d.id FROM clinlims.dictionary d
+                        WHERE d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
+                    )
+                    AND tr.test_id = t.id
+                )
+                WHERE description = 'COVIDPCR(Fluid)';
 
-		</preConditions>
-		<sql splitStatements="true">
-			DELETE FROM clinlims.test_result
-			WHERE
-			tst_rslt_type = 'N' AND test_id
-			= (select id from test where
-			description = 'COVIDPCR(Sputum)' limit
-			1);
+                UPDATE clinlims.result_limits rl
+                SET normal_dictionary_id = (
+                    SELECT d.id FROM clinlims.dictionary d
+                    WHERE d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
+                )
+                WHERE rl.test_id in (
+                    SELECT id FROM clinlims.test
+                    WHERE description = 'COVIDPCR(Fluid)'
+                );
+            </sql>
+        </changeSet>
 
-			INSERT INTO
-			clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
-			VALUES
-			(nextval('test_result_seq'),
-			(select id from test where
-			description = 'COVIDPCR(Sputum)' limit 1),
-			null,null,'D',
-			(select id
-			from dictionary where dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
-			limit 1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Sputum)' limit 1),
-			null,null,'D',
-			(select id from dictionary
-			where dict_entry = 'SARS-CoV-2 RNA DETECTED'
-			limit 1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Sputum)' limit 1),
-			null,null,'D',
-			(select id from dictionary
-			where dict_entry = 'RETEST - INCONCLUSIVE' limit
-			1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Sputum)' limit 1),
-			null,null,'D',
-			(select id from dictionary
-			where dict_entry = 'Invalid' limit 1),
-			null,null,null,now(),null,1,'f','t','f');
+        <changeSet author="csteele" id="635">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="1">
+                SELECT count(*)
+                FROM clinlims.test t
+                WHERE description = 'COVID-19ANTIBODYIgM(Serum)'
+                AND default_test_result_id is NULL
+                </sqlCheck>
+            </preConditions>
+            <sql splitStatements="true">
+                UPDATE clinlims.test t
+                SET default_test_result_id = (
+                    SELECT tr.id
+                    FROM clinlims.test_result tr
+                    WHERE CAST (tr.value as NUMERIC) in (
+                        SELECT d.id FROM clinlims.dictionary d
+                        WHERE d.dict_entry = 'IgM NOT DETECTED'
+                    )
+                    AND tr.test_id = t.id
+                )
+                WHERE description = 'COVID-19ANTIBODYIgM(Serum)';
 
-			UPDATE clinlims.test t
-			SET
-			default_test_result_id = (
-			SELECT tr.id
-			FROM clinlims.test_result tr
-			WHERE CAST (tr.value as NUMERIC) in (
-			SELECT d.id FROM
-			clinlims.dictionary d
-			WHERE d.dict_entry = 'SARS-COV-2 RNA NOT
-			DETECTED'
-			)
-			AND tr.test_id = t.id
-			)
-			WHERE description =
-			'COVIDPCR(Sputum)';
+                UPDATE clinlims.result_limits rl
+                SET normal_dictionary_id = (
+                    SELECT d.id FROM clinlims.dictionary d
+                    WHERE d.dict_entry = 'IgM NOT DETECTED'
+                )
+                WHERE rl.test_id in (
+                SELECT id FROM clinlims.test
+                WHERE description = 'COVID-19ANTIBODYIgM(Serum)'
+                );
+            </sql>
+        </changeSet>
 
-			UPDATE clinlims.result_limits rl
-			SET
-			normal_dictionary_id = (
-			SELECT d.id FROM clinlims.dictionary d
-			WHERE
-			d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
-			)
-			WHERE rl.test_id in (
-			SELECT id FROM clinlims.test
-			WHERE description = 'COVIDPCR(Sputum)'
-			);
-			<!-- spotless:on -->
-		</sql>
+        <changeSet author="csteele" id="640">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="1">
+                SELECT count(*)
+                FROM clinlims.test t
+                WHERE description = 'COVID-19ANTIBODYIgM(Plasma)'
+                AND default_test_result_id is NULL
+                </sqlCheck>
+            </preConditions>
+            <sql splitStatements="true">
+                UPDATE clinlims.test t
+                SET default_test_result_id = (
+                    SELECT tr.id
+                    FROM clinlims.test_result tr
+                    WHERE CAST (tr.value as NUMERIC) in (
+                        SELECT d.id FROM clinlims.dictionary d
+                        WHERE d.dict_entry = 'IgM NOT DETECTED'
+                    )
+                    AND tr.test_id = t.id
+                )
+                WHERE description = 'COVID-19ANTIBODYIgM(Plasma)';
 
-	</changeSet>
+                UPDATE clinlims.result_limits rl
+                SET normal_dictionary_id = (
+                    SELECT d.id FROM clinlims.dictionary d
+                    WHERE d.dict_entry = 'IgM NOT DETECTED'
+                )
+                WHERE rl.test_id in (
+                SELECT id FROM clinlims.test
+                WHERE description = 'COVID-19ANTIBODYIgM(Plasma)'
+                );
+            </sql>
+        </changeSet>
 
-	<changeSet author="csteele" id="631">
-		<preConditions onFail="MARK_RAN">
+        <changeSet author="csteele" id="645">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="1">
+                SELECT count(*)
+                FROM clinlims.test t
+                WHERE description = 'COVID-19ANTIBODYIgG(Serum)'
+                AND default_test_result_id is NULL
+                </sqlCheck>
+            </preConditions>
+            <sql splitStatements="true">
+                UPDATE clinlims.test t
+                SET default_test_result_id = (
+                    SELECT tr.id
+                    FROM clinlims.test_result tr
+                    WHERE CAST (tr.value as NUMERIC) in (
+                        SELECT d.id FROM clinlims.dictionary d
+                        WHERE d.dict_entry = 'IgG NOT DETECTED'
+                    )
+                    AND tr.test_id = t.id
+                )
+                WHERE description = 'COVID-19ANTIBODYIgG(Serum)';
 
-			<sqlCheck expectedResult="1">
-				SELECT count(*)
-				FROM
-				clinlims.test_result
-				WHERE tst_rslt_type = 'N'
-				AND test_id = (select
-				id from test where description =
-				'COVIDPCR(Fluid)' limit 1)
-			</sqlCheck>
+                UPDATE clinlims.result_limits rl
+                SET normal_dictionary_id = (
+                    SELECT d.id FROM clinlims.dictionary d
+                    WHERE d.dict_entry = 'IgG NOT DETECTED'
+                )
+                WHERE rl.test_id in (
+                SELECT id FROM clinlims.test
+                WHERE description = 'COVID-19ANTIBODYIgG(Serum)'
+                );
+            </sql>
+        </changeSet>
 
-		</preConditions>
-		<sql splitStatements="true">
-			DELETE FROM clinlims.test_result
-			WHERE
-			tst_rslt_type = 'N' AND test_id
-			= (select id from test where
-			description = 'COVIDPCR(Fluid)' limit 1);
-			INSERT INTO
-			clinlims.test_result(id,test_id,result_group,flags,tst_rslt_type,value,significant_digits,quant_limit,cont_level,lastupdated,scriptlet_id,sort_order,is_quantifiable,is_active,is_normal)
-			VALUES
-			(nextval('test_result_seq'),
-			(select id from test where
-			description = 'COVIDPCR(Fluid)' limit 1),
-			null,null,'D',
-			(select id
-			from dictionary where dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
-			limit 1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Fluid)' limit 1),
-			null,null,'D',
-			(select id from dictionary
-			where dict_entry = 'SARS-CoV-2 RNA DETECTED'
-			limit 1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Fluid)' limit 1),
-			null,null,'D',
-			(select id from dictionary
-			where dict_entry = 'RETEST - INCONCLUSIVE' limit
-			1),
-			null,null,null,now(),null,1,'f','t','f'),
-			(nextval('test_result_seq'),
-			(select id from test where description =
-			'COVIDPCR(Fluid)' limit 1),
-			null,null,'D',
-			(select id from dictionary
-			where dict_entry = 'Invalid' limit 1),
-			null,null,null,now(),null,1,'f','t','f');
+        <changeSet author="csteele" id="650">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="1">
+                SELECT count(*)
+                FROM clinlims.test t
+                WHERE description = 'COVID-19ANTIBODYIgG(Plasma)'
+                AND default_test_result_id is NULL
+                </sqlCheck>
+            </preConditions>
+            <sql splitStatements="true">
+                UPDATE clinlims.test t
+                SET default_test_result_id = (
+                    SELECT tr.id
+                    FROM clinlims.test_result tr
+                    WHERE CAST (tr.value as NUMERIC) in (
+                        SELECT d.id FROM clinlims.dictionary d
+                        WHERE d.dict_entry = 'IgG NOT DETECTED'
+                    )
+                    AND tr.test_id = t.id
+                )
+                WHERE description = 'COVID-19ANTIBODYIgG(Plasma)';
 
-			UPDATE clinlims.test t
-			SET
-			default_test_result_id = (
-			SELECT tr.id
-			FROM clinlims.test_result tr
-			WHERE CAST (tr.value as NUMERIC) in (
-			SELECT d.id FROM
-			clinlims.dictionary d
-			WHERE d.dict_entry = 'SARS-COV-2 RNA NOT
-			DETECTED'
-			)
-			AND tr.test_id = t.id
-			)
-			WHERE description =
-			'COVIDPCR(Fluid)';
+                UPDATE clinlims.result_limits rl
+                SET normal_dictionary_id = (
+                    SELECT d.id FROM clinlims.dictionary d
+                    WHERE d.dict_entry = 'IgG NOT DETECTED'
+                )
+                WHERE rl.test_id in (
+                SELECT id FROM clinlims.test
+                WHERE description = 'COVID-19ANTIBODYIgG(Plasma)'
+                );
+            </sql>
+        </changeSet>
 
-			UPDATE clinlims.result_limits rl
-			SET
-			normal_dictionary_id = (
-			SELECT d.id FROM clinlims.dictionary d
-			WHERE
-			d.dict_entry = 'SARS-COV-2 RNA NOT DETECTED'
-			)
-			WHERE rl.test_id in (
-			SELECT id FROM clinlims.test
-			WHERE description = 'COVIDPCR(Fluid)'
-			);
-			<!-- spotless:on -->
-		</sql>
+        <changeSet author="csteele" id="655">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="0">
+                SELECT count(*)
+                FROM clinlims.test
+                WHERE description like 'COVID-19ANTIBODYIgG(%)'
+                AND loinc = '94547-7'
+                </sqlCheck>
+            </preConditions>
+            <sql >
+                UPDATE clinlims.test
+                SET loinc = '94547-7'
+                WHERE description like 'COVID-19ANTIBODYIgG(%)'
+            </sql>
+        </changeSet>
 
-	</changeSet>
-
-	<changeSet author="csteele" id="635">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="1">
-				SELECT count(*)
-				FROM clinlims.test t
-				WHERE description = 'COVID-19ANTIBODYIgM(Serum)'
-				AND
-				default_test_result_id is NULL
-			</sqlCheck>
-
-		</preConditions>
-		<sql splitStatements="true">
-			UPDATE clinlims.test t
-			SET
-			default_test_result_id = (
-			SELECT tr.id
-			FROM
-			clinlims.test_result tr
-			WHERE CAST (tr.value as NUMERIC) in (
-			SELECT
-			d.id FROM
-			clinlims.dictionary d
-			WHERE d.dict_entry = 'IgM NOT DETECTED'
-			)
-			AND
-			tr.test_id = t.id
-			)
-			WHERE description =
-			'COVID-19ANTIBODYIgM(Serum)';
-
-			UPDATE clinlims.result_limits rl
-			SET
-			normal_dictionary_id = (
-			SELECT
-			d.id FROM clinlims.dictionary d
-			WHERE
-			d.dict_entry = 'IgM NOT
-			DETECTED'
-			)
-			WHERE rl.test_id in (
-			SELECT id FROM
-			clinlims.test
-			WHERE
-			description = 'COVID-19ANTIBODYIgM(Serum)'
-			);
-			<!-- spotless:on -->
-		</sql>
-
-	</changeSet>
-
-	<changeSet author="csteele" id="640">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="1">
-				SELECT count(*)
-				FROM clinlims.test t
-				WHERE description = 'COVID-19ANTIBODYIgM(Plasma)'
-				AND
-				default_test_result_id is NULL
-			</sqlCheck>
-
-		</preConditions>
-		<sql splitStatements="true">
-			UPDATE clinlims.test t
-			SET
-			default_test_result_id = (
-			SELECT tr.id
-			FROM
-			clinlims.test_result tr
-			WHERE CAST (tr.value as NUMERIC) in (
-			SELECT
-			d.id FROM
-			clinlims.dictionary d
-			WHERE d.dict_entry = 'IgM NOT DETECTED'
-			)
-			AND
-			tr.test_id = t.id
-			)
-			WHERE description =
-			'COVID-19ANTIBODYIgM(Plasma)';
-
-			UPDATE clinlims.result_limits rl
-			SET
-			normal_dictionary_id = (
-			SELECT
-			d.id FROM clinlims.dictionary d
-			WHERE
-			d.dict_entry = 'IgM NOT
-			DETECTED'
-			)
-			WHERE rl.test_id in (
-			SELECT id FROM
-			clinlims.test
-			WHERE
-			description = 'COVID-19ANTIBODYIgM(Plasma)'
-			);
-			<!-- spotless:on -->
-		</sql>
-
-	</changeSet>
-
-	<changeSet author="csteele" id="645">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="1">
-				SELECT count(*)
-				FROM clinlims.test t
-				WHERE description = 'COVID-19ANTIBODYIgG(Serum)'
-				AND
-				default_test_result_id is NULL
-			</sqlCheck>
-
-		</preConditions>
-		<sql splitStatements="true">
-			UPDATE clinlims.test t
-			SET
-			default_test_result_id = (
-			SELECT tr.id
-			FROM
-			clinlims.test_result tr
-			WHERE CAST (tr.value as NUMERIC) in (
-			SELECT
-			d.id FROM
-			clinlims.dictionary d
-			WHERE d.dict_entry = 'IgG NOT DETECTED'
-			)
-			AND
-			tr.test_id = t.id
-			)
-			WHERE description =
-			'COVID-19ANTIBODYIgG(Serum)';
-
-			UPDATE clinlims.result_limits rl
-			SET
-			normal_dictionary_id = (
-			SELECT
-			d.id FROM clinlims.dictionary d
-			WHERE
-			d.dict_entry = 'IgG NOT
-			DETECTED'
-			)
-			WHERE rl.test_id in (
-			SELECT id FROM
-			clinlims.test
-			WHERE
-			description = 'COVID-19ANTIBODYIgG(Serum)'
-			);
-			<!-- spotless:on -->
-		</sql>
-
-	</changeSet>
-
-	<changeSet author="csteele" id="650">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="1">
-				SELECT count(*)
-				FROM clinlims.test t
-				WHERE description = 'COVID-19ANTIBODYIgG(Plasma)'
-				AND
-				default_test_result_id is NULL
-			</sqlCheck>
-
-		</preConditions>
-		<sql splitStatements="true">
-			UPDATE clinlims.test t
-			SET
-			default_test_result_id = (
-			SELECT tr.id
-			FROM
-			clinlims.test_result tr
-			WHERE CAST (tr.value as NUMERIC) in (
-			SELECT
-			d.id FROM
-			clinlims.dictionary d
-			WHERE d.dict_entry = 'IgG NOT DETECTED'
-			)
-			AND
-			tr.test_id = t.id
-			)
-			WHERE description =
-			'COVID-19ANTIBODYIgG(Plasma)';
-
-			UPDATE clinlims.result_limits rl
-			SET
-			normal_dictionary_id = (
-			SELECT
-			d.id FROM clinlims.dictionary d
-			WHERE
-			d.dict_entry = 'IgG NOT
-			DETECTED'
-			)
-			WHERE rl.test_id in (
-			SELECT id FROM
-			clinlims.test
-			WHERE
-			description = 'COVID-19ANTIBODYIgG(Plasma)'
-			);
-			<!-- spotless:on -->
-		</sql>
-
-	</changeSet>
-
-	<changeSet author="csteele" id="655">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">
-				SELECT count(*)
-				FROM clinlims.test
-				WHERE description like 'COVID-19ANTIBODYIgG(%)'
-				AND loinc = '94547-7'
-			</sqlCheck>
-
-		</preConditions>
-		<sql>
-			<!-- spotless:off -->
-			UPDATE clinlims.test
-			SET loinc = '94547-7'
-			WHERE description like
-			'COVID-19ANTIBODYIgG(%)'
-		<!-- spotless:on -->
-		</sql>
-
-	</changeSet>
-
-	<changeSet author="csteele" id="660">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">
-				SELECT count(*)
-				FROM clinlims.test
-				WHERE description like 'COVID-19ANTIBODYIgM(%)'
-				AND loinc = '94547-7'
-			</sqlCheck>
-
-		</preConditions>
-
-		<sql>
-			<!-- spotless:off --> 
+        <changeSet author="csteele" id="660">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="0">
+                SELECT count(*)
+                FROM clinlims.test
+                WHERE description like 'COVID-19ANTIBODYIgM(%)'
+                AND loinc = '94547-7'
+                </sqlCheck>
+            </preConditions>
+            <sql>
                 UPDATE clinlims.test
                 SET loinc = '94547-7'
                 WHERE description like 'COVID-19ANTIBODYIgM(%)'
-            <!-- spotless:on -->
-		</sql>
+            </sql>
+        </changeSet>
 
-	</changeSet>
-
-	<changeSet author="csteele" id="665">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">
-				SELECT count(*)
-				FROM clinlims.test
-				WHERE description like 'DENGUEPCR(%)'
-				AND loinc = '7855-0'
-			</sqlCheck>
-
-		</preConditions>
-
-		<sql>
-			<!-- spotless:off --> 
+        <changeSet author="csteele" id="665">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="0">
+                SELECT count(*)
+                FROM clinlims.test
+                WHERE description like 'DENGUEPCR(%)'
+                AND loinc = '7855-0'
+                </sqlCheck>
+            </preConditions>
+            <sql>
                 UPDATE clinlims.test
                 SET loinc = '7855-0'
                 WHERE description like 'DENGUEPCR(%)'
-            <!-- spotless:on -->
-		</sql>
+            </sql>
+        </changeSet>
 
-	</changeSet>
-
-	<changeSet author="csteele" id="670">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">
-				SELECT count(*)
-				FROM clinlims.test
-				WHERE description like 'HIVVIRALLOAD(%)'
-				AND loinc = '10351-5'
-			</sqlCheck>
-
-		</preConditions>
-
-		<sql>
-			<!-- spotless:off --> 
+        <changeSet author="csteele" id="670">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="0">
+                SELECT count(*)
+                FROM clinlims.test
+                WHERE description like 'HIVVIRALLOAD(%)'
+                AND loinc = '10351-5'
+                </sqlCheck>
+            </preConditions>
+            <sql>
                 UPDATE clinlims.test
                 SET loinc = '10351-5'
                 WHERE description like 'HIVVIRALLOAD(%)'
-            <!-- spotless:on -->
-		</sql>
+            </sql>
+        </changeSet>
 
-	</changeSet>
-
-	<changeSet author="csteele" id="675">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">
-				SELECT count(*)
-				FROM clinlims.test
-				WHERE description like 'HEPATITISCVIRALLOAD(%)'
-				AND loinc = '11011-4'
-			</sqlCheck>
-
-		</preConditions>
-
-		<sql>
-			<!-- spotless:off --> 
+        <changeSet author="csteele" id="675">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="0">
+                SELECT count(*)
+                FROM clinlims.test
+                WHERE description like 'HEPATITISCVIRALLOAD(%)'
+                AND loinc = '11011-4'
+                </sqlCheck>
+            </preConditions>
+            <sql>
                 UPDATE clinlims.test
                 SET loinc = '11011-4'
                 WHERE description like 'HEPATITISCVIRALLOAD(%)'
-            <!-- spotless:on -->
-		</sql>
+            </sql>
+        </changeSet>
 
-	</changeSet>
-
-	<changeSet author="csteele" id="680">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">
-				SELECT count(*)
-				FROM clinlims.test
-				WHERE description like 'HEPATITISBVIRALLOAD(%)'
-				AND loinc = '29615-2'
-			</sqlCheck>
-
-		</preConditions>
-
-		<sql>
-			<!-- spotless:off --> 
+        <changeSet author="csteele" id="680">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="0">
+                SELECT count(*)
+                FROM clinlims.test
+                WHERE description like 'HEPATITISBVIRALLOAD(%)'
+                AND loinc = '29615-2'
+                </sqlCheck>
+            </preConditions>
+            <sql>
                 UPDATE clinlims.test
                 SET loinc = '29615-2'
                 WHERE description like 'HEPATITISBVIRALLOAD(%)'
-            <!-- spotless:on -->
-		</sql>
+            </sql>
+        </changeSet>
 
-	</changeSet>
-
-	<changeSet author="csteele" id="685">
-		<preConditions onFail="MARK_RAN">
-
-			<sqlCheck expectedResult="0">
-				SELECT count(*)
-				FROM clinlims.test
-				WHERE description like 'HIVINFANTVIRALLOAD(%)'
-				AND loinc = ''
-			</sqlCheck>
-
-		</preConditions>
-
-		<sql>
-			<!-- spotless:off --> 
+        <changeSet author="csteele" id="685">
+            <preConditions onFail="MARK_RAN">
+                <sqlCheck  expectedResult="0">
+                SELECT count(*)
+                FROM clinlims.test
+                WHERE description like 'HIVINFANTVIRALLOAD(%)'
+                AND loinc = ''
+                </sqlCheck>
+            </preConditions>
+            <sql>
                 UPDATE clinlims.test
                 SET loinc = ''
                 WHERE description like 'HIVINFANTVIRALLOAD(%)'
-            <!-- spotless:on -->
-		</sql>
-
-	</changeSet>
+            </sql>
+        </changeSet>
 
 </databaseChangeLog>

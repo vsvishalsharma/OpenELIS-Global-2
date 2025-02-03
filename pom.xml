@@ -703,7 +703,7 @@
 							<toggleOffOn />
 							<includes>
 								<include>src/main/resources/hibernate/**/*.xml</include>
-								<include>src/main/resources/liquibase/**/*.xml</include>
+								<!-- <include>src/main/resources/liquibase/**/*.xml</include> -->
 								<include>src/test/resources/**/*.xml</include>
 								<include>pom.xml</include>
 							</includes>

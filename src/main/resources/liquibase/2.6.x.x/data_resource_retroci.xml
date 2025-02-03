@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
-	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-	<changeSet author="CIV developer Group" id="202303241"
-		context="CDIRetroCI">
-		<preConditions onFail="MARK_RAN">
-			<not>
-				<tableExists tableName="data_resource"
-					schemaName="clinlims" />
-			</not>
-		</preConditions>
-		<comment>create data_resource table and map tables in RetroCI database</comment>
-
-		<sql>
-			<!-- spotless:off --> 
+    <changeSet author="CIV developer Group" id="202303241"
+        context="CDIRetroCI">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="data_resource"
+                    schemaName="clinlims" />
+            </not>
+        </preConditions>
+        <comment>create data_resource table and map tables in RetroCI database</comment>
+        <sql>
             CREATE TABLE clinlims.data_resource (
             "id" NUMERIC (20),
             "name" VARCHAR (20),
@@ -42,9 +40,7 @@
             "data_resource_id" NUMERIC (20),
             PRIMARY KEY ("id")
             );
-        <!-- spotless:on -->
-		</sql>
-
-	</changeSet>
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>
