@@ -18,11 +18,10 @@ class Validation {
   }
 
   saveResults(note) {
-    cy.get("#cell-save-0 > .cds--form-item > .cds--checkbox-label").click();
+    cy.get("[data-testid='Checkbox']").click();
     cy.get("#resultList0\\.note").type(note);
     cy.get("[data-testis='Save-btn']").click();
   }
 }
 
 export default Validation;
-
