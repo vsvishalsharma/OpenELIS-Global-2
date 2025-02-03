@@ -64,6 +64,10 @@ jobs:
         run: npm install react-scripts@5.0.1 -g
         working-directory: frontend
 
+      - name: Check Format
+        run: npx prettier ./ --check
+        working-directory: frontend  
+
       - name: Run Frontend Qa Workflow
         run: npx cypress run –headless
         working-directory: frontend
