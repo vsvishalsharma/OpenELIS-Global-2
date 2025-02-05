@@ -286,8 +286,11 @@ export const NCECorrectiveAction = () => {
               </Column>
 
               <Column lg={16} md={8} sm={4}>
-                <Button type="button" data-testid='nce-search-button' onClick={handleSubmit}>
-
+                <Button
+                  type="button"
+                  data-testid="nce-search-button"
+                  onClick={handleSubmit}
+                >
                   <FormattedMessage id="label.button.search" />
                 </Button>
               </Column>
@@ -302,7 +305,7 @@ export const NCECorrectiveAction = () => {
             </Section>
           </Form>
         </Column>
-        <Column lg={16} md={8} sm={4} >
+        <Column lg={16} md={8} sm={4}>
           <br />
         </Column>
         <Column lg={16} md={8} sm={4}>
