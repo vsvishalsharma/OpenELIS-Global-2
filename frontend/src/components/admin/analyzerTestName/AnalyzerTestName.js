@@ -125,7 +125,6 @@ function AnalyzerTestName() {
   }
 
   function handleDropDown(response) {
-    console.log(response);
     if (response) {
       setAnalyzerList(response.analyzerList || []);
       // setTestList(response.testList || []);
@@ -371,6 +370,17 @@ function AnalyzerTestName() {
             }}
           />
           <br />
+          <TextInput
+            id="testName"
+            labelText={intl.formatMessage({
+              id: "sidenav.label.admin.analyzerTest",
+            })}
+            value={testName}
+            onChange={(e) => setTestName(e.target.value)}
+            required
+          />
+          <br />
+
           <Dropdown
             id="test-dropdown"
             titleText={intl.formatMessage({ id: "label.actualTestName" })}
@@ -381,16 +391,6 @@ function AnalyzerTestName() {
               setSelectedTest(selectedItem);
               setSelectedTestId(selectedItem ? selectedItem.id : null);
             }}
-          />
-          <br />
-          <TextInput
-            id="testName"
-            labelText={intl.formatMessage({
-              id: "sidenav.label.admin.analyzerTest",
-            })}
-            value={testName}
-            onChange={(e) => setTestName(e.target.value)}
-            required
           />
         </Modal>
 
