@@ -2,7 +2,7 @@ package org.openelisglobal.pathology;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.dbunit.DatabaseUnitException;
@@ -66,6 +66,7 @@ public class PathologySampleServiceTest extends BaseWebContextSensitiveTest {
         Assert.assertEquals(Integer.valueOf(1), pathologySample.getId());
         Assert.assertEquals(PathologySample.PathologyStatus.GROSSING, pathologySample.getStatus());
         Assert.assertEquals("John", pathologySample.getTechnician().getFirstName());
+        Assert.assertEquals(Integer.parseInt("1"), pathologySample.getBlocks().size());
     }
 
     @Test
@@ -103,17 +104,23 @@ public class PathologySampleServiceTest extends BaseWebContextSensitiveTest {
         PathologySampleForm pathologySampleForm = new PathologySampleForm();
         pathologySampleForm.setSystemUserId("2");
 
-        PathologyBlock pathologyBlock = new PathologyBlock();
-        pathologyBlock.setBlockNumber(11);
-        pathologyBlock.setLocation("Lab 1");
+        PathologyBlock block1 = new PathologyBlock();
+        block1.setBlockNumber(12);
+        block1.setLocation("Lab 2");
 
-        List<PathologyBlock> pathologyBlocks = new ArrayList<>();
-        pathologyBlocks.add(pathologyBlock);
+        PathologyBlock block2 = new PathologyBlock();
+        block2.setBlockNumber(13);
+        block2.setLocation("Lab 3");
+
+        List<PathologyBlock> pathologyBlocks = Arrays.asList(block1, block2);
 
         pathologySampleForm.setBlocks(pathologyBlocks);
         pathologySampleForm.setSlides(Collections.singletonList(new PathologySampleForm.PathologySlideForm()));
         pathologySampleForm.setReports(Collections.singletonList(new PathologySampleForm.PathologyReportForm()));
         pathologySampleService.updateWithFormValues(2, pathologySampleForm);
+
+        Assert.assertEquals(Integer.parseInt("2"), pathologySampleForm.getBlocks().size());
+        Assert.assertEquals("2", pathologySampleForm.getSystemUserId());
     }
 
 }
