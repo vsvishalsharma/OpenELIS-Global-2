@@ -2,6 +2,7 @@ package org.openelisglobal.pathology;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.dbunit.DatabaseUnitException;
@@ -10,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openelisglobal.BaseWebContextSensitiveTest;
 import org.openelisglobal.program.controller.pathology.PathologySampleForm;
-import org.openelisglobal.program.service.PathologyBlockService;
 import org.openelisglobal.program.service.PathologySampleService;
 import org.openelisglobal.program.valueholder.pathology.PathologyBlock;
 import org.openelisglobal.program.valueholder.pathology.PathologySample;
@@ -22,9 +22,6 @@ public class PathologySampleServiceTest extends BaseWebContextSensitiveTest {
 
     @Autowired
     PathologySampleService pathologySampleService;
-
-    @Autowired
-    PathologyBlockService pathologyBlockService;
 
     @Autowired
     SystemUserService systemUserService;
@@ -106,7 +103,13 @@ public class PathologySampleServiceTest extends BaseWebContextSensitiveTest {
         PathologySampleForm pathologySampleForm = new PathologySampleForm();
         pathologySampleForm.setSystemUserId("2");
 
-        List<PathologyBlock> pathologyBlocks = pathologyBlockService.getAll();
+        PathologyBlock pathologyBlock = new PathologyBlock();
+        pathologyBlock.setBlockNumber(11);
+        pathologyBlock.setLocation("Lab 1");
+
+        List<PathologyBlock> pathologyBlocks = new ArrayList<>();
+        pathologyBlocks.add(pathologyBlock);
+
         pathologySampleForm.setBlocks(pathologyBlocks);
         pathologySampleForm.setSlides(Collections.singletonList(new PathologySampleForm.PathologySlideForm()));
         pathologySampleForm.setReports(Collections.singletonList(new PathologySampleForm.PathologyReportForm()));
