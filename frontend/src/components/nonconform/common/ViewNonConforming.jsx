@@ -262,15 +262,15 @@ export const ViewNonConformingEvent = () => {
     <>
       {notificationVisible === true ? <AlertDialog /> : ""}
       <Grid fullWidth={true}>
-        <Column lg={16} md={8} sm={4}>
+        <Column lg={16}>
           <h2>
             <FormattedMessage id={`nonconform.view.report`} />
           </h2>
         </Column>
-        <Column lg={16} md={8} sm={4}>
+        <Column lg={16} md={10} sm={8}>
           <Form>
             <Grid fullWidth={true}>
-              <Column lg={4} md={4} sm={2}>
+              <Column lg={4} md={8}>
                 <Select
                   id="type"
                   labelText={intl.formatMessage({
@@ -294,7 +294,7 @@ export const ViewNonConformingEvent = () => {
                   ))}
                 </Select>
               </Column>
-              <Column lg={4} md={4} sm={2}>
+              <Column lg={4}>
                 <TextInput
                   labelText={intl.formatMessage({
                     id: "testcalculation.label.textValue",
@@ -309,11 +309,10 @@ export const ViewNonConformingEvent = () => {
                   id={`field.name`}
                 />
               </Column>
-              <Column lg={16} md={8} sm={4}>
+              <Column lg={16}>
                 <br></br>
               </Column>
-
-              <Column lg={16} md={8} sm={4}>
+              <Column lg={16}>
                 <Button
                   type="button"
                   data-testid="nce-search-button"
