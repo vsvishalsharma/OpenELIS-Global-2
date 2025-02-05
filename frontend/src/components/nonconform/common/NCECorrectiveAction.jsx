@@ -233,15 +233,15 @@ export const NCECorrectiveAction = () => {
     <div>
       {notificationVisible && <AlertDialog />}
       <Grid fullWidth={true}>
-        <Column lg={16} md={8} sm={4}>
+        <Column lg={16}>
           <h2>
             <FormattedMessage id={`nonconform.corrective.title`} />
           </h2>
         </Column>
-        <Column lg={16} md={8} sm={4}>
+        <Column lg={16} md={10} sm={8}>
           <Form>
             <Grid fullWidth={true}>
-              <Column lg={4} md={4} sm={2}>
+              <Column lg={4} md={8}>
                 <Select
                   id="type"
                   labelText={intl.formatMessage({
@@ -265,7 +265,7 @@ export const NCECorrectiveAction = () => {
                   ))}
                 </Select>
               </Column>
-              <Column lg={4} md={4} sm={2}>
+              <Column lg={4}>
                 <TextInput
                   labelText={intl.formatMessage({
                     id: "testcalculation.label.textValue",
@@ -281,11 +281,10 @@ export const NCECorrectiveAction = () => {
                 />
               </Column>
 
-              <Column lg={16} md={8} sm={4}>
+              <Column lg={16}>
                 <br />
               </Column>
-
-              <Column lg={16} md={8} sm={4}>
+              <Column lg={16}>
                 <Button
                   type="button"
                   data-testid="nce-search-button"
@@ -305,14 +304,14 @@ export const NCECorrectiveAction = () => {
             </Section>
           </Form>
         </Column>
-        <Column lg={16} md={8} sm={4}>
+        <Column lg={16}>
           <br />
         </Column>
-        <Column lg={16} md={8} sm={4}>
+        <Column lg={16}>
           {tData && (
             <div>
               <Grid>
-                <Column lg={16} md={8} sm={4}>
+                <Column lg={16} md={16} sm={16}>
                   <Table style={{ marginTop: "1em" }}>
                     <TableHead>
                       <TableRow>
