@@ -4,7 +4,7 @@ import java.io.IOException;
 import org.openelisglobal.dataexchange.fhir.exception.FhirGeneralException;
 import org.openelisglobal.dataexchange.fhir.exception.FhirLocalPersistingException;
 
-public interface ProviderImportService extends ImportService {
+public interface ProviderImportService {
 
-    void importList() throws FhirLocalPersistingException, FhirGeneralException, IOException;
+    void importPractitionerList() throws FhirLocalPersistingException, FhirGeneralException, IOException;
 }

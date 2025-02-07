@@ -3,9 +3,8 @@ package org.openelisglobal.organization.service;
 import java.io.IOException;
 import org.openelisglobal.dataexchange.fhir.exception.FhirGeneralException;
 import org.openelisglobal.dataexchange.fhir.exception.FhirLocalPersistingException;
-import org.openelisglobal.provider.service.ImportService;
 
-public interface OrganizationImportService extends ImportService {
+public interface OrganizationImportService {
 
-    void importList() throws FhirLocalPersistingException, FhirGeneralException, IOException;
+    void importOrganizationList() throws FhirLocalPersistingException, FhirGeneralException, IOException;
 }
