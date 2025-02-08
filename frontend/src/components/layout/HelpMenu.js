@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useIntl } from "react-intl";
 import { HeaderGlobalAction, HeaderPanel } from "@carbon/react";
 import { Help } from "@carbon/icons-react";
 
 const HelpMenu = () => {
+  const intl = useIntl();
   const [isExpanded, setIsExpanded] = useState(false);
   const panelRef = useRef(null);
   const buttonRef = useRef(null);
@@ -90,10 +92,10 @@ const HelpMenu = () => {
               >
                 <Help size={16} />
                 {type === "manual"
-                  ? "User Manual"
+                  ? intl.formatMessage({ id: "banner.menu.help.usermanual" })
                   : type === "tutorials"
-                    ? "Video Tutorials"
-                    : "Release Notes"}
+                  ? intl.formatMessage({ id: "banner.menu.help.about" })
+                  : intl.formatMessage({ id: "banner.menu.help.contact" })}
               </button>
             </li>
           ))}
