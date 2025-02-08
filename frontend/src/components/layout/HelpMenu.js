@@ -94,8 +94,8 @@ const HelpMenu = () => {
                 {type === "manual"
                   ? intl.formatMessage({ id: "banner.menu.help.usermanual" })
                   : type === "tutorials"
-                  ? intl.formatMessage({ id: "banner.menu.help.about" })
-                  : intl.formatMessage({ id: "banner.menu.help.contact" })}
+                    ? intl.formatMessage({ id: "banner.menu.help.about" })
+                    : intl.formatMessage({ id: "banner.menu.help.contact" })}
               </button>
             </li>
           ))}
