@@ -144,7 +144,7 @@
   "rulebuilder.label.addAction": "Ajouter une action",
   "rulebuilder.label.removeAction": "Supprimer l'action",
   "rulebuilder.label.addRule": "Ajouter une règle",
-  "rulebuilder.label.removeRule": "Supprimer la règle",
+  "rulebuilder.label.removeRule": "Désactiver la règle",
   "rulebuilder.label.rule": "Règle",
   "rulebuilder.label.confirmDelete": "Êtes-vous sûr de vouloir supprimer cette règle ?",
   "rulebuilder.error.invalidNumeric": "Valeur numérique invalide",
