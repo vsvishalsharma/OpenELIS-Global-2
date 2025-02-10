@@ -543,7 +543,7 @@
   "label.button.remove.block": "Supprimer le Bloc",
   "label.button.remove.report": "Supprimer le Rapport",
   "pathology.label.block.number": "Numéro du Bloc",
-  "button.label.generateReport": "Générer un rapport",
+  "button.label.genarateReport": "Générer un rapport",
   "button.label.showHidePram": "Afficher/Masquer les paramètres du rapport",
   "immunohistochemistry.label.numberOfCancer": "Nombre de noyaux cancéreux",
   "immunohistochemistry.label.averageHer2": "Moyenne de HER2 par noyau",
