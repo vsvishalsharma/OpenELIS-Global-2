@@ -386,7 +386,7 @@ export const NCECorrectiveAction = () => {
                 <div style={{ marginBottom: "10px" }}>{data.dateOfEvent}</div>
               </Column>
 
-              <Column lg={3} md={3} sm={1} style={{ marginBottom: "20px" }}>
+              <Column lg={3} md={3} sm={3} style={{ marginBottom: "20px" }}>
                 <div style={{ marginBottom: "10px" }}>
                   <span style={{ color: "#3366B3", fontWeight: "bold" }}>
                     <FormattedMessage id="nonconform.view.nce.severity" />
