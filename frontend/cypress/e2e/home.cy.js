@@ -10,11 +10,6 @@ before(() => {
   home = loginPage.goToHomePage();
 });
 
-//This action runs after each test
-afterEach(() => {
-  home.afterAll();
-});
-
 describe("User interacts with the navigation bar", function () {
   it("User searches for patient and closes search bar", function () {
     home.searchBar();
@@ -30,6 +25,11 @@ describe("User interacts with the navigation bar", function () {
 });
 
 describe("User navigates to different tiles", function () {
+  //This action runs after each test
+  afterEach(() => {
+    home.afterAll();
+  });
+
   it("User navigates to the In Progress", function () {
     home.selectInProgress();
   });
