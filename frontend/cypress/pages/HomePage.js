@@ -211,6 +211,27 @@ class HomePage {
     //This closes the navigation components after each test
     cy.get(".icon-wrapper > svg.clickable-icon").click();
   }
+
+  searchBar() {
+    cy.get("#search-Icon").click();
+    cy.get("#searchItem").type("Smith");
+    cy.get("#patientSearch").click();
+    cy.wait(200);
+    cy.get("#search-Icon").click();
+  }
+
+  clickNotifications() {
+    cy.get("#notification-Icon").click();
+    cy.wait(200);
+    cy.get("#notification-Icon").click();
+  }
+
+  clickUserIcon() {
+    cy.get("#user-Icon").click();
+    cy.wait(200);
+    cy.get("user-Icon").click();
+  }
+
   selectInProgress() {
     cy.contains("a.cds--link", "In Progress").click();
   }

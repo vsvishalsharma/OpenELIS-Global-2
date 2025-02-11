@@ -15,6 +15,21 @@ afterEach(() => {
   home.afterAll();
 });
 
+describe("User interacts with the navigation bar", function () {
+  it("User searches for patient and closes search bar", function () {
+    home.searchBar();
+  });
+
+  it("User checks for notifications and closes it", function () {
+    home.clickNotifications();
+  });
+
+  it("User interacts with the user icon", function () {
+    home.clickUserIcon();
+  });
+  
+});
+
 describe("User navigates to different tiles", function () {
   it("User navigates to the In Progress", function () {
     home.selectInProgress();
