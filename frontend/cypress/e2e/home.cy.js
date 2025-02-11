@@ -25,8 +25,13 @@ describe("User interacts with the navigation bar", function () {
 });
 
 describe("User navigates to different tiles", function () {
-  //This action runs after each test
+  // This action runs after each test
   afterEach(() => {
+    home.afterAll();
+  });
+
+  // This action runs after all tests in this describe block
+  after(() => {
     home.afterAll();
   });
 

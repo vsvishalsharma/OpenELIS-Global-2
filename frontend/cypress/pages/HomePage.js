@@ -209,14 +209,14 @@ class HomePage {
 
   afterAll() {
     //This closes the navigation components after each test
-    cy.get(".icon-wrapper > svg.clickable-icon").click();
+    cy.get(".icon-wrapper > svg.clickable-icon").click({ multiple: true });
   }
 
   searchBar() {
     cy.get("#search-Icon").click();
     cy.get("#searchItem").type("Smith");
     cy.get("#patientSearch").click();
-    cy.wait(200);
+    cy.wait(1000);
     cy.get("#search-Icon").click();
   }
 
@@ -229,7 +229,7 @@ class HomePage {
   clickUserIcon() {
     cy.get("#user-Icon").click();
     cy.wait(200);
-    cy.get("user-Icon").click();
+    cy.get("#user-Icon").click();
   }
 
   selectInProgress() {
