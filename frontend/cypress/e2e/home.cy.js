@@ -30,11 +30,6 @@ describe("User navigates to different tiles", function () {
     home.afterAll();
   });
 
-  // This action runs after all tests in this describe block
-  after(() => {
-    home.afterAll();
-  });
-
   it("User navigates to the In Progress", function () {
     home.selectInProgress();
   });
