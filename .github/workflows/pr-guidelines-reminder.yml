@@ -56,14 +56,4 @@ jobs:
       
               core.setFailed("PR Guidelines Check Failed");
             }
-            
-            await github.rest.checks.create({
-              owner,
-              repo,
-              name: 'PR Guidelines Check',
-              head_sha: pr.head.sha,
-              status: 'completed',
-              conclusion: checkConclusion,
-              output: checkOutput
-            });
     
