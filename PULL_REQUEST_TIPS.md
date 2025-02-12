@@ -23,7 +23,7 @@ guidelines:
 
 ## 3. Pull Request References
 
-- PR title must include issue number (e.g., "Fix #123: Improve error handling")
+- PR title must include issue number (e.g., "issue-123: Improve error handling")
 - Include issue link in PR description
 - Title should clearly summarize the changes
 
@@ -73,9 +73,9 @@ guidelines:
 - Instead, split into separate PRs:
   ```
   // Good: Separate PRs for each concern
-  PR #1: "Fix #123: Refactor utils class"
-  PR #2: "Fix #124: Improve UI component responsiveness"
-  PR #3: "Fix #125: Fix documentation typos"
+  PR #1: "Issue-123: Refactor utils class"
+  PR #2: "Issue-124: Improve UI component responsiveness"
+  PR #3: "Issue-125: Fix documentation typos"
   ```
 - Consider squashing commits for bug fixes and small features
 - Don't worry about squashing review-related commits
