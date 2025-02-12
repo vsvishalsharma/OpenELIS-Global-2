@@ -6,62 +6,61 @@ jobs:
   check-guidelines:
     runs-on: ubuntu-latest
     steps:
-      - name: Check PR Guidelines
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { owner, repo } = context.repo;
-            const pr = context.payload.pull_request;
-            
-            let errors = [];
-            
-            const branchName = pr.head.ref;
-            if (!branchName.match(/^issue-\d+$/)) {
-              errors.push("❌ Branch name should follow format 'issue-NUMBER' (e.g., issue-123)");
-            }
-            
-            const titlePattern = /^(Fix|Fixes|Close|Closes|Resolve|Resolves) #\d+:/i;
-            if (!pr.title.match(titlePattern)) {
-              errors.push("❌ PR title should start with 'Fix #NUMBER:' (e.g., 'Fix #123: Add feature')");
-            }
-            
-            const hasIssueReference = pr.body.includes('#') && /\#\d+/.test(pr.body);
-            if (!hasIssueReference) {
-              errors.push("❌ PR description should reference an issue number (e.g., #123)");
-            }
-            
-            const checkConclusion = errors.length === 0 ? 'success' : 'failure';
-            const checkOutput = {
-              title: 'PR Guidelines Check',
-              summary: errors.length === 0 
-                ? '✅ All PR guidelines checks passed!'
-                : '❌ Some checks failed:\n\n' + errors.join('\n')
-            };
-            
-            if (errors.length > 0) {
-                const guidelinesUrl = `https://github.com/${owner}/${repo}/blob/develop/PULL_REQUEST_TIPS.md`;
-                const comment = `## PR Guidelines Check Failed
-            
-              Please fix the following issues:
-            
-              ${errors.join('\n')}
-            
-              Please review our [Pull Request Guidelines](${guidelinesUrl}) for more details.`;
+       - uses: actions/github-script@v7
+         with:
+            script: |
+              const { owner, repo } = context.repo;
+              const pr = context.payload.pull_request;
+              
+              let errors = [];
+              
+              const branchName = pr.head.ref;
+              if (!branchName.match(/^issue-\d+$/)) {
+                errors.push("❌ Branch name should follow format 'issue-NUMBER' (e.g., issue-123)");
+              }
+              
+              const titlePattern = /^(Fix|Fixes|Close|Closes|Resolve|Resolves) \d+:/i;
+              if (!pr.title.match(titlePattern)) {
+                errors.push("❌ PR title should start with 'Fix NUMBER:' (e.g., 'Fix 123: Add feature')");
+              }
+              
+              const hasIssueReference = pr.body.includes('#') && /\#\d+/.test(pr.body);
+              if (!hasIssueReference) {
+                errors.push("❌ PR description should reference an issue number (e.g., #123)");
+              }
+              
+              const checkConclusion = errors.length === 0 ? 'success' : 'failure';
+              const checkOutput = {
+                title: 'PR Guidelines Check',
+                summary: errors.length === 0 
+                  ? '✅ All PR guidelines checks passed!'
+                  : '❌ Some checks failed:\n\n' + errors.join('\n')
+              };
+              
+              if (errors.length > 0) {
+                  const guidelinesUrl = `https://github.com/${owner}/${repo}/blob/develop/PULL_REQUEST_TIPS.md`;
+                  const comment = `## PR Guidelines Check Failed
+              
+                Please fix the following issues:
+              
+                ${errors.join('\n')}
+              
+                Please review our [Pull Request Guidelines](${guidelinesUrl}) for more details.`;
 
-                await github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: comment
+                  await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: comment
+                });
+              }
+              
+              await github.rest.checks.create({
+                owner,
+                repo,
+                name: 'PR Guidelines Check',
+                head_sha: pr.head.sha,
+                status: 'completed',
+                conclusion: checkConclusion,
+                output: checkOutput
               });
-            }
-            
-            await github.rest.checks.create({
-              owner,
-              repo,
-              name: 'PR Guidelines Check',
-              head_sha: pr.head.sha,
-              status: 'completed',
-              conclusion: checkConclusion,
-              output: checkOutput
-            });
