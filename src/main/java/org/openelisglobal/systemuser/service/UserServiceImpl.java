@@ -176,7 +176,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<IdValuePair> getUserTestSections(String systemUserId, String roleId) {
         Authentication authentication = null;
-        // TODO workaround for Security Context authentication is null
+        // see filter org.openelisglobal.security.AjaxFilter to handle
+        // RequestContextHolder for Ajax calls via servlets
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
 
         HttpServletRequest request = null;
