@@ -199,25 +199,6 @@ public class UserServiceImpl implements UserService {
         if (authentication != null) {
             Object principal = authentication.getPrincipal();
             if (principal instanceof UserDetails) {
-                // List<String> userLabUnits = new ArrayList<>();
-                // UserLabUnitRoles userLabRoles = getUserLabUnitRoles(systemUserId);
-                // if (userLabRoles != null) {
-                // userLabRoles.getLabUnitRoleMap().forEach(roles -> {
-                // if (roles.getRoles().contains(roleId)) {
-                // userLabUnits.add(roles.getLabUnit());
-                // }
-                // });
-                // }
-                // List<IdValuePair> allTestSections = DisplayListService.getInstance()
-                // .getList(ListType.TEST_SECTION_ACTIVE);
-                // if (userLabUnits.contains(UnifiedSystemUserController.ALL_LAB_UNITS)) {
-                // return allTestSections;
-                // } else {
-                // List<IdValuePair> userTestSections = allTestSections.stream()
-                // .filter(testSection -> userLabUnits.contains(testSection.getId()))
-                // .collect(Collectors.toList());
-                // return userTestSections;
-                // }
                 List<IdValuePair> userTestSections = new ArrayList<>();
                 Boolean requireLabUnitAtLogin = ConfigurationProperties.getInstance()
                         .getPropertyValue(Property.REQUIRE_LAB_UNIT_AT_LOGIN).equals("true");
