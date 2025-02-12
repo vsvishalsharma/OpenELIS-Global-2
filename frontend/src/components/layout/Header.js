@@ -451,6 +451,7 @@ function OEHeader(props) {
                       <>
                         {searchBar && <SearchBar />}
                         <HeaderGlobalAction
+                          id="search-Icon"
                           aria-label="Search"
                           onClick={handleSearch}
                         >
@@ -461,6 +462,7 @@ function OEHeader(props) {
                           )}
                         </HeaderGlobalAction>
                         <HeaderGlobalAction
+                          id="notification-Icon"
                           aria-label="Notifications"
                           onClick={toggleSlideOver}
                         >
@@ -500,6 +502,7 @@ function OEHeader(props) {
                       </>
                     )}
                     <HeaderGlobalAction
+                      id="user-Icon"
                       aria-label={panelSwitchLabel()}
                       onClick={clickPanelSwitch}
                       ref={userSwitchRef}
