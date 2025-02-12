@@ -1,0 +1,8 @@
+<dataset>
+	<gender id="1" gender_type="M" description="Male"
+		name_key="gender.male" />
+	<gender id="2" gender_type="F" description="Female"
+		name_key="gender.female" />
+	<gender id="3" gender_type="O" description="Other"
+		name_key="gender.other" />
+</dataset>
