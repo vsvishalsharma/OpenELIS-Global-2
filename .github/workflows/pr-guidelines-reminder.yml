@@ -15,11 +15,11 @@ jobs:
             let errors = [];
             
             const branchName = pr.head.ref;
-            if (!branchName.match(/^issue-\d+$/)) {
+            if (!branchName.match(/^issue-\d+$/i)) {
               errors.push("❌ Branch name should follow format 'issue-NUMBER' (e.g., issue-123)");
             }
             
-            const titlePattern = /^Issue-\d+: .+/;
+            const titlePattern = /^Issue-\d+: .+/i;
             if (!pr.title.match(titlePattern)) {
               errors.push("❌ PR title should follow format 'Issue-NUMBER: Description' (e.g., 'Issue-123: Adds a feature')");
             }
