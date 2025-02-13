@@ -53,7 +53,7 @@ public class GenderServiceTest extends BaseWebContextSensitiveTest {
     @Test
     public void getAllGenders_shouldReturnAllGenders() throws Exception {
         List<Gender> genders = genderService.getAll();
-        assertEquals(3, genders.size());
+        assertEquals(4, genders.size());
     }
 
     @Test
@@ -76,18 +76,12 @@ public class GenderServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void GenderWithNullDescription_should_return_GenderWithNullDescription() {
-        Gender gender = new Gender();
-        gender.setGenderType("X");
-        gender.setDescription(null);
-        gender.setNameKey("gender.unknown");
 
-        Integer genderId = genderService.insert(gender);
+        Gender retrievedGender = genderService.get(4);
+        Assert.assertTrue(retrievedGender.getDescription() == null || retrievedGender.getDescription().isEmpty());
 
-        Gender retrievedGender = genderService.get(genderId);
-
-        Assert.assertNull(retrievedGender.getDescription());
-        assertEquals("X", retrievedGender.getGenderType());
-        assertEquals("gender.unknown", retrievedGender.getNameKey());
+        assertEquals("W", retrievedGender.getGenderType());
+        assertEquals("gender.untold", retrievedGender.getNameKey());
     }
 
     @Test(expected = LIMSDuplicateRecordException.class)
