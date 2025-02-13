@@ -1,5 +1,7 @@
 package org.openelisglobal.gender;
 
+import static org.junit.Assert.assertEquals;
+
 import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -8,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openelisglobal.BaseWebContextSensitiveTest;
+import org.openelisglobal.common.exception.LIMSDuplicateRecordException;
 import org.openelisglobal.gender.service.GenderService;
 import org.openelisglobal.gender.valueholder.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,38 +39,31 @@ public class GenderServiceTest extends BaseWebContextSensitiveTest {
 
     @Test
     public void createGender_shouldCreateNewGender() throws Exception {
-        List<Gender> genders = genderService.getAll();
-        boolean genderExists = genders.stream().anyMatch(g -> "M".equals(g.getGenderType()));
+        Gender gender = createGender("X", "Unknown");
+        Integer savedGenderId = genderService.insert(gender);
 
-        if (!genderExists) {
-            Gender gender = createGender("M", "Male");
-            Integer savedGenderId = genderService.insert(gender);
+        Gender savedGender = genderService.get(savedGenderId);
 
-            Gender savedGender = genderService.get(savedGenderId);
-            Assert.assertEquals("M", savedGender.getGenderType());
-            Assert.assertNotNull(savedGender.getId());
-        }
+        Assert.assertNotNull(savedGender);
+        assertEquals("X", savedGender.getGenderType());
+        assertEquals("Unknown", savedGender.getDescription());
+        Assert.assertNotNull(savedGender.getId());
     }
 
     @Test
     public void getAllGenders_shouldReturnAllGenders() throws Exception {
         List<Gender> genders = genderService.getAll();
-        Assert.assertEquals(3, genders.size());
+        assertEquals(3, genders.size());
     }
 
     @Test
     public void getGenderByType_shouldReturnGenderByType() throws Exception {
-        List<Gender> genders = genderService.getAll();
-        boolean genderExists = genders.stream().anyMatch(g -> "M".equals(g.getGenderType()));
-
-        if (!genderExists) {
-            Gender gender = createGender("M", "Male");
-            genderService.insert(gender);
-        }
-
         Gender genderByType = genderService.getGenderByType("M");
+
         Assert.assertNotNull(genderByType);
-        Assert.assertEquals("M", genderByType.getGenderType());
+        assertEquals("M", genderByType.getGenderType());
+        assertEquals("Male", genderByType.getDescription());
+        assertEquals("gender.male", genderByType.getNameKey());
     }
 
     private Gender createGender(String genderType, String description) {
@@ -77,4 +73,32 @@ public class GenderServiceTest extends BaseWebContextSensitiveTest {
         gender.setLastupdated(new Timestamp(System.currentTimeMillis()));
         return gender;
     }
+
+    @Test
+    public void GenderWithNullDescription_should_return_GenderWithNullDescription() {
+        Gender gender = new Gender();
+        gender.setGenderType("X");
+        gender.setDescription(null);
+        gender.setNameKey("gender.unknown");
+
+        Integer genderId = genderService.insert(gender);
+
+        Gender retrievedGender = genderService.get(genderId);
+
+        Assert.assertNull(retrievedGender.getDescription());
+        assertEquals("X", retrievedGender.getGenderType());
+        assertEquals("gender.unknown", retrievedGender.getNameKey());
+    }
+
+    @Test(expected = LIMSDuplicateRecordException.class)
+    public void InsertDuplicateGender_shouldThrowDuplicateGenderException() {
+
+        Gender gender2 = new Gender();
+        gender2.setGenderType("M");
+        gender2.setDescription("Male");
+        gender2.setNameKey("gender.male");
+
+        genderService.insert(gender2);
+    }
+
 }
